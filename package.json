@@ -6,7 +6,7 @@
    "license": "MIT",
    "main": "index.js",
    "scripts": {
-     "test": "./node_modules/.bin/mocha"
+     "test": "/usr/local/node_modules/.bin/mocha"
    },
    "repository": {
      "type": "git",
