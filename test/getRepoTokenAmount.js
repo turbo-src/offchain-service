@@ -3,7 +3,7 @@ import getTokenAmount from "../lib";
 
 describe("getTokenAmount", function () {
   it("should return the amount of tokens belonging to a repo", async function () {
-    let newRepo = await createRepo(
+    await createRepo(
       /*owner:*/ "john",
       /*repo:*/ "john/myRepo",
       /*pr_id:*/ "",

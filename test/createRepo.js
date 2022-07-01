@@ -3,7 +3,7 @@ import createRepo, { getTokenAmount } from "../lib";
 
 describe("createRepo", function () {
   it("should return a token amount of 1000000", async function () {
-    let newRepo = await createRepo("john", "john/myRepo", "", contributor, "");
+    await createRepo("john", "john/myRepo", "", contributor, "");
 
     let resTokenAmount = await getTokenAmount(
       /*owner:*/ "",

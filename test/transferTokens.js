@@ -31,6 +31,10 @@ describe("transferTokens", function () {
 
     let tokenAmount = Number(resTokenAmount);
 
-    assert.equal(tokenAmount, 5_00_000, "Failed to transfer tokens");
+    assert.equal(
+      tokenAmount,
+      5_00_000,
+      "Failed to transfer tokens between two contributors"
+    );
   });
 });

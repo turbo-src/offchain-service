@@ -1,9 +1,9 @@
 var assert = require("assert");
-import transferTokens, { getTokenAmount } from "../lib";
+import { createRepo, getContributorTokenAmount } from "../lib";
 
-describe("transferTokens", function () {
+describe("getContributorTokenAmount", function () {
   it("should return the number of tokens a contributor has for a repo", async function () {
-    let newRepo = await createRepo("john", "john/myRepo", "", "222", "");
+    await createRepo("john", "john/myRepo", "", "222", "");
 
     let resTokenAmount = await getContributorTokenAmount(
       /*owner:*/ "",
