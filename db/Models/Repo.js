@@ -12,7 +12,7 @@ const Repo = db.define("repo", {
     defaultValue:
       "6563f8e28a947405385d56a5afd3c93e01929268e4158dba555a82d7aa5b2a8f",
   },
-  tokenSupply: {
+  tokenAmount: {
     type: Sequelize.STRING(),
   },
   quorum: {
