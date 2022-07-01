@@ -1,0 +1,23 @@
+ {
+   "name": "testing",
+   "version": "0.0.1",
+   "description": "Test opreturn contracts.",
+   "author": "author's name",
+   "license": "MIT",
+   "main": "index.js",
+   "scripts": {
+     "test": "./node_modules/.bin/mocha"
+   },
+   "repository": {
+     "type": "git",
+     "url": ""
+   },
+   "bugs": {
+     "url": ""
+   },
+   "homepage": "",
+   "devDependencies": {
+     "mocha": "8.0.1"
+   }
+ }
+
