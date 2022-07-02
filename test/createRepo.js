@@ -1,8 +1,9 @@
 var assert = require("assert");
 import createRepo, { getTokenAmount } from "../lib";
+import Repo from "../db";
 
 describe("createRepo", function () {
-  it("should return a token amount of 1000000", async function () {
+  it("should create a repo and return a token amount of 1000000", async function () {
     await createRepo("john", "john/myRepo", "", contributor, "");
 
     let resTokenAmount = await getTokenAmount(
