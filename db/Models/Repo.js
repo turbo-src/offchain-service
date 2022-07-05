@@ -14,6 +14,7 @@ const Repo = db.define("repo", {
   },
   tokenAmount: {
     type: Sequelize.STRING(),
+    defaultValue: "1000000",
   },
   quorum: {
     type: Sequelize.STRING(),
