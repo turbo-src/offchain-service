@@ -2,6 +2,10 @@ import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
 import db from "../db.js";
 
 const Repo = db.define("repo", {
+  owner: {
+    type: Sequelize.STRING(),
+    allowNull: false,
+  },
   repo_id: {
     type: Sequelize.STRING(),
     unique: true,

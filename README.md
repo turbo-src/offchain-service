@@ -16,6 +16,21 @@ docker exec -it <container-name-from-docker-compose-stdout> bash
 
 When enter in, you have `cd ../` to get to your source code.
 
+# Scripts
+
+## Create Postgres Database
+
+createdb privateStore
+CREATE DATABASE privateStore
+
+## npm start
+
+Syncs the database
+
+## npm test
+
+Runs tests
+
 ### Setup
 
 ```
