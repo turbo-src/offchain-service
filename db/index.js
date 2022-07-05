@@ -1,10 +1,9 @@
-const db = require("./db");
-
-const Repo = require("./Models/Repo");
-const Contributor = require("./Models/Contributor");
-const Token = require("./Models/Token");
-const Vote = require("./Models/Vote");
-const PullRequest = require("./Models/PullRequest");
+import db from "./db.js";
+import Repo from "./Models/Repo.js";
+import Contributor from "./Models/Contributor.js";
+import Token from "./Models/Token.js";
+import Vote from "./Models/Vote.js";
+import PullRequest from "./Models/PullRequest.js";
 
 // Associations here
 Repo.hasMany(Contributor);
@@ -14,7 +13,15 @@ PullRequest.hasMany(Vote);
 Contributor.hasMany(Vote);
 Repo.hasMany(Vote);
 
-module.exports = {
+try {
+  await db.sync({ force: true });
+  await db.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
+
+export default {
   db,
   Repo,
   Contributor,

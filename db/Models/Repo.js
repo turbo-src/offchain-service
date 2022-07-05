@@ -1,5 +1,5 @@
-const { Sequelize } = require("sequelize");
-const db = require("../db");
+import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
+import db from "../db.js";
 
 const Repo = db.define("repo", {
   repo_id: {
@@ -19,5 +19,4 @@ const Repo = db.define("repo", {
     type: Sequelize.STRING(),
   },
 });
-
-module.exports = Repo;
+export default Repo;

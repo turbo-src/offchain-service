@@ -1,12 +1,12 @@
-var assert = require("assert");
-import createRepo, { getTokenAmount } from "../lib";
-import Repo from "../db";
+import assert from "assert";
+import createRepo from "../lib/createRepo.js";
+import getRepoTokenAmount from "../lib/getRepoTokenAmount.js";
 
 describe("createRepo", function () {
   it("should create a repo and return a token amount of 1000000", async function () {
-    await createRepo("john", "john/myRepo", "", contributor, "");
+    await createRepo("john", "john/myRepo", "", "222", "");
 
-    let resTokenAmount = await getTokenAmount(
+    let resTokenAmount = await getRepoTokenAmount(
       /*owner:*/ "",
       /*repo:*/ "john/myRepo",
       /*pr_id:*/ "",

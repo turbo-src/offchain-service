@@ -1,5 +1,5 @@
-const { Sequelize } = require("sequelize");
-const db = require("../db");
+import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
+import db from "../db.js";
 
 const PullRequest = db.define("pullRequest", {
   pr_id: {
@@ -16,4 +16,4 @@ const PullRequest = db.define("pullRequest", {
   },
 });
 
-module.exports = PullRequest;
+export default PullRequest;

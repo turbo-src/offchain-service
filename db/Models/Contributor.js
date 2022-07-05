@@ -1,5 +1,5 @@
-const { Sequelize } = require("sequelize");
-const db = require("../db");
+import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
+import db from "../db.js";
 
 const Contributor = db.define("contributor", {
   contributor_id: {
@@ -10,4 +10,4 @@ const Contributor = db.define("contributor", {
   },
 });
 
-module.exports = Contributor;
+export default Contributor;
