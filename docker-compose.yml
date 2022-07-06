@@ -6,17 +6,19 @@ services:
       - db
     build: ./
     environment:
-      DB_URL: postgres://db/privateStore
-
+      DB_URL: postgresql://privatestore:password@db:5432/privatestore
+    tty: true
+    
   db:
     image: postgres:13.7-bullseye
+    restart: always
     ports:
       - 5432:5432
     environment:
+      POSTGRES_USER: privatestore
       POSTGRES_PASSWORD: password
     volumes:
-      - getting-started-db:/user/local/node_modules/
+      - getting-started-db:/data/db
 
 volumes:
   getting-started-db:
-    external: true
