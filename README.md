@@ -18,11 +18,6 @@ When enter in, you have `cd ../` to get to your source code.
 
 # Scripts
 
-## Create Postgres Database
-
-createdb privateStore
-CREATE DATABASE privateStore
-
 ## npm start
 
 Syncs the database

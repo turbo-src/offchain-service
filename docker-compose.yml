@@ -1,0 +1,22 @@
+version: "3.0"
+
+services:
+  library:
+    depends_on:
+      - db
+    build: ./
+    environment:
+      DB_URL: postgres://db/privateStore
+
+  db:
+    image: postgres:13.7-bullseye
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - getting-started-db:/user/local/node_modules/
+
+volumes:
+  getting-started-db:
+    external: true
