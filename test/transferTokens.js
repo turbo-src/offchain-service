@@ -1,40 +1,49 @@
-// var assert = require("assert");
-// import transferTokens, { getTokenAmount } from "../lib";
+import assert from "assert";
+import createRepo from "../lib/createRepo.js";
+import getContributorTokenAmount from "../lib/getContributorTokenAmount.js";
 
-// describe("transferTokens", function () {
-//   it("should transfer tokens between two contributors", async function () {
-//     let newRepo = await createRepo("john", "john/myRepo", "", "222", "");
+describe("transferTokens", function () {
+  it("should transfer tokens between two contributors", async function () {
+    await createRepo("john", "john/demo", "", "222", "");
 
-//     let mary = await createContributor(
-//       /*owner:*/ "",
-//       /*repo:*/ "",
-//       /*contributor_id:*/ "111",
-//       /*contributor_name:*/ "mary",
-//       /*contributor_signature:*/ "456"
-//     );
+    await createUser(
+      /*owner:*/ "",
+      /*repo:*/ "",
+      /*contributor_id:*/ "111",
+      /*contributor_name:*/ "mary",
+      /*contributor_signature:*/ "456"
+    );
 
-//     await transferTokens(
-//       /*owner*/ "john",
-//       /*repo_id*/ "john/myRepo",
-//       /*from*/ "222",
-//       /*to*/ "111",
-//       /*amount*/ "500000"
-//     );
+    await createUser(
+      /*owner:*/ "",
+      /*repo:*/ "",
+      /*contributor_id:*/ "444",
+      /*contributor_name:*/ "john",
+      /*contributor_signature:*/ "345"
+    );
 
-//     let resTokenAmount = await getContributorTokenAmount(
-//       /*owner:*/ "john",
-//       /*repo:*/ "john/myRepo",
-//       /*pr_id:*/ "issue_1",
-//       /*contributor:*/ "mary",
-//       /*side:*/ "no"
-//     );
+    await transferTokens(
+      /*owner*/ "john",
+      /*repo_id*/ "john/myRepo",
+      /*from*/ "222",
+      /*to*/ "111",
+      /*amount*/ "500000"
+    );
 
-//     let tokenAmount = Number(resTokenAmount);
+    let resTokenAmount = await getContributorTokenAmount(
+      /*owner:*/ "",
+      /*repo:*/ "john/myRepo",
+      /*pr_id:*/ "",
+      /*contributor:*/ "mary",
+      /*side:*/ ""
+    );
 
-//     assert.equal(
-//       tokenAmount,
-//       5_00_000,
-//       "Failed to transfer tokens between two contributors"
-//     );
-//   });
-// });
+    let tokenAmount = Number(resTokenAmount);
+
+    assert.equal(
+      tokenAmount,
+      5_00_000,
+      "Failed to transfer tokens between two contributors"
+    );
+  });
+});
