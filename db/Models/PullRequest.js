@@ -5,6 +5,9 @@ const PullRequest = db.define("pullRequest", {
   pr_id: {
     type: Sequelize.STRING(),
   },
+  title: {
+    type: Sequelize.STRING(),
+  },
   status: {
     type: Sequelize.STRING(),
   },

@@ -1,18 +1,19 @@
 import assert from "assert";
 import createUser from "../lib/createUser.js";
+import getContributorName from "../lib/getContributorName.js";
 
 describe("createUser", function () {
-  it("should create a new contributor with name and id as the only required values", async function () {
+  it("should create a new contributor in the database", async function () {
     await createUser(
       /*owner:*/ "",
       /*repo:*/ "",
-      /*contributor_id:*/ "0x09EAF54C0fc9F2b077ebC96e3FeD47051f7fb626",
-      /*contributor_name:*/ "mary",
-      /*contributor_signature:*/ "2aee41131c1f78f9f881a8be2ea9e1f6faae9ba1b6d78449dca708084b193886"
+      /*contributor_id:*/ "111111111111",
+      /*contributor_name:*/ "neo",
+      /*contributor_signature:*/ "2ae1111111111"
     );
 
-    const res = await getContributorNameById("111");
+    const res = await getContributorName("111111111111");
 
-    assert.equal(res, "mary", "Failed to create a repo in the database");
+    assert.equal(res, "neo", "Failed to create a user");
   });
 });
