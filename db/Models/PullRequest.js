@@ -1,7 +1,7 @@
 import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
 import db from "../db.js";
 
-const PullRequest = db.define("pullRequest", {
+const PullRequest = db.define("pullrequest", {
   pr_id: {
     type: Sequelize.STRING(),
   },

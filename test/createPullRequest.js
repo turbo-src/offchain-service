@@ -3,7 +3,7 @@ import createRepo from "../lib/createRepo.js";
 import createPullRequest from "../lib/createPullRequest.js";
 import createUser from "../lib/createUser.js";
 
-describe("createPullRequest", function () {
+describe.only("createPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
     await createUser(
       /*owner:*/ "",
@@ -17,7 +17,7 @@ describe("createPullRequest", function () {
 
     const res = await createPullRequest(
       /*owner:*/ "ignacius",
-      /*repo:*/ "demo",
+      /*repo_id:*/ "ignacius/demo",
       /*fork_branch:*/ "pullRequest1",
       /*pr_id:*/ "issue_1",
       /*title:*/ "refactor(lsp): remove redundant client cleanup"
