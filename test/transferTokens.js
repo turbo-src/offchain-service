@@ -1,11 +1,11 @@
 import assert from "assert";
 import createRepo from "../lib/createRepo.js";
 import getContributorTokenAmount from "../lib/getContributorTokenAmount.js";
+import createUser from "../lib/createUser.js";
+import transferTokens from "../lib/transferTokens.js";
 
 describe("transferTokens", function () {
   it("should transfer tokens between two contributors", async function () {
-    await createRepo("john", "john/demo", "", "222", "");
-
     await createUser(
       /*owner:*/ "",
       /*repo:*/ "",
@@ -18,23 +18,25 @@ describe("transferTokens", function () {
       /*owner:*/ "",
       /*repo:*/ "",
       /*contributor_id:*/ "444",
-      /*contributor_name:*/ "john",
+      /*contributor_name:*/ "joseph",
       /*contributor_signature:*/ "345"
     );
 
+    await createRepo("joseph", "joseph/demo", "", "444", "");
+
     await transferTokens(
-      /*owner*/ "john",
-      /*repo_id*/ "john/myRepo",
-      /*from*/ "222",
+      /*owner*/ "joseph",
+      /*repo_id*/ "joseph/demo",
+      /*from*/ "444",
       /*to*/ "111",
-      /*amount*/ "500000"
+      /*amount*/ "500001"
     );
 
     let resTokenAmount = await getContributorTokenAmount(
-      /*owner:*/ "",
-      /*repo:*/ "john/myRepo",
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
-      /*contributor:*/ "mary",
+      /*contributor_name:*/ "mary",
       /*side:*/ ""
     );
 
@@ -42,7 +44,7 @@ describe("transferTokens", function () {
 
     assert.equal(
       tokenAmount,
-      5_00_000,
+      5_00_001,
       "Failed to transfer tokens between two contributors"
     );
   });
