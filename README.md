@@ -1,42 +1,44 @@
-### Usage
+# Usage
 
-Mounts your project files into the container.
-
-Spin up container
+### Build image and containers in detatched mode
 
 ```
-docker-compose up
+docker-compose up --build -d
 ```
 
-Enter container
-
-```
-docker exec -it <container-name-from-docker-compose-stdout> bash
-```
-
-When enter in, you have `cd ../` to get to your source code.
-
-# Scripts
-
-## npm start
-
-Syncs the database
-
-## npm test
-
-Runs tests
-
-### Setup
-
-```
-docker volume create --name=repoint-opreturn-node-modules-data-volume
-docker build -t repoint_opreturn:0.1.0 .
-```
-
-### Notes
-
-See running containers. Use `-a ` to see non-running also
+### Get container getting-started-library id
 
 ```
 docker ps
+```
+
+### Enter container
+
+```
+docker exec -it <container-id> bash *or* sh
+```
+
+# From here:
+
+## Scripts
+
+```
+npm start
+``
+Syncs the database
+
+```
+
+npm test
+
+```
+Runs tests
+
+# End
+```
+
+docker-compose down
+
+```
+to stop containers
 ```
