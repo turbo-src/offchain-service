@@ -21,11 +21,4 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-export default {
-  db,
-  Repo,
-  Contributor,
-  Token,
-  Vote,
-  PullRequest,
-};
+export { db, Repo, Contributor, Token, Vote, PullRequest };

@@ -20,7 +20,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: privatestore
     volumes:
-      - data:/var/lib/postgresql/data
+      - db-data:/db-data/
 
 volumes:
-  data:
+  db-data:
