@@ -7,7 +7,7 @@ import PullRequest from "./Models/PullRequest.js";
 
 // Associations here
 Repo.hasMany(Contributor);
-Contributor.belongsToMany(Repo, { through: Token });
+// Contributor.belongsToMany(Repo, { through: Token });
 Repo.hasMany(PullRequest);
 PullRequest.hasMany(Vote);
 Contributor.hasMany(Vote);

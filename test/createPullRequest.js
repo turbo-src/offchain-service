@@ -3,7 +3,7 @@ import createRepo from "../lib/createRepo.js";
 import createPullRequest from "../lib/createPullRequest.js";
 import createUser from "../lib/createUser.js";
 
-describe.only("createPullRequest", function () {
+describe("createPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
     await createUser(
       /*owner:*/ "",
