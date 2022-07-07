@@ -6,13 +6,13 @@
 docker-compose up --build -d
 ```
 
-### Get container getting-started-library id
+### Get container id: getting-started-library_1
 
 ```
 docker ps
 ```
 
-### Enter container
+### Enter container by id (first 3 chars)
 
 ```
 docker exec -it <container-id> bash *or* sh
@@ -24,21 +24,26 @@ docker exec -it <container-id> bash *or* sh
 
 ```
 npm start
-``
-Syncs the database
-
 ```
 
+Connects the database, run again to clear database
+
+```
 npm test
-
 ```
+
 Runs tests
 
 # End
+
 ```
 
 docker-compose down
 
 ```
+
 to stop containers
+
+```
+
 ```
