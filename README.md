@@ -18,8 +18,6 @@ docker ps
 docker exec -it <first 3 chars getting-started-library_1 container id> bash *or* sh
 ```
 
-## Scripts from container:
-
 ### Connect to the database
 
 ```
