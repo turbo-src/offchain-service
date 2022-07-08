@@ -30,9 +30,13 @@ npm start
 npm test
 ```
 
-Enter npm start again to clear database if running tests a second time.
+N.B. Enter npm start again to clear database if running tests a second time.
 
-Exit Shell or Bash session:
+### Exit Shell or Bash session
+
+```
+exit
+```
 
 ### Remove containers:
 
