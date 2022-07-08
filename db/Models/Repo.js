@@ -1,5 +1,6 @@
 import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
 import db from "../db.js";
+import Token from "./Token.js";
 
 const Repo = db.define("repo", {
   owner: {
@@ -20,8 +21,23 @@ const Repo = db.define("repo", {
     type: Sequelize.STRING(),
     defaultValue: "1000000",
   },
+  contributor_id: {
+    type: Sequelize.STRING(),
+  },
   quorum: {
     type: Sequelize.STRING(),
   },
 });
+
+const initialBalance = async (Repo) => {
+  await Token.create({
+    from: Repo.contributor_id,
+    to: Repo.contributor_id,
+    repo_id: Repo.repo_id,
+    amount: Repo.tokenAmount,
+  });
+};
+
+Repo.afterCreate(initialBalance);
+
 export default Repo;
