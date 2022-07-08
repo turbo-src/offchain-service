@@ -12,25 +12,29 @@ docker-compose up --build -d
 docker ps
 ```
 
-### Enter container by id of getting-started-library_1
+### Enter bash or shell session in container getting-started-library_1
 
 ```
-docker exec -it <container-id  (first 3 chars)> bash *or* sh
+docker exec -it <first 3 chars getting-started-library_1 container id> bash *or* sh
 ```
 
 ## Scripts from container:
+
+###
+
+Connect to the database
 
 ```
 npm start
 ```
 
-Connects the database. Enter again to clear database if running tests a second time.
+### Run tests
 
 ```
 npm test
 ```
 
-Runs tests
+Enter npm start again to clear database if running tests a second time.
 
 # Remove containers:
 
