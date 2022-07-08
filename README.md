@@ -32,7 +32,9 @@ npm test
 
 Enter npm start again to clear database if running tests a second time.
 
-# Remove containers:
+Exit Shell or Bash session:
+
+### Remove containers:
 
 ```
 docker-compose down
