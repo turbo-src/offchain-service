@@ -36,7 +36,7 @@ describe("transferTokens", function () {
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
-      /*contributor_name:*/ "mary",
+      /*contributor_id:*/ "111",
       /*side:*/ ""
     );
 

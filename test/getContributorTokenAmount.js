@@ -46,6 +46,30 @@ describe("getContributorTokenAmount", function () {
       /*amount*/ "250000"
     );
 
+    await transferTokens(
+      /*owner*/ "ben",
+      /*repo_id*/ "ben/demo",
+      /*from*/ "111",
+      /*to*/ "333",
+      /*amount*/ "20000"
+    );
+
+    await transferTokens(
+      /*owner*/ "ben",
+      /*repo_id*/ "ben/demo",
+      /*from*/ "111",
+      /*to*/ "333",
+      /*amount*/ "10000"
+    );
+
+    await transferTokens(
+      /*owner*/ "ben",
+      /*repo_id*/ "ben/demo",
+      /*from*/ "333",
+      /*to*/ "111",
+      /*amount*/ "90"
+    );
+
     let resBenTokenAmount = await getContributorTokenAmount(
       /*owner:*/ "",
       /*repo:*/ "ben/demo",
