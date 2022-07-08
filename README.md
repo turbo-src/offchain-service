@@ -20,9 +20,7 @@ docker exec -it <first 3 chars getting-started-library_1 container id> bash *or*
 
 ## Scripts from container:
 
-###
-
-Connect to the database
+### Connect to the database
 
 ```
 npm start
