@@ -4,7 +4,7 @@ import createUser from "../lib/createUser.js";
 import getContributorTokenAmount from "../lib/getContributorTokenAmount.js";
 import transferTokens from "../lib/transferTokens.js";
 
-describe.only("getContributorTokenAmount", function () {
+describe("getContributorTokenAmount", function () {
   it("should return the number of tokens a contributor has for a repo", async function () {
     await createUser(
       /*owner:*/ "",
@@ -35,40 +35,24 @@ describe.only("getContributorTokenAmount", function () {
       /*repo_id*/ "ben/demo",
       /*from*/ "111",
       /*to*/ "222",
-      /*amount*/ "500001"
+      /*amount*/ "500000"
     );
 
-    // await transferTokens(
-    //   /*owner*/ "ben",
-    //   /*repo_id*/ "ben/demo",
-    //   /*from*/ "111",
-    //   /*to*/ "333",
-    //   /*amount*/ "250000"
-    // );
+    await transferTokens(
+      /*owner*/ "ben",
+      /*repo_id*/ "ben/demo",
+      /*from*/ "111",
+      /*to*/ "333",
+      /*amount*/ "250000"
+    );
 
-    // await transferTokens(
-    //   /*owner*/ "ben",
-    //   /*repo_id*/ "ben/demo",
-    //   /*from*/ "111",
-    //   /*to*/ "333",
-    //   /*amount*/ "200000"
-    // );
-
-    // await transferTokens(
-    //   /*owner*/ "ben",
-    //   /*repo_id*/ "ben/demo",
-    //   /*from*/ "111",
-    //   /*to*/ "333",
-    //   /*amount*/ "10000"
-    // );
-
-    // await transferTokens(
-    //   /*owner*/ "ben",
-    //   /*repo_id*/ "ben/demo",
-    //   /*from*/ "333",
-    //   /*to*/ "111",
-    //   /*amount*/ "90"
-    // );
+    await transferTokens(
+      /*owner*/ "ben",
+      /*repo_id*/ "ben/demo",
+      /*from*/ "111",
+      /*to*/ "333",
+      /*amount*/ "200000"
+    );
 
     let resBenTokenAmount = await getContributorTokenAmount(
       /*owner:*/ "",
@@ -78,38 +62,38 @@ describe.only("getContributorTokenAmount", function () {
       /*side:*/ ""
     );
 
-    // let resLouisTokenAmount = await getContributorTokenAmount(
-    //   /*owner:*/ "",
-    //   /*repo:*/ "ben/demo",
-    //   /*pr_id:*/ "",
-    //   /*contributor:*/ "222",
-    //   /*side:*/ ""
-    // );
+    let resLouisTokenAmount = await getContributorTokenAmount(
+      /*owner:*/ "",
+      /*repo:*/ "ben/demo",
+      /*pr_id:*/ "",
+      /*contributor:*/ "222",
+      /*side:*/ ""
+    );
 
-    // let resThibautTokenAmount = await getContributorTokenAmount(
-    //   /*owner:*/ "",
-    //   /*repo:*/ "ben/demo",
-    //   /*pr_id:*/ "",
-    //   /*contributor:*/ "333",
-    //   /*side:*/ ""
-    // );
+    let resThibautTokenAmount = await getContributorTokenAmount(
+      /*owner:*/ "",
+      /*repo:*/ "ben/demo",
+      /*pr_id:*/ "",
+      /*contributor:*/ "333",
+      /*side:*/ ""
+    );
 
     assert.equal(
       Number(resBenTokenAmount),
-      499999,
+      50_000,
       "Failed to get contributor token amount"
     );
 
-    // assert.equal(
-    //   Number(resLouisTokenAmount),
-    //   250_000,
-    //   "Failed to get contributor token amount"
-    // );
+    assert.equal(
+      Number(resLouisTokenAmount),
+      500_000,
+      "Failed to get contributor token amount"
+    );
 
-    // assert.equal(
-    //   Number(resThibautTokenAmount),
-    //   250_000,
-    //   "Failed to get contributor token amount"
-    // );
+    assert.equal(
+      Number(resThibautTokenAmount),
+      450_000,
+      "Failed to get contributor token amount"
+    );
   });
 });
