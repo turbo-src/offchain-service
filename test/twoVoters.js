@@ -11,7 +11,7 @@ import setVote from "../lib/setVote.js";
 import getVoteStatus from "../lib/state/getVoteStatus.js";
 
 describe("Two voters vote - exceed quorum.", function () {
-  it("Should add votes to the votes table and add yes/no votes to the pullrequest table", async function () {
+  it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {
     await createUser(
       /*owner:*/ "",
       /*repo:*/ "",
@@ -125,7 +125,7 @@ describe("Two voters vote - exceed quorum.", function () {
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
-    console.log("===>", mergeStatus);
+
     assert.equal(daveVote, 204, "Fail to add vote to database");
     assert.equal(amVote, 204, "Fail to add vote to database");
     assert.equal(joanVote, 204, "Fail to add vote to database");
