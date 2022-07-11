@@ -10,6 +10,8 @@ Repo.hasMany(Contributor);
 Repo.hasMany(PullRequest);
 PullRequest.hasMany(Vote);
 Contributor.hasMany(Vote);
+Vote.belongsTo(Contributor);
+Vote.belongsTo(PullRequest);
 
 try {
   await db.sync({ force: true });

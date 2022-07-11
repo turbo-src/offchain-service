@@ -13,8 +13,13 @@ const PullRequest = db.define("pullrequest", {
   },
   yesTokenAmount: {
     type: Sequelize.STRING(),
+    defaultValue: "0",
   },
   noTokenAmount: {
+    type: Sequelize.STRING(),
+    defaultValue: "0",
+  },
+  repo_id: {
     type: Sequelize.STRING(),
   },
 });
