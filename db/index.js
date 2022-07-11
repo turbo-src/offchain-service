@@ -11,7 +11,6 @@ Repo.hasMany(Contributor);
 Repo.hasMany(PullRequest);
 PullRequest.hasMany(Vote);
 Contributor.hasMany(Vote);
-Repo.hasMany(Vote);
 
 try {
   await db.sync({ force: true });

@@ -11,7 +11,7 @@ const PullRequest = db.define("pullrequest", {
   status: {
     type: Sequelize.STRING(),
   },
-  yesTokeAmount: {
+  yesTokenAmount: {
     type: Sequelize.STRING(),
   },
   noTokenAmount: {
