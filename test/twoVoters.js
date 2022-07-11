@@ -24,8 +24,16 @@ describe("Two voters vote - exceed quorum.", function () {
       /*owner:*/ "",
       /*repo:*/ "",
       /*contributor_id:*/ "1432",
-      /*contributor_name:*/ "sophia",
+      /*contributor_name:*/ "am",
       /*contributor_signature:*/ "264262625"
+    );
+
+    await createUser(
+      /*owner:*/ "",
+      /*repo:*/ "",
+      /*contributor_id:*/ "113",
+      /*contributor_name:*/ "mary",
+      /*contributor_signature:*/ "13132324141"
     );
 
     await createRepo("79dba", "79dba/demo", "", "1431", "");
@@ -43,15 +51,15 @@ describe("Two voters vote - exceed quorum.", function () {
       /*repo_id*/ "79dba/demo",
       /*from*/ "1431",
       /*to*/ "1432",
-      /*amount*/ "250000"
+      /*amount*/ "160000"
     );
 
     await transferTokens(
       /*owner*/ "79dba",
       /*repo_id*/ "79dba/demo",
       /*from*/ "1431",
-      /*to*/ "1321",
-      /*amount*/ "250000"
+      /*to*/ "1113",
+      /*amount*/ "760000"
     );
 
     await setVote(
@@ -111,7 +119,7 @@ describe("Two voters vote - exceed quorum.", function () {
       /*side:*/ "yes"
     );
 
-    const mergeStatus = await getPRvoteStatus(
+    const mergeStatus = await getVoteStatus(
       /*owner:*/ "79dba",
       /*repo:*/ "79dba/demo",
       /*pr_id:*/ "issue_1",
@@ -119,12 +127,10 @@ describe("Two voters vote - exceed quorum.", function () {
       /*side:*/ ""
     );
 
-    //console.log(status)
     assert.equal(voteYesTotals, "34000", "Fail to add votes yes.");
     assert.equal(voteNoTotals, "0", "Fail to add votes no.");
     assert.equal(voteTotals, "0.034", "Fail to add votes no.");
     assert.equal(openStatus, "open", "Fail to stay open.");
-
     assert.equal(
       mergeStatus,
       "merge",
