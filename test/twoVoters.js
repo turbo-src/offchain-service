@@ -41,9 +41,9 @@ describe("Two voters vote - exceed quorum.", function () {
     await createPullRequest(
       /*owner:*/ "dominic",
       /*repo_id:*/ "dominic/demo",
-      /*fork_branch:*/ "pullRequest1",
-      /*pr_id:*/ "issue_1",
-      /*title:*/ "refactor(lsp): remove redundant client cleanup"
+      /*fork_branch:*/ "pullRequest2",
+      /*pr_id:*/ "issue_2",
+      /*title:*/ "refactor(lsp): comments removed"
     );
 
     await transferTokens(
@@ -65,7 +65,7 @@ describe("Two voters vote - exceed quorum.", function () {
     let daveVote = await setVote(
       /*owner:*/ "dominic",
       /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_2",
       /*contributor_id:*/ "1431",
       /*side:*/ "yes"
     );
@@ -73,7 +73,7 @@ describe("Two voters vote - exceed quorum.", function () {
     let amVote = await setVote(
       /*owner:*/ "dominic",
       /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_2",
       /*contributor_id:*/ "1432",
       /*side:*/ "yes"
     );
@@ -81,18 +81,18 @@ describe("Two voters vote - exceed quorum.", function () {
     const voteYesTotals = await getVoteYesTotals(
       /*owner:*/ "dominic",
       /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_2",
       /*contributor:*/ "1453",
       /*side:*/ ""
     );
 
-    // const voteNoTotals = await getVoteNoTotals(
-    //   /*owner:*/ "dominic",
-    //   /*repo:*/ "dominic/demo",
-    //   /*pr_id:*/ "issue_1",
-    //   /*contributor_id:*/ "1113",
-    //   /*side:*/ ""
-    // );
+    const voteNoTotals = await getVoteNoTotals(
+      /*owner:*/ "dominic",
+      /*repo:*/ "dominic/demo",
+      /*pr_id:*/ "issue_2",
+      /*contributor_id:*/ "1113",
+      /*side:*/ ""
+    );
 
     // const voteTotals = await getVoteTotals(
     //   /*owner:*/ "dominic",
@@ -102,41 +102,41 @@ describe("Two voters vote - exceed quorum.", function () {
     //   /*side:*/ ""
     // );
 
-    // const openStatus = await getVoteStatus(
-    //   /*owner:*/ "dominic",
-    //   /*repo:*/ "dominic/demo",
-    //   /*pr_id:*/ "issue_1",
-    //   /*contributor:*/ "1453",
-    //   /*side:*/ ""
-    // );
+    const openStatus = await getVoteStatus(
+      /*owner:*/ "dominic",
+      /*repo:*/ "dominic/demo",
+      /*pr_id:*/ "issue_2",
+      /*contributor:*/ "1453",
+      /*side:*/ ""
+    );
 
-    // let joanVote = await setVote(
-    //   /*owner:*/ "dominic",
-    //   /*repo:*/ "dominic/demo",
-    //   /*pr_id:*/ "issue_1",
-    //   /*contributor_id:*/ "1113",
-    //   /*side:*/ "yes"
-    // );
+    let joanVote = await setVote(
+      /*owner:*/ "dominic",
+      /*repo:*/ "dominic/demo",
+      /*pr_id:*/ "issue_2",
+      /*contributor_id:*/ "1113",
+      /*side:*/ "yes"
+    );
 
-    // const mergeStatus = await getVoteStatus(
-    //   /*owner:*/ "dominic",
-    //   /*repo:*/ "dominic/demo",
-    //   /*pr_id:*/ "issue_1",
-    //   /*contributor_id:*/ "1432",
-    //   /*side:*/ ""
-    // );
-
+    const mergeStatus = await getVoteStatus(
+      /*owner:*/ "",
+      /*repo:*/ "dominic/demo",
+      /*pr_id:*/ "issue_2",
+      /*contributor_id:*/ "",
+      /*side:*/ ""
+    );
+    console.log("===>", mergeStatus);
     assert.equal(daveVote, 204, "Fail to add vote to database");
     assert.equal(amVote, 204, "Fail to add vote to database");
-    // assert.equal(joanVote, 204, "Fail to add vote to database");
+    assert.equal(joanVote, 204, "Fail to add vote to database");
     assert.equal(voteYesTotals, "340000", "Fail to add votes yes.");
-    // assert.equal(voteNoTotals, "0", "Fail to add votes no.");
+    assert.equal(voteNoTotals, "0", "Fail to add votes no.");
     // assert.equal(voteTotals, "0.34", "Fail to add votes no.");
-    // assert.equal(openStatus, "open", "Fail to stay open.");
-    // assert.equal(
-    //   mergeStatus,
-    //   "merge",
-    //   "Fail to merge even though it was voted in."
-    // );
+    assert.equal(openStatus, "open", "Fail to stay open.");
+    assert.equal(
+      mergeStatus,
+      "merge",
+      "Fail to merge even though it was voted in."
+    );
   });
 });
