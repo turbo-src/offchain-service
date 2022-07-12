@@ -62,7 +62,7 @@ describe("Two voters vote - exceed quorum.", function () {
       /*amount*/ "660000"
     );
 
-    let daveVote = await setVote(
+    let domVote = await setVote(
       /*owner:*/ "dominic",
       /*repo:*/ "dominic/demo",
       /*pr_id:*/ "issue_2",
@@ -126,7 +126,7 @@ describe("Two voters vote - exceed quorum.", function () {
       /*side:*/ ""
     );
 
-    assert.equal(daveVote, 204, "Fail to add vote to database");
+    assert.equal(domVote, 204, "Fail to add vote to database");
     assert.equal(amVote, 204, "Fail to add vote to database");
     assert.equal(joanVote, 204, "Fail to add vote to database");
     assert.equal(voteYesTotals, "340000", "Fail to add votes yes.");
