@@ -6,6 +6,12 @@
 docker-compose up --build -d
 ```
 
+### If not building, may need to pull node image:
+
+```
+docker pull node:16.15-bullseye
+```
+
 ### Get container id of getting-started-library_1
 
 ```
