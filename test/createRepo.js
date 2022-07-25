@@ -5,11 +5,17 @@ import createUser from "../lib/createUser.js";
 
 describe("createRepo", function () {
   it("should create a repo and return a token amount of 1000000", async function () {
-    await createRepo("john", "john/myRepo", "", "222", "");
+    await createRepo(
+      "joseph",
+      "joseph/demo",
+      "",
+      "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
+      ""
+    );
 
     let resTokenAmount = await getRepoTokenAmount(
       /*owner:*/ "",
-      /*repo:*/ "john/myRepo",
+      /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor:*/ "",
       /*side:*/ ""
