@@ -1,17 +1,17 @@
 npm test test/createUser.js
 
-sleep 5
+# sleep 5
 
-npm test test/createRepo.js
+# npm test test/createRepo.js
 
-sleep5
+# sleep5
 
-npm test test/transferTokens.js
+# npm test test/transferTokens.js
 
-sleep 5
+# sleep 5
 
-npm test test/createPullRequest
+# npm test test/createPullRequest
 
-sleep 5
+# sleep 5
 
-npm test test/twoVoters.js
+# npm test test/twoVoters.js

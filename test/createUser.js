@@ -98,7 +98,7 @@ describe("createUser", function () {
       "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53"
     );
     const ben = await getContributorName(
-      "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C"
+      "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78"
     );
     const louis = await getContributorName(
       "0x0cea312808EdcdC905428D3922480930689F4500"
