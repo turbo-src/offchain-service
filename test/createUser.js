@@ -94,6 +94,9 @@ describe("createUser", function () {
     const magda = await getContributorName(
       "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925"
     );
+    const thomas = await getContributorName(
+      "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53"
+    );
     const ben = await getContributorName(
       "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C"
     );
@@ -112,6 +115,7 @@ describe("createUser", function () {
     assert.equal(gabriel, "gabriel", "Failed to create a user");
     assert.equal(michael, "michael", "Failed to create a user");
     assert.equal(magda, "magda", "Failed to create a user");
+    assert.equal(thomas, "thomas", "Failed to create a user");
     assert.equal(ben, "ben", "Failed to create a user");
     assert.equal(louis, "louis", "Failed to create a user");
     assert.equal(thibaut, "thibaut", "Failed to create a user");
