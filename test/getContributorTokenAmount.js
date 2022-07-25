@@ -6,28 +6,6 @@ import transferTokens from "../lib/transferTokens.js";
 
 describe("getContributorTokenAmount", function () {
   it("should return the number of tokens a contributor has for a repo", async function () {
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "111",
-      /*contributor_name:*/ "ben",
-      /*contributor_signature:*/ "456"
-    );
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "222",
-      /*contributor_name:*/ "louis",
-      /*contributor_signature:*/ "789"
-    );
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "333",
-      /*contributor_name:*/ "thibaut",
-      /*contributor_signature:*/ "012"
-    );
-
     await createRepo("ben", "ben/demo", "", "111", "");
 
     await transferTokens(

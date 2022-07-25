@@ -5,14 +5,6 @@ import createUser from "../lib/createUser.js";
 
 describe("createPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "777",
-      /*contributor_name:*/ "ignacius",
-      /*contributor_signature:*/ "2ae717"
-    );
-
     await createRepo("ignacius", "ignacius/demo", "", "777", "");
 
     const res = await createPullRequest(
