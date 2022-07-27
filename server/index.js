@@ -11,41 +11,29 @@ import {
   getContributorID,
   getContributorName,
   getContributorTokenAmount,
-  getPrStatus,
-  getRepoTokenAmount,
+  getPRStatus,
   getRepoStatus,
+  getVoteYesTotals,
+  getVoteNoTotals,
 } from "../lib/index.js";
 
 var schema = buildSchema(`
-  type PullRequest {
-    vote_code: [String]
-  }
   type Query {
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    createUser(owner: String, repo: String, contributor_id: String, contributor_name: String, contributor_signature: String): String,
+    createUser(owner: String, repo: String, contributor_id: String, contributor_name: String, contributor_signature: String): Number,
     getContributorName(owner: String, repo: String, pr_id: String, contributor_id: String): String,
     getContributorID(owner: String, repo: String, pr_id: String, contributor_name: String): String,
     getContributorSignature(owner: String, repo: String, pr_id: String, contributor_id: String): String,
-    transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
-    pullFork(owner: String, repo: String, pr_id: String, contributor_id: String): String,
-    getPRforkStatus(owner: String, repo: String, pr_id: String, contributor_id: String): String,
-    getVote(pr_id: String, contributor_id: String): String,
-    getVoteAll(pr_id: String): PullRequest,
-    getVoteEverything: String,
-    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    newPullRequest(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getRepoStatus(repo_id: String): Boolean,
+    transferTokens(owner: String, repo: String, from: String, to: String, amount: String): Number,
+    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): Number,
+    createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): Number,
+    createPullRequest(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRVoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getVoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getVoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getRepoStatus(repo_id: String): Number,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
-    verifyPullRequest(pr_id: String): String,
-    createPullRequest(owner: String, repo: String, fork_branch: String, pr_id: String, title: String): String,
-    closePullRequest(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    mergePullRequest(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    fork(owner: String, repo: String, org: String): String,
+    createPullRequest(owner: String, repo: String, fork_branch: String, pr_id: String, title: String): Number,
   }
 `);
 
@@ -69,33 +57,20 @@ var root = {
   transferTokens: async (args) => {
     return await transferTokens(args);
   },
-  verifyPullRequest: async (arg) => {
-    // Check if it's in our database
-    // If not, fetch it.
-    // redis.get(sha256)
-    //return status
-    //return fakeTurboSrcReposDB.includes(arg.repo_id)
-  },
   getRepoStatus: async (args) => {
     return await getRepoStatus(args);
   },
   getAuthorizedContributor: async (args) => {
     return getAuthorizedContributor(args);
   },
-  getPrStatus: async (args) => {
-    return await getPrStatus(args);
-  },
-  getPRpercentVotedQuorum: async (args) => {
-    const voteTotals = getPRvoteTotals(args);
+  getPRStatus: async (args) => {
+    return await getPRStatus(args);
   },
   getPRvoteYesTotals: async (args) => {
     return getVoteYesTotals(args);
   },
   getPRvoteNoTotals: async (args) => {
     return getVoteNoTotals(args);
-  },
-  getPRvoteTotals: async (args) => {
-    return getPRvoteTotals(args);
   },
   setVote: async (args) => {
     return await setVote(args);
