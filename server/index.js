@@ -89,17 +89,14 @@ var root = {
     return status;
   },
   getAuthorizedContributor: async (args) => {
-    console.log(args.repo_id);
-    console.log(args.contributor_id);
-    const contributor_exists = checkContributor(fakeTurboSrcReposDB, args);
-    return contributor_exists;
+    return getAuthorizedContributor(args);
   },
   getVoteAll: async (pr_id) => {
     return pullRequestsDB[pr_id];
   },
-  getVoteEverything: async () => {
-    return JSON.stringify(pullRequestsDB);
-  },
+  //   getVoteEverything: async () => {
+  //     return JSON.stringify(pullRequestsDB);
+  //   },
   getPRvoteStatus: async (args) => {
     var status = getPRvoteStatus(fakeTurboSrcReposDB, args);
     if (status === "open" || status === "none") {
@@ -126,147 +123,31 @@ var root = {
   },
   getPRpercentVotedQuorum: async (args) => {
     const voteTotals = getPRvoteTotals(fakeTurboSrcReposDB, args);
-    return voteTotals.percentVotedQuorum;
   },
   getPRvoteYesTotals: async (args) => {
-    const voteTotals = getPRvoteTotals(fakeTurboSrcReposDB, args);
-    return voteTotals.totalVotedYesTokens;
-    //return voteTotals.percentVotedQuorum
+    return getVoteYesTotals(args);
   },
   getPRvoteNoTotals: async (args) => {
-    const voteTotals = getPRvoteTotals(fakeTurboSrcReposDB, args);
-    return voteTotals.totalVotedNoTokens;
-    //return voteTotals.percentVotedQuorum
+    return getVoteNoTotals(args);
   },
   getPRvoteTotals: async (args) => {
-    const voteTotals = getPRvoteTotals(fakeTurboSrcReposDB, args);
-    //return voteTotals.totalVotedTokens
-    return voteTotals.percentVotedQuorum;
-  },
-  getPRforkStatus: async (args) => {
-    var res;
-    const prID = args.pr_id.split("_")[1];
-    // User should do this instead and pass it in request so we don't overuse our github api.
-    console.log("owner " + args.owner);
-    console.log("repo " + args.repo);
-    console.log("pr_id " + prID);
-    var baseRepoName = args.repo;
-    var baseRepoOwner = args.owner;
-    console.log(args.owner);
-    console.log(baseRepoOwner);
-    console.log(prID);
-    var resGetPR = await getPullRequest(baseRepoOwner, baseRepoName, prID);
-    console.log(resGetPR);
-    var pullReqRepoHead = await gitHeadUtil(
-      resGetPR.contributor,
-      baseRepoName,
-      resGetPR.forkBranch,
-      0
-    );
-    const baseDir = "repos/" + args.repo;
-    const pullForkDir = baseDir + "/" + pullReqRepoHead;
-
-    console.log("pullReqRepoHead " + pullReqRepoHead);
-
-    // 404 means the repo doesn't exist on github, per api call.
-    if (resGetPR !== 404 && pullReqRepoHead !== 404) {
-      // Check if there is already a dir for the pull fork.
-      if (!fs.existsSync(pullForkDir)) {
-        res = "pull";
-        console.log("pull");
-      } else {
-        res = "valid";
-        console.log("valid");
-      }
-    } else {
-      res = "notOnGithub";
-      console.log("notOnGithub");
-    }
-    console.log("final result");
-    console.log(res);
-    return res;
-  },
-  pullFork: async (args) => {
-    superagent
-      .post("http://localhost:4001/graphql")
-      .send({
-        query: `{ getPRfork(owner: "${args.owner}", repo: "${args.repo}", pr_id: "${args.pr_id}", contributor_id: "${args.contributor_id}") }`,
-      }) // sends a JSON post body
-      .set("accept", "json")
-      .end((err, res) => {
-        // Calling the end function will send the request
-      });
-    return "something";
+    return getPRvoteTotals(args);
   },
   setVote: async (args) => {
-    // Check user votes. If voted, don't set vote.
-    debugger;
-    const votedTokens = getPRvote(fakeTurboSrcReposDB, args);
-    if (votedTokens > 0) {
-      return "duplicate";
-    } else if (typeof votedTokens === "undefined") {
-      // If vote not open, open it.
-      const voteStatus = await getPRvoteStatus(fakeTurboSrcReposDB, args);
-      if (voteStatus === "none") {
-        const numberActivePullRequests = getActivePullRequestsCount(
-          fakeTurboSrcReposDB,
-          args
-        );
-
-        //Fix: shouldn't make state changes in status check.
-
-        // Only allow to open the pull request for vote
-        // if there is no other active vote.
-        if (numberActivePullRequests === 0) {
-          const resNewPullRequest = await newPullRequest(args);
-        }
-      }
-
-      const resultSetVote = await setVote(args);
-
-      fakeTurboSrcReposDB = resultSetVote.db;
-      return resultSetVote.prVoteStatus;
-    }
+    return await setVote(args);
   },
   newPullRequest: async (args) => {
-    const resNewPullRequest = await newPullRequest(args);
-
-    fakeTurboSrcReposDB = resNewPullRequest.db;
-    pullRequestsDB = resNewPullRequest.pullRequestsDB;
-
-    return pullRequestsDB[args.pr_id];
+    return await createPullRequest(args);
   },
   createRepo: async (args) => {
-    var contributors = getContributorsByContributorID(
-      nameSpaceDB.contributors,
-      args.contributor_id
-    );
-    if (contributors.length == 1) {
-      const resCreateRepo = await createRepo(
-        fakeTurboSrcReposDB,
-        pullRequestsDB,
-        args
-      );
-      fakeTurboSrcReposDB = resCreateRepo.db;
-      pullRequestsDB = resCreateRepo.pullRequestsDB;
-      return pullRequestsDB[args.pr_id];
-    } else {
-      return "none";
-    }
+    return await createRepo(args);
   },
 };
 
 var app = express();
-//app.use(loggingMiddleware);
+
 app.use(cors());
-app.use(function (req, res, next) {
-  let originalSend = res.send;
-  res.send = function (data) {
-    console.log(data + "\n");
-    originalSend.apply(res, Array.from(arguments));
-  };
-  next();
-});
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -275,13 +156,6 @@ app.use(
     graphiql: true,
   })
 );
-var way = false;
-//if (way === true) {
-//     console.log("true");
-//     return true;
-//   } else {
-//     console.log("false");
-//     return false;
-//}
+
 app.listen(8080);
 console.log("Running a GraphQL API server at localhost:4000/graphql");
