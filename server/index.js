@@ -1,7 +1,7 @@
-const express = require("express");
-const { graphqlHTTP } = require("express-graphql");
-const { buildSchema } = require("graphql");
-const superagent = require("superagent");
+const express = "/usr/local/node_modules/express/index.js";
+const { graphqlHTTP } = "/usr/local/node_modules/express-graphql/index.js";
+const { buildSchema } = "/usr/local/node_modules/graphql/index.js";
+const superagent = "/usr/local/node_modules/superagent/dist/superagent.js";
 
 import {
   createPullRequest,
@@ -14,14 +14,6 @@ import {
   getPrStatus,
   getRepoTokenAmount,
 } from "../lib/index.js";
-
-import {
-  getPullRequest,
-  createPullRequest,
-  closePullRequest,
-  mergePullRequest,
-  fork,
-} from "../utils/gitHubUtil.js";
 
 var schema = buildSchema(`
   type PullRequest {
@@ -84,45 +76,16 @@ var root = {
     //return fakeTurboSrcReposDB.includes(arg.repo_id)
   },
   getRepoStatus: async (args) => {
-    const status = getRepoStatus(fakeTurboSrcReposDB, args);
-
-    return status;
+    return await getRepoStatus(args);
   },
   getAuthorizedContributor: async (args) => {
     return getAuthorizedContributor(args);
   },
-  getVoteAll: async (pr_id) => {
-    return pullRequestsDB[pr_id];
-  },
-  //   getVoteEverything: async () => {
-  //     return JSON.stringify(pullRequestsDB);
-  //   },
-  getPRvoteStatus: async (args) => {
-    var status = getPRvoteStatus(fakeTurboSrcReposDB, args);
-    if (status === "open" || status === "none") {
-      const prID = args.pr_id.split("_")[1];
-      const closeRes = checkRejectPullRequestHistory(
-        pullRequestsVoteCloseHistory,
-        args
-      );
-      if (closeRes) {
-        status = "closed";
-      }
-
-      const mergeRes = checkMergePullRequestHistory(
-        pullRequestsVoteMergeHistory,
-        args
-      );
-
-      if (mergeRes) {
-        status = "merge";
-      }
-    }
-
-    return status;
+  getPRVoteStatus: async (args) => {
+    return await getPRVoteStatus(args);
   },
   getPRpercentVotedQuorum: async (args) => {
-    const voteTotals = getPRvoteTotals(fakeTurboSrcReposDB, args);
+    const voteTotals = getPRvoteTotals(args);
   },
   getPRvoteYesTotals: async (args) => {
     return getVoteYesTotals(args);
