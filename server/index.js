@@ -13,6 +13,7 @@ import {
   getContributorTokenAmount,
   getPrStatus,
   getRepoTokenAmount,
+  getRepoStatus,
 } from "../lib/index.js";
 
 var schema = buildSchema(`
@@ -81,8 +82,8 @@ var root = {
   getAuthorizedContributor: async (args) => {
     return getAuthorizedContributor(args);
   },
-  getPRVoteStatus: async (args) => {
-    return await getPRVoteStatus(args);
+  getPrStatus: async (args) => {
+    return await getPrStatus(args);
   },
   getPRpercentVotedQuorum: async (args) => {
     const voteTotals = getPRvoteTotals(args);
