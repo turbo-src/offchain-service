@@ -1,7 +1,7 @@
-const express = "/usr/local/node_modules/express/index.js";
-const { graphqlHTTP } = "/usr/local/node_modules/express-graphql/index.js";
-const { buildSchema } = "/usr/local/node_modules/graphql/index.js";
-// const superagent = "/usr/local/node_modules/superagent/dist/superagent.js";
+import express from "/usr/local/node_modules/express/index.js";
+import { graphqlHTTP } from "/usr/local/node_modules/express-graphql/index.js";
+import { buildSchema } from "/usr/local/node_modules/graphql/index.js";
+// import superagent from "/usr/local/node_modules/superagent/dist/superagent.js";
 
 import {
   createPullRequest,
