@@ -1,25 +1,21 @@
 import assert from "assert";
-import createRepo from "../lib/createRepo.js";
-import createUser from "../lib/createUser.js";
 import getAuthorizedContributor from "../lib/getAuthorizedContributor.js";
 
 describe("getAuthorizedContributor", function () {
   it("should return true if a user is an authorized contributor to a repo, ie, has tokens, else false", async function () {
-    await createRepo("boniface", "boniface/demo", "", "131", "");
-
     let isAuthorizedContributor = await getAuthorizedContributor(
       /*owner:*/ "",
       /*repo:*/ "boniface/demo",
       /*pr_id:*/ "",
-      /*contributor_id:*/ "131",
+      /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ ""
     );
 
     let isNotAuthorizedContributor = await getAuthorizedContributor(
       /*owner:*/ "",
-      /*repo:*/ "boniface/demo",
+      /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
-      /*contributor_id:*/ "414",
+      /*contributor_id:*/ "0x0c55D3B26A1229B9D707a42743F3FG92D03301858",
       /*side:*/ ""
     );
 
