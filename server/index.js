@@ -37,7 +37,6 @@ var schema = buildSchema(`
   }
 `);
 
-// root 'method' for query.
 var root = {
   createUser: async (args) => {
     return await createUser(args);
