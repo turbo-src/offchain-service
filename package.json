@@ -7,7 +7,7 @@
    "main": "index.js",
    "type": "module",
    "scripts": {
-      "start": "node db",
+      "start": "node server",
       "test": "/usr/local/node_modules/mocha/bin/mocha.js"
    },
    "repository": {
