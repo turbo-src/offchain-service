@@ -1,7 +1,8 @@
-import express from "/usr/local/node_modules/express/index.js";
-import { graphqlHTTP } from "/usr/local/node_modules/express-graphql/index.js";
-import { buildSchema } from "/usr/local/node_modules/graphql/index.js";
+import express from "express";
+import { graphqlHTTP } from "express-graphql";
+import { buildSchema } from "graphql";
 // import superagent from "/usr/local/node_modules/superagent/dist/superagent.js";
+import { db } from "./db/index.js";
 
 import {
   createPullRequest,
@@ -20,20 +21,19 @@ import {
 var schema = buildSchema(`
   type Query {
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    createUser(owner: String, repo: String, contributor_id: String, contributor_name: String, contributor_signature: String): Number,
+    createUser(owner: String, repo: String, contributor_id: String, contributor_name: String, contributor_signature: String): String,
     getContributorName(owner: String, repo: String, pr_id: String, contributor_id: String): String,
     getContributorID(owner: String, repo: String, pr_id: String, contributor_name: String): String,
     getContributorSignature(owner: String, repo: String, pr_id: String, contributor_id: String): String,
-    transferTokens(owner: String, repo: String, from: String, to: String, amount: String): Number,
-    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): Number,
-    createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): Number,
+    transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
+    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createPullRequest(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getPRVoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getRepoStatus(repo_id: String): Number,
+    getRepoStatus(repo_id: String): String,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
-    createPullRequest(owner: String, repo: String, fork_branch: String, pr_id: String, title: String): Number,
   }
 `);
 
@@ -84,8 +84,6 @@ var root = {
 
 var app = express();
 
-app.use(cors());
-
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -95,5 +93,15 @@ app.use(
   })
 );
 
-app.listen(8080);
+try {
+  await db.sync({ force: true });
+  await db.authenticate();
+  console.log(
+    "Connection to the Postgres database has been established successfully."
+  );
+} catch (error) {
+  console.error("Unable to connect to the Postgres database:", error);
+}
+
+app.listen(4000);
 console.log("Running a GraphQL API server at localhost:4000/graphql");

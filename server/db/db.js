@@ -1,4 +1,4 @@
-import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
+import Sequelize from "sequelize";
 
 const dbUrl = process.env.DB_URL || "postgres://localhost:5432/privatestore";
 
