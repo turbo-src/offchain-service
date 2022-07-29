@@ -34,14 +34,6 @@ describe("transferTokens", function () {
       /*owner*/ "joseph",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
-      /*to*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
-      /*amount*/ "50000"
-    );
-
-    await transferTokens(
-      /*owner*/ "joseph",
-      /*repo_id*/ "joseph/demo",
-      /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*amount*/ "50000"
     );

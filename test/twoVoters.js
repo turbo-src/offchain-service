@@ -1,6 +1,5 @@
 import assert from "assert";
 import createRepo from "../lib/createRepo.js";
-import getContributorTokenAmount from "../lib/getContributorTokenAmount.js";
 import createUser from "../lib/createUser.js";
 import transferTokens from "../lib/transferTokens.js";
 import getVoteNoTotals from "../lib/state/getVoteNoTotals.js";
@@ -12,126 +11,58 @@ import getVoteStatus from "../lib/state/getVoteStatus.js";
 
 describe("Two voters vote - exceed quorum.", function () {
   it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "1431",
-      /*contributor_name:*/ "dominic",
-      /*contributor_signature:*/ "132425"
-    );
-
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "1432",
-      /*contributor_name:*/ "am",
-      /*contributor_signature:*/ "264262625"
-    );
-
-    await createUser(
-      /*owner:*/ "",
-      /*repo:*/ "",
-      /*contributor_id:*/ "1113",
-      /*contributor_name:*/ "joan",
-      /*contributor_signature:*/ "13132324141"
-    );
-
-    await createRepo("dominic", "dominic/demo", "", "1431", "");
-
-    await createPullRequest(
-      /*owner:*/ "dominic",
-      /*repo_id:*/ "dominic/demo",
-      /*fork_branch:*/ "pullRequest2",
-      /*pr_id:*/ "issue_2",
-      /*title:*/ "refactor(lsp): comments removed"
-    );
-
-    await transferTokens(
-      /*owner*/ "dominic",
-      /*repo_id*/ "dominic/demo",
-      /*from*/ "1431",
-      /*to*/ "1432",
-      /*amount*/ "160000"
-    );
-
-    await transferTokens(
-      /*owner*/ "dominic",
-      /*repo_id*/ "dominic/demo",
-      /*from*/ "1431",
-      /*to*/ "1113",
-      /*amount*/ "660000"
-    );
-
-    let domVote = await setVote(
-      /*owner:*/ "dominic",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
-      /*contributor_id:*/ "1431",
-      /*side:*/ "yes"
-    );
-
-    let amVote = await setVote(
-      /*owner:*/ "dominic",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
-      /*contributor_id:*/ "1432",
+    let michaelVote = await setVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
+      /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
 
     const voteYesTotals = await getVoteYesTotals(
-      /*owner:*/ "dominic",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
-      /*contributor:*/ "1453",
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
+      /*contributor:*/ "",
       /*side:*/ ""
     );
 
     const voteNoTotals = await getVoteNoTotals(
-      /*owner:*/ "dominic",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
-      /*contributor_id:*/ "1113",
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
+      /*contributor_id:*/ "",
       /*side:*/ ""
     );
-
-    // const voteTotals = await getVoteTotals(
-    //   /*owner:*/ "dominic",
-    //   /*repo:*/ "dominic/demo",
-    //   /*pr_id:*/ "issue_1",
-    //   /*contributor:*/ "1453",
-    //   /*side:*/ ""
-    // );
 
     const openStatus = await getVoteStatus(
-      /*owner:*/ "dominic",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
-      /*contributor:*/ "1453",
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
+      /*contributor:*/ "",
       /*side:*/ ""
     );
 
-    let joanVote = await setVote(
-      /*owner:*/ "dominic",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
-      /*contributor_id:*/ "1113",
+    let maryVote = await setVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
+      /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
       /*side:*/ "yes"
     );
 
     const mergeStatus = await getVoteStatus(
       /*owner:*/ "",
-      /*repo:*/ "dominic/demo",
-      /*pr_id:*/ "issue_2",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
 
-    assert.equal(domVote, 204, "Fail to add vote to database");
-    assert.equal(amVote, 204, "Fail to add vote to database");
-    assert.equal(joanVote, 204, "Fail to add vote to database");
-    assert.equal(voteYesTotals, "340000", "Fail to add votes yes.");
+    assert.equal(michaelVote, 204, "Fail to add vote to database");
+    assert.equal(maryVote, 204, "Fail to add vote to database");
+    assert.equal(voteYesTotals, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals, "0", "Fail to add votes no.");
-    // assert.equal(voteTotals, "0.34", "Fail to add votes no.");
     assert.equal(openStatus, "open", "Fail to stay open.");
     assert.equal(
       mergeStatus,

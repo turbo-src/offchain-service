@@ -5,11 +5,9 @@ import createUser from "../lib/createUser.js";
 
 describe("createPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
-    await createRepo("ignacius", "ignacius/demo", "", "777", "");
-
     const res = await createPullRequest(
-      /*owner:*/ "ignacius",
-      /*repo_id:*/ "ignacius/demo",
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
       /*fork_branch:*/ "pullRequest1",
       /*pr_id:*/ "issue_1",
       /*title:*/ "refactor(lsp): remove redundant client cleanup"
@@ -17,7 +15,7 @@ describe("createPullRequest", function () {
 
     assert.equal(
       res,
-      "pull request: issue_1 successfully added to repo: ignacius/demo",
+      "pull request: issue_1 successfully added to repo: joseph/demo",
       "Failed to create a pull request in the database"
     );
   });
