@@ -94,6 +94,7 @@ app.use(
 );
 
 try {
+  //Will delete data from db every time with force: true
   await db.sync({ force: true });
   await db.authenticate();
   console.log(
