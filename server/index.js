@@ -82,7 +82,7 @@ var root = {
   },
 };
 
-var app = express();
+const app = express();
 
 app.use(
   "/graphql",
@@ -92,6 +92,9 @@ app.use(
     graphiql: true,
   })
 );
+
+app.listen(4000);
+console.log("Running a GraphQL API server at localhost:4000/graphql");
 
 try {
   //Will delete data from db every time with force: true
@@ -103,6 +106,3 @@ try {
 } catch (error) {
   console.error("Unable to connect to the Postgres database:", error);
 }
-
-app.listen(4000);
-console.log("Running a GraphQL API server at localhost:4000/graphql");
