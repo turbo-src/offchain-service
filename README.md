@@ -24,7 +24,7 @@ docker ps
 docker exec -it <first 3 chars getting-started-library_1 container id> bash *or* sh
 ```
 
-### Connect to the database
+### Connect to the database, start the Graphql server
 
 ```
 npm start
@@ -33,7 +33,7 @@ npm start
 ### Run tests
 
 ```
-npm test
+./test/run-tests.sh
 ```
 
 N.B. Enter npm start again to clear database if running tests a second time.
