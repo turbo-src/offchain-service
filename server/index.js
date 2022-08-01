@@ -1,7 +1,6 @@
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { buildSchema } from "graphql";
-// import superagent from "/usr/local/node_modules/superagent/dist/superagent.js";
 import { db } from "./db/index.js";
 
 import {

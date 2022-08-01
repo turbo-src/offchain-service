@@ -5,6 +5,10 @@ services:
   library:
     depends_on:
       - db
+    ports:
+      - 4000:4000
+    expose:
+      - "4000"
     build: ./
     environment:
       DB_URL: postgresql://user:password@db:5432/privatestore

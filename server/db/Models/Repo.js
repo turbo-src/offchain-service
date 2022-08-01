@@ -1,4 +1,4 @@
-import Sequelize from "/usr/local/node_modules/sequelize/lib/index.js";
+import Sequelize from "sequelize";
 import db from "../db.js";
 import Token from "./Token.js";
 
