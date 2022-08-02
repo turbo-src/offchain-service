@@ -80,6 +80,10 @@ As a majority of votes have been reached for yes, the repo status is automatical
 
 # To Do:
 
+- Resolve creating a database step in the usage process
+
+- Resolve the Postgres volume location in docker-compose
+
 - Achieve a majority through a quorum
 
 - Verify user actions such as voting
