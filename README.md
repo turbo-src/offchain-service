@@ -1,5 +1,13 @@
 # Usage
 
+### Install Postgres and Create database privatestore
+
+```
+createdb privatestore
+```
+
+\*\*\* Needs updating - not sure if this step is required
+
 ### Build image and containers in detatched mode from root directory
 
 ```
