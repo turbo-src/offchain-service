@@ -127,3 +127,15 @@ returns a string of 1000000
 ### getContributorTokenAmount
 
 returns a string of the amount of tokens a user has in the given repo
+
+### getVoteNoTotals
+
+returns a string of the total number of votes against a pull request
+
+### getVoteYesTotals
+
+returns a string of the total number of votes against a pull request
+
+### getVoteStatus
+
+returns status of pr for a repo, string either open close or merge \*same as getPRStatus
