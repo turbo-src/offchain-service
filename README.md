@@ -82,60 +82,88 @@ As a majority of votes have been reached for yes, the repo status is automatical
 
 - Create a more demanding voting narrative to test safeguards
 
-### Functions if Successfull
+### Functions and Their Return Values if Request is Successful
 
 ### createRepo
 
-returns 204
+'''
+204
+'''
 
 ### createUser
 
-returns 204
+'''
+204
+'''
 
 ### createPullRequest
 
-returns string: 'pull request PR_ID was successfully added to repo REPO_ID
+'''
+string: 'pull request PR_ID was successfully added to repo REPO_ID
+'''
 
 ### setVote
 
-returns 204
+'''
+204
+'''
 
 ### transferTokens
 
-returns 200
+'''
+200
+'''
 
 ### getContributorID
 
-returns a string with the contributor id
+'''
+a string with the contributor id
+'''
 
 ### getContributorName
 
-returns a string with the contributor's name (github login)
+'''
+a string with the contributor's name (github login)
+'''
 
 ### getAuthorizedContributor
 
-returns a boolean
+'''
+a boolean
+'''
 
 ### getPRStatus
 
-returns a string of either closed open or merge
+'''
+a string of either closed open or merge
+'''
 
 ### getRepoToken amount
 
-returns a string of 1000000
+'''
+a string of 1000000
+'''
 
 ### getContributorTokenAmount
 
-returns a string of the amount of tokens a user has in the given repo
+'''
+a string of the amount of tokens a user has in the given repo
+'''
 
 ### getVoteNoTotals
 
-returns a string of the total number of votes against a pull request
+'''
+a string of the total number of votes against a pull request
+'''
 
 ### getVoteYesTotals
 
-returns a string of the total number of votes against a pull request
+'''
+a string of the total number of votes against a pull request
+'''
 
 ### getVoteStatus
 
-returns status of pr for a repo, string either open close or merge \*same as getPRStatus
+'''
+status of pr for a repo, string either open close or merge \*same as getPRStatus
+'''
