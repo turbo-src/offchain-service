@@ -86,84 +86,84 @@ As a majority of votes have been reached for yes, the repo status is automatical
 
 ### createRepo
 
-'''
+```
 204
-'''
+```
 
 ### createUser
 
-'''
+```
 204
-'''
+```
 
 ### createPullRequest
 
-'''
+```
 string: 'pull request PR_ID was successfully added to repo REPO_ID
-'''
+```
 
 ### setVote
 
-'''
+```
 204
-'''
+```
 
 ### transferTokens
 
-'''
+```
 200
-'''
+```
 
 ### getContributorID
 
-'''
+```
 a string with the contributor id
-'''
+```
 
 ### getContributorName
 
-'''
+```
 a string with the contributor's name (github login)
-'''
+```
 
 ### getAuthorizedContributor
 
-'''
+```
 a boolean
-'''
+```
 
 ### getPRStatus
 
-'''
+```
 a string of either closed open or merge
-'''
+```
 
 ### getRepoToken amount
 
-'''
+```
 a string of 1000000
-'''
+```
 
 ### getContributorTokenAmount
 
-'''
+```
 a string of the amount of tokens a user has in the given repo
-'''
+```
 
 ### getVoteNoTotals
 
-'''
+```
 a string of the total number of votes against a pull request
-'''
+```
 
 ### getVoteYesTotals
 
-'''
+```
 a string of the total number of votes against a pull request
-'''
+```
 
 ### getVoteStatus
 
-'''
+```
 status of pr for a repo, string either open close or merge \*same as getPRStatus
-'''
+```
