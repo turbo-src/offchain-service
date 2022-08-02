@@ -21,7 +21,7 @@ docker ps
 ### Enter bash or shell session in container getting-started-library_1
 
 ```
-docker exec -it <first 3 chars getting-started-library_1 container id> bash *or* sh
+docker exec -it <getting-started-library_1 id> bash *or* sh
 ```
 
 ### Connect to the database, start the Graphql server
@@ -30,13 +30,17 @@ docker exec -it <first 3 chars getting-started-library_1 container id> bash *or*
 npm start
 ```
 
+```
+ctrl c
+```
+
 ### Run tests
 
 ```
 ./test/run-tests.sh
 ```
 
-N.B. Enter npm start again to clear database if running tests a second time.
+### N.B. Enter npm start again to clear database if running tests a second time.
 
 ### Exit Shell or Bash session
 
@@ -44,8 +48,30 @@ N.B. Enter npm start again to clear database if running tests a second time.
 exit
 ```
 
-### Remove containers:
+### Remove containers when done:
 
 ```
 docker-compose down
 ```
+
+# Test Story:
+
+Joseph creates a repo called demo.
+
+He then transfers tokens to a list of contributors. 500001 to Mary and 50,000 to a variety of others.
+
+A pull request is added called issue_1.
+
+Michael uses his 50,000 tokens to vote yes.
+
+Mary uses her 500,001 tokens to vote yes.
+
+As a majority of votes have been reached for yes, the repo status is automatically updated to merged.
+
+# To Do:
+
+- Achieve a majority through a quorum
+
+- Verify user actions such as voting
+
+- Create a more demanding voting narrative to test safeguards
