@@ -24,11 +24,13 @@ docker ps
 docker exec -it <getting-started-library_1 id> bash *or* sh
 ```
 
-### Connect to the database, start the Graphql server
+### Connect to the database, start the Graphql server, ports 5432 and 4000
 
 ```
 npm start
 ```
+
+### Then
 
 ```
 ctrl c
