@@ -74,8 +74,6 @@ As a majority of votes have been reached for yes, the repo status is automatical
 
 # To Do:
 
-- Test Graphql endpoints
-
 - Resolve the Postgres volume location in docker-compose
 
 - Achieve a majority through a quorum
@@ -83,3 +81,49 @@ As a majority of votes have been reached for yes, the repo status is automatical
 - Verify user actions such as voting
 
 - Create a more demanding voting narrative to test safeguards
+
+### Functions if Successfull
+
+### createRepo
+
+returns 204
+
+### createUser
+
+returns 204
+
+### createPullRequest
+
+returns string: 'pull request PR_ID was successfully added to repo REPO_ID
+
+### setVote
+
+returns 204
+
+### transferTokens
+
+returns 200
+
+### getContributorID
+
+returns a string with the contributor id
+
+### getContributorName
+
+returns a string with the contributor's name (github login)
+
+### getAuthorizedContributor
+
+returns a boolean
+
+### getPRStatus
+
+returns a string of either closed open or merge
+
+### getRepoToken amount
+
+returns a string of 1000000
+
+### getContributorTokenAmount
+
+returns a string of the amount of tokens a user has in the given repo
