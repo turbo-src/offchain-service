@@ -28,7 +28,7 @@ var schema = buildSchema(`
     setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createPullRequest(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRVoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getRepoStatus(repo_id: String): String,
@@ -38,37 +38,89 @@ var schema = buildSchema(`
 
 var root = {
   createUser: async (args) => {
-    return await createUser(args);
+    return await createUser(
+      args.owner,
+      args.repo,
+      args.contributor_id,
+      args.contributor_name,
+      args.contributor_signature
+    );
   },
   getContributorName: async (args) => {
-    return await getContributorName(args);
+    return await getContributorName(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id
+    );
   },
   getContributorID: async (args) => {
-    return await getContributorID(args);
+    let contributorID = await getContributorID(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_name
+    );
+    return contributorID;
   },
   getContributorSignature: async (args) => {
-    return await getContributorSignature;
+    return await getContributorSignature(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id
+    );
   },
   getContributorTokenAmount: async (args) => {
-    return await getContributorTokenAmount(args);
+    return await getContributorTokenAmount(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   transferTokens: async (args) => {
-    return await transferTokens(args);
+    return await transferTokens(
+      args.owner,
+      args.repo,
+      args.from,
+      args.to,
+      args.amount
+    );
   },
   getRepoStatus: async (args) => {
-    return await getRepoStatus(args);
+    return await getRepoStatus(args.repo_id);
   },
   getAuthorizedContributor: async (args) => {
-    return getAuthorizedContributor(args);
+    return getAuthorizedContributor(args.contributor_id, args.repo_id);
   },
   getPRStatus: async (args) => {
-    return await getPRStatus(args);
+    return await getPRStatus(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   getPRvoteYesTotals: async (args) => {
-    return getVoteYesTotals(args);
+    return getVoteYesTotals(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   getPRvoteNoTotals: async (args) => {
-    return getVoteNoTotals(args);
+    return getVoteNoTotals(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   setVote: async (args) => {
     return await setVote(args);
@@ -83,6 +135,9 @@ var root = {
 
 const app = express();
 
+app.listen(4000);
+console.log("Running a GraphQL API server at localhost:4000/graphql");
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -91,9 +146,6 @@ app.use(
     graphiql: true,
   })
 );
-
-app.listen(4000);
-console.log("Running a GraphQL API server at localhost:4000/graphql");
 
 try {
   //Will delete data from db every time with force: true
