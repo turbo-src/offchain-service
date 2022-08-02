@@ -1,6 +1,6 @@
 # Usage
 
-### Install Postgres and Create database privatestore
+### Install Postgres and create database privatestore \*\*\*
 
 ```
 createdb privatestore
