@@ -1,6 +1,6 @@
-import Sequelize from "sequelize";
-import db from "../db.js";
-import Token from "./Token.js";
+const { Sequelize } = require("sequelize");
+const db = require("../db");
+const Token = require("./Token");
 
 const Repo = db.define("repo", {
   owner: {
@@ -40,4 +40,4 @@ const initialBalance = async (Repo) => {
 
 Repo.afterCreate(initialBalance);
 
-export default Repo;
+module.exports = Repo;

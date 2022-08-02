@@ -1,9 +1,9 @@
-import db from "./db.js";
-import Repo from "./Models/Repo.js";
-import Contributor from "./Models/Contributor.js";
-import Token from "./Models/Token.js";
-import Vote from "./Models/Vote.js";
-import PullRequest from "./Models/PullRequest.js";
+const db = require("./db");
+const Repo = require("./Models/Repo");
+const Contributor = require("./Models/Contributor");
+const Token = require("./Models/Token");
+const Vote = require("./Models/Vote");
+const PullRequest = require("./Models/PullRequest");
 
 // Associations here
 Repo.hasMany(Contributor);
@@ -13,4 +13,4 @@ Contributor.hasMany(Vote);
 Vote.belongsTo(Contributor);
 Vote.belongsTo(PullRequest);
 
-export { db, Repo, Contributor, Token, Vote, PullRequest };
+module.exports = { db, Repo, Contributor, Token, Vote, PullRequest };

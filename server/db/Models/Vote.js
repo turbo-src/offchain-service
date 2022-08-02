@@ -1,5 +1,5 @@
-import Sequelize from "sequelize";
-import db from "../db.js";
+const { Sequelize } = require("sequelize");
+const db = require("../db");
 
 const Vote = db.define("vote", {
   side: {
@@ -7,4 +7,4 @@ const Vote = db.define("vote", {
   },
 });
 
-export default Vote;
+module.exports = Vote;

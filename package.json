@@ -5,10 +5,9 @@
    "author": "author's name",
    "license": "MIT",
    "main": "index.js",
-   "type": "module",
    "scripts": {
       "start": "node server",
-      "test": "mocha"
+      "test": "/usr/local/node_modules/mocha/bin/mocha.js"
    },
    "dependencies": {
       "express": "^4.17.1",

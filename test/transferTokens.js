@@ -1,8 +1,5 @@
-import assert from "assert";
-import createRepo from "../lib/createRepo.js";
-import getContributorTokenAmount from "../lib/getContributorTokenAmount.js";
-import createUser from "../lib/createUser.js";
-import transferTokens from "../lib/transferTokens.js";
+const assert = require("assert");
+const { getContributorTokenAmount, transferTokens } = require("../lib");
 
 describe("transferTokens", function () {
   it("should transfer tokens between two contributors", async function () {

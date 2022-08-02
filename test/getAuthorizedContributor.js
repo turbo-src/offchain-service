@@ -1,5 +1,5 @@
-import assert from "assert";
-import getAuthorizedContributor from "../lib/getAuthorizedContributor.js";
+const assert = require("assert");
+const { getAuthorizedContributor } = require("../lib");
 
 describe("getAuthorizedContributor", function () {
   it("should return true if a user is an authorized contributor to a repo, ie, has tokens, else false", async function () {

@@ -1,6 +1,5 @@
-import assert from "assert";
-import createUser from "../lib/createUser.js";
-import getContributorName from "../lib/getContributorName.js";
+const assert = require("assert");
+const { getContributorName, createUser } = require("../lib");
 
 describe("createUser", function () {
   it("should create a new contributor in the database", async function () {

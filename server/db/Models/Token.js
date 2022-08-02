@@ -1,5 +1,5 @@
-import Sequelize from "sequelize";
-import db from "../db.js";
+const { Sequelize } = require("sequelize");
+const db = require("../db");
 
 const Token = db.define("token", {
   to: {
@@ -16,4 +16,4 @@ const Token = db.define("token", {
   },
 });
 
-export default Token;
+module.exports = Token;

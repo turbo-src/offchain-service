@@ -1,9 +1,9 @@
-import express from "express";
-import { graphqlHTTP } from "express-graphql";
-import { buildSchema } from "graphql";
-import { db } from "./db/index.js";
+const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+const { db } = require("./db");
 
-import {
+const {
   createPullRequest,
   createRepo,
   createUser,
@@ -15,7 +15,7 @@ import {
   getRepoStatus,
   getVoteYesTotals,
   getVoteNoTotals,
-} from "../lib/index.js";
+} = require("../lib");
 
 var schema = buildSchema(`
   type Query {
@@ -97,8 +97,8 @@ console.log("Running a GraphQL API server at localhost:4000/graphql");
 
 try {
   //Will delete data from db every time with force: true
-  await db.sync({ force: true });
-  await db.authenticate();
+  db.sync({ force: true });
+  db.authenticate();
   console.log(
     "Connection to the Postgres database has been established successfully."
   );

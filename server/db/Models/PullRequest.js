@@ -1,5 +1,5 @@
-import Sequelize from "sequelize";
-import db from "../db.js";
+const { Sequelize } = require("sequelize");
+const db = require("../db");
 
 const PullRequest = db.define(
   "pullrequest",
@@ -49,4 +49,4 @@ const PullRequest = db.define(
   }
 );
 
-export default PullRequest;
+module.exports = PullRequest;

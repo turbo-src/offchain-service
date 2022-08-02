@@ -1,5 +1,5 @@
-import assert from "assert";
-import getContributorName from "../lib/getContributorName.js";
+const assert = require("assert");
+const { getContributorName } = require("../lib");
 
 describe("getContributorName", function () {
   it("should return a contributor's name (github login) based on their id (ethereum address)", async function () {

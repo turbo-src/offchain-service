@@ -1,7 +1,5 @@
-import assert from "assert";
-import createRepo from "../lib/createRepo.js";
-import createPullRequest from "../lib/createPullRequest.js";
-import createUser from "../lib/createUser.js";
+const assert = require("assert");
+const { createPullRequest } = require("../lib");
 
 describe("createPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {

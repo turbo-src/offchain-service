@@ -1,13 +1,10 @@
-import assert from "assert";
-import createRepo from "../lib/createRepo.js";
-import createUser from "../lib/createUser.js";
-import transferTokens from "../lib/transferTokens.js";
-import getVoteNoTotals from "../lib/state/getVoteNoTotals.js";
-import getVoteYesTotals from "../lib/state/getVoteYesTotals.js";
-import getVoteTotals from "../lib/state/getVoteTotals.js";
-import createPullRequest from "../lib/createPullRequest.js";
-import setVote from "../lib/setVote.js";
-import getVoteStatus from "../lib/state/getVoteStatus.js";
+const assert = require("assert");
+const {
+  getVoteStatus,
+  setVote,
+  getVoteYesTotals,
+  getVoteNoTotals,
+} = require("../lib");
 
 describe("Two voters vote - exceed quorum.", function () {
   it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {

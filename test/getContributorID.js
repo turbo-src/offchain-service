@@ -1,8 +1,7 @@
-import assert from "assert";
-import getContributorID from "../lib/getContributorID.js";
-import createUser from "../lib/createUser.js";
+const assert = require("assert");
+const { getContributorID } = require("../lib");
 
-describe("getContributorId", function () {
+describe("getContributorID", function () {
   it("should return a contributor's id (ethereum address) based on their name (github login)", async function () {
     let contributorId = await getContributorID("michael");
 
