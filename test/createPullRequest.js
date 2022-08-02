@@ -11,10 +11,6 @@ describe("createPullRequest", function () {
       /*title:*/ "refactor(lsp): remove redundant client cleanup"
     );
 
-    assert.equal(
-      res,
-      "pull request: issue_1 successfully added to repo: joseph/demo",
-      "Failed to create a pull request in the database"
-    );
+    assert.equal(res, "204", "Failed to create a pull request in the database");
   });
 });

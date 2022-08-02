@@ -99,13 +99,13 @@ As a majority of votes have been reached for yes, the repo status is automatical
 ### createPullRequest
 
 ```
-string: 'pull request PR_ID was successfully added to repo REPO_ID
+204
 ```
 
 ### setVote
 
 ```
-204
+201
 ```
 
 ### transferTokens
