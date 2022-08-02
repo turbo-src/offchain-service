@@ -1,13 +1,5 @@
 # Usage
 
-### Install Postgres and create database privatestore \*\*\*
-
-```
-createdb privatestore
-```
-
-\*\*\* Needs updating - not sure if this step is required
-
 ### Build image and containers in detatched mode from root directory
 
 ```
@@ -50,7 +42,9 @@ ctrl c
 ./test/run-tests.sh
 ```
 
-### N.B. Enter npm start again to clear database if running tests a second time.
+### N.B.:
+
+Enter npm start again to clear database if running tests a second time.
 
 ### Exit Shell or Bash session
 
@@ -79,8 +73,6 @@ Mary uses her 500,001 tokens to vote yes.
 As a majority of votes have been reached for yes, the repo status is automatically updated to merged.
 
 # To Do:
-
-- Resolve creating a database step in the usage process
 
 - Resolve the Postgres volume location in docker-compose
 
