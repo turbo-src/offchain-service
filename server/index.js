@@ -123,13 +123,31 @@ var root = {
     );
   },
   setVote: async (args) => {
-    return await setVote(args);
+    return await setVote(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   newPullRequest: async (args) => {
-    return await createPullRequest(args);
+    return await createPullRequest(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   createRepo: async (args) => {
-    return await createRepo(args);
+    return await createRepo(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
 };
 
