@@ -56,8 +56,8 @@ describe("Two voters vote - exceed quorum.", function () {
       /*side:*/ ""
     );
 
-    assert.equal(michaelVote, 204, "Fail to add vote to database");
-    assert.equal(maryVote, 204, "Fail to add vote to database");
+    assert.equal(michaelVote, 201, "Fail to add vote to database");
+    assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.equal(voteYesTotals, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals, "0", "Fail to add votes no.");
     assert.equal(openStatus, "open", "Fail to stay open.");
