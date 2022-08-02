@@ -74,6 +74,8 @@ As a majority of votes have been reached for yes, the repo status is automatical
 
 # To Do:
 
+- Test Graphql endpoints
+
 - Resolve the Postgres volume location in docker-compose
 
 - Achieve a majority through a quorum
