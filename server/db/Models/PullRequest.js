@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const db = require("../db");
+const { getPRVoteTotals } = require("../lib");
 
 const PullRequest = db.define(
   "pullrequest",
@@ -29,16 +30,27 @@ const PullRequest = db.define(
   {
     hooks: {
       afterUpdate: async (pr, options) => {
-        if (Number(pr.yesTokenAmount) >= 500001) {
-          try {
+        const quorum = getQuorum(pr.repo_id);
+        const voteTotals = getPRVoteTotals(args); //
+        const percentVoted = Number(voteTotals.totalVotedTokens) / 1000000;
+
+        if (percentVoted >= quorum) {
+          const yesRatio =
+            Number(voteTotals.totalVotedYesTokens) /
+            Number(voteTotals.totalVotedNoTokens);
+
+          if (yesRatio > 1) {
             await PullRequest.update(
               { status: "merge" },
               { where: { id: pr.id } }
             );
-          } catch (error) {
-            console.log(error);
+          } else {
+            await PullRequest.update(
+              { status: "close" },
+              { where: { id: pr.id } }
+            );
           }
-        } else if (Number(pr.yesTokenAmount) <= 500000) {
+        } else {
           await PullRequest.update(
             { status: "open" },
             { where: { id: pr.id } }

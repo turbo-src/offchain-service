@@ -58,7 +58,7 @@ exit
 docker-compose down
 ```
 
-# Test Story:
+# Test:
 
 - Joseph creates a repo called demo.
 
