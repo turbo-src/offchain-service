@@ -84,7 +84,7 @@ docker-compose down
 
 # Functions and their return values if request is successful
 
-### createRepo(owner: String, repo*: String, pr_id: String, contributor_id*: String, side: String): String
+### createRepo
 
 ```
 204
