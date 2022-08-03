@@ -1,6 +1,5 @@
-import assert from "assert";
-import createRepo from "../lib/createRepo.js";
-import getRepoTokenAmount from "../lib/getRepoTokenAmount.js";
+const assert = require("assert");
+const { getRepoTokenAmount, createRepo } = require("../lib");
 
 describe("createRepo", function () {
   it("should create a repo and return a token amount of 1000000", async function () {

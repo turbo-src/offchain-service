@@ -1,4 +1,4 @@
- {
+{
    "name": "testing",
    "version": "0.0.1",
    "description": "Test opreturn contracts.",
@@ -6,18 +6,21 @@
    "license": "MIT",
    "main": "index.js",
    "scripts": {
-     "test": "/usr/local/node_modules/.bin/mocha"
+      "start": "node server",
+      "test": "/usr/local/node_modules/mocha/bin/mocha.js"
+   },
+   "dependencies": {
+      "express": "^4.17.1",
+      "express-graphql": "^0.12.0",
+      "graphql": "^16.0.1",
+      "mocha": "^9.2.0",
+      "pg": "^8.7.3",
+      "pg-hstore": "^2.3.4",
+      "sequelize": "6.21.3"
    },
    "repository": {
-     "type": "git",
-     "url": ""
+      "type": "git",
+      "url": ""
    },
-   "bugs": {
-     "url": ""
-   },
-   "homepage": "",
-   "devDependencies": {
-     "mocha": "8.0.1"
-   }
- }
-
+   "homepage": ""
+}
