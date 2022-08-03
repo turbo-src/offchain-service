@@ -82,7 +82,7 @@ As a majority of votes have been reached for yes, the repo status is automatical
 
 - Create a more demanding voting narrative to test safeguards
 
-### Functions and Their Return Values if Request is Successful
+# Functions and Their Return Values if Request is Successful
 
 ### createRepo
 
