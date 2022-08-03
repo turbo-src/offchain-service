@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 const db = require("../db");
-const { getPRVoteTotals } = require("../lib");
+const { getPRVoteTotals, getQuorum } = require("../lib");
 
 const PullRequest = db.define(
   "pullrequest",
@@ -29,9 +29,17 @@ const PullRequest = db.define(
   },
   {
     hooks: {
-      afterUpdate: async (pr, options) => {
+      afterUpdate: async (pr) => {
         const quorum = getQuorum(pr.repo_id);
-        const voteTotals = getPRVoteTotals(args); //
+
+        const voteTotals = getPRVoteTotals(
+          /*owner:*/ "",
+          /*repo:*/ pr.repo_id,
+          /*pr_id:*/ pr.pr_id,
+          /*contributor:*/ "",
+          /*side:*/ ""
+        );
+
         const percentVoted = Number(voteTotals.totalVotedTokens) / 1000000;
 
         if (percentVoted >= quorum) {
