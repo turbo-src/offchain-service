@@ -45,7 +45,6 @@ describe("Two voters vote - exceed quorum.", function () {
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*contributor_name:*/ "gabriel",
       /*side*/ "yes"
     );
 
@@ -54,7 +53,6 @@ describe("Two voters vote - exceed quorum.", function () {
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
-      /*contributor_name:*/ "magda",
       /*side*/ "yes"
     );
 
@@ -103,7 +101,7 @@ describe("Two voters vote - exceed quorum.", function () {
       /*side:*/ ""
     );
 
-    assert.equal(michaelVote, 201, "Fail to add vote to database");
+    assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.equal(openStatus, "open", "Fail to stay open.");
