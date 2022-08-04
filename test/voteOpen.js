@@ -6,8 +6,15 @@ const {
   getVoteNoTotals,
 } = require("../lib");
 
+var snooze_ms = 5000
+
+// We call this at the top of each test case, otherwise nodeosd could
+// throw duplication errors (ie, data races).
+const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 describe("Not enough voters vote to exceed quorum", function () {
   it("Should leave PR status as open if quorum is not exceeded", async function () {
+    this.timeout(snooze_ms*12);
     let michaelVote = await setVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",

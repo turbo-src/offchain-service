@@ -6,8 +6,16 @@ const {
   getVoteNoTotals,
 } = require("../lib");
 
+var snooze_ms = 5000
+
+// We call this at the top of each test case, otherwise nodeosd could
+// throw duplication errors (ie, data races).
+const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 describe("Multiple voters vote to merge Pull Request 1: issue_1", function () {
   it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {
+    this.timeout(snooze_ms*12);
+
     let michaelVote = await setVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
