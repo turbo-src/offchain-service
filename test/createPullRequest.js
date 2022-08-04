@@ -37,22 +37,22 @@ describe("createPullRequest", function () {
 
     assert.equal(
       issue_1,
-      "204",
+      "201",
       "Failed to create a pull request issue_1 in the database"
     );
     assert.equal(
       issue_2,
-      "204",
+      "201",
       "Failed to create a pull request issue_2 in the database"
     );
     assert.equal(
       issue_3,
-      "204",
+      "201",
       "Failed to create a pull request issue_3 in the database"
     );
     assert.equal(
       issue_4,
-      "204",
+      "201",
       "Failed to create a pull request issue_4 in the database"
     );
   });
