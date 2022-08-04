@@ -32,14 +32,11 @@ const PullRequest = db.define(
       afterUpdate: async (pr) => {
         const repo = await Repo.findOne({ where: { repo_id: pr.repo_id } });
         const quorum = repo.quorum;
-
         const voteTotals = Number(pr.yesTokenAmount) + Number(pr.noTokenAmount);
-
         const percentVoted = voteTotals / 1000000;
 
         if (percentVoted >= quorum) {
           const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
-
           if (yesRatio > 1) {
             await PullRequest.update(
               { status: "merge" },

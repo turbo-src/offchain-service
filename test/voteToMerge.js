@@ -6,7 +6,7 @@ const {
   getVoteNoTotals,
 } = require("../lib");
 
-describe("Two voters vote - exceed quorum.", function () {
+describe("Multiple voters vote to merge Pull Request 1: issue_1", function () {
   it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {
     let michaelVote = await setVote(
       /*owner:*/ "joseph",
@@ -61,7 +61,7 @@ describe("Two voters vote - exceed quorum.", function () {
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
-      /*side*/ "yes"
+      /*side*/ "no"
     );
 
     const benVote = await setVote(
