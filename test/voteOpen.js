@@ -6,28 +6,28 @@ const {
   getVoteNoTotals,
 } = require("../lib");
 
-describe("Two voters vote - exceed quorum.", function () {
-  it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {
+describe("Not enough voters vote to exceed quorum", function () {
+  it("Should leave PR status as open if quorum is not exceeded", async function () {
     let michaelVote = await setVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_3",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
 
-    const voteYesTotals = await getVoteYesTotals(
+    const voteYesTotals50000 = await getVoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_3",
       /*contributor:*/ "",
       /*side:*/ ""
     );
 
-    const voteNoTotals = await getVoteNoTotals(
+    const voteNoTotals0 = await getVoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_3",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
@@ -35,36 +35,37 @@ describe("Two voters vote - exceed quorum.", function () {
     const openStatus = await getVoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_3",
       /*contributor:*/ "",
       /*side:*/ ""
     );
 
-    let maryVote = await setVote(
+    let gabrielVote = await setVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
-      /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
-      /*side:*/ "yes"
+      /*pr_id:*/ "issue_3",
+      /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
+      /*side*/ "yes"
     );
 
     const mergeStatus = await getVoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*pr_id:*/ "issue_3",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
 
-    assert.equal(michaelVote, 201, "Fail to add vote to database");
-    assert.equal(maryVote, 201, "Fail to add vote to database");
-    assert.equal(voteYesTotals, "50000", "Fail to add votes yes.");
-    assert.equal(voteNoTotals, "0", "Fail to add votes no.");
+    assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
+    assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
+    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.equal(openStatus, "open", "Fail to stay open.");
+    assert.equal(gabrielVote, 201, "Fail to add vote to database");
+
     assert.equal(
       mergeStatus,
-      "merge",
-      "Fail to merge even though it was voted in."
+      "open",
+      "Fail to stay open even though it was vote on and did not exceed quorum"
     );
   });
 });

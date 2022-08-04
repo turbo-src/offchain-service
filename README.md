@@ -58,30 +58,6 @@ exit
 docker-compose down
 ```
 
-# Test Story:
-
-- Joseph creates a repo called demo.
-
-- He then transfers tokens to a list of contributors. 500001 to Mary and 50,000 to a variety of others.
-
-- A pull request is added called issue_1.
-
-- Michael uses his 50,000 tokens to vote yes.
-
-- Mary uses her 500,001 tokens to vote yes.
-
-- As a majority of votes have been reached for yes, the repo status is automatically updated to merged.
-
-# To Do:
-
-- Resolve the Postgres volume location in docker-compose
-
-- Achieve a majority through a quorum
-
-- Verify user actions such as voting
-
-- Create a more demanding voting narrative to test safeguards
-
 # Functions and their return values if request is successful
 
 ### createRepo
