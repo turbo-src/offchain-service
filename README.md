@@ -63,19 +63,19 @@ docker-compose down
 ### createRepo
 
 ```
-204
+201
 ```
 
 ### createUser
 
 ```
-204
+201
 ```
 
 ### createPullRequest
 
 ```
-204
+201
 ```
 
 ### setVote
@@ -87,7 +87,7 @@ docker-compose down
 ### transferTokens
 
 ```
-200
+201
 ```
 
 ### getContributorID
@@ -142,4 +142,16 @@ a string of the total number of votes against a pull request
 
 ```
 status of pr for a repo, string either open close or merge \*same as getPRStatus
+```
+
+### getQuorum
+
+```
+a string representing the repo's quorum. default is ".34"
+```
+
+### setQuorum
+
+```
+204
 ```
