@@ -36,7 +36,7 @@ var schema = buildSchema(`
     getPRStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     setQuorum(repo_id: String, contributor_id: String, quorum: String): String,
     getQuorum(repo_id: String): String,
-    getVoteTotals(owner: "String", repo: "String", pr_id: "String", contributor_id: "String", side: "String")
+    getVoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
   }
