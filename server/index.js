@@ -13,6 +13,7 @@ const {
   getContributorTokenAmount,
   getPRStatus,
   getRepoStatus,
+  getVoteTotals,
   getVoteYesTotals,
   getVoteNoTotals,
   setQuorum,
@@ -35,6 +36,7 @@ var schema = buildSchema(`
     getPRStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     setQuorum(repo_id: String, contributor_id: String, quorum: String): String,
     getQuorum(repo_id: String): String,
+    getVoteTotals(owner: "String", repo: "String", pr_id: "String", contributor_id: "String", side: "String")
     getVoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getVoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
   }
@@ -48,6 +50,24 @@ var root = {
       args.contributor_id,
       args.contributor_name,
       args.contributor_signature
+    );
+  },
+  createRepo: async (args) => {
+    return await createRepo(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
+  },
+  createPullRequest: async (args) => {
+    return await createPullRequest(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
     );
   },
   getContributorName: async (args) => {
@@ -75,6 +95,12 @@ var root = {
       args.contributor_id
     );
   },
+  getRepoStatus: async (args) => {
+    return await getRepoStatus(args.repo_id);
+  },
+  getAuthorizedContributor: async (args) => {
+    return getAuthorizedContributor(args.contributor_id, args.repo_id);
+  },
   getContributorTokenAmount: async (args) => {
     return await getContributorTokenAmount(
       args.owner,
@@ -93,11 +119,14 @@ var root = {
       args.amount
     );
   },
-  getRepoStatus: async (args) => {
-    return await getRepoStatus(args.repo_id);
-  },
-  getAuthorizedContributor: async (args) => {
-    return getAuthorizedContributor(args.contributor_id, args.repo_id);
+  setVote: async (args) => {
+    return await setVote(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   getPRStatus: async (args) => {
     return await getPRStatus(
@@ -108,7 +137,22 @@ var root = {
       args.side
     );
   },
-  getPRvoteYesTotals: async (args) => {
+  setQuorum: async (args) => {
+    return await setQuorum(args.repo_id, args.contributor_id, args.quorum);
+  },
+  getQuorum: async (args) => {
+    return await getQuorum(args.repo_id);
+  },
+  getVoteTotals: async (args) => {
+    return getVoteTotals(
+      args.owner,
+      args.repo,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
+  },
+  getVoteYesTotals: async (args) => {
     return getVoteYesTotals(
       args.owner,
       args.repo,
@@ -117,35 +161,8 @@ var root = {
       args.side
     );
   },
-  getPRvoteNoTotals: async (args) => {
+  getVoteNoTotals: async (args) => {
     return getVoteNoTotals(
-      args.owner,
-      args.repo,
-      args.pr_id,
-      args.contributor_id,
-      args.side
-    );
-  },
-  setVote: async (args) => {
-    return await setVote(
-      args.owner,
-      args.repo,
-      args.pr_id,
-      args.contributor_id,
-      args.side
-    );
-  },
-  newPullRequest: async (args) => {
-    return await createPullRequest(
-      args.owner,
-      args.repo,
-      args.pr_id,
-      args.contributor_id,
-      args.side
-    );
-  },
-  createRepo: async (args) => {
-    return await createRepo(
       args.owner,
       args.repo,
       args.pr_id,
