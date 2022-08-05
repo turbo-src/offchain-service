@@ -31,25 +31,23 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.createRepo;
   },
-  // postCreatePullRequest: async (
-  //   owner,
-  //   repo_id,
-  //   pr_id,
-  //   contributor_id,
-  //   side
-  // ) => {
-  //   const res = superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ createPullRequest(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}", vote_status: "${vote_status}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   // .end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
+  postCreatePullRequest: async (
+    /*owner:*/ owner,
+    /*repo_id:*/ repo_id,
+    /*fork_branch:*/ fork_branch,
+    /*pr_id:*/ pr_id,
+    /*title:*/ title
+  ) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ createPullRequest(owner: "${owner}", repo_id: "${repo_id}", fork_branch: "${fork_branch}", pr_id: "${pr_id}", title: "${title}") }`,
+      })
+      .set("accept", "json");
+
+    const json = JSON.parse(res.text);
+    return json.data.createPullRequest;
+  },
   postGetContributorName: async (owner, repo, pr_id, contributor_id) => {
     const res = await superagent
       .post("http://localhost:4000/graphql")
