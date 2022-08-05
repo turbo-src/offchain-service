@@ -1,1 +1,1 @@
-npm test test-server/postCreateUser.js
+npm test test-server/postCreateUser.js test-server/postCreateRepo.js

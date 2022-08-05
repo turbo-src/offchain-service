@@ -20,19 +20,17 @@ var root = {
         return json.data.createUser;
       });
   },
-  // postCreateRepo: async (owner, repo, pr_id, contributor_id, side) => {
-  //   const res = superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ createRepo(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   // .end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
+  postCreateRepo: async (owner, repo, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ createRepo(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+
+    const json = JSON.parse(res.text);
+    return json.data.createRepo;
+  },
   // postCreatePullRequest: async (
   //   owner,
   //   repo_id,
