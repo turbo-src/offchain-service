@@ -1,17 +1,17 @@
 const assert = require("assert");
 const {
-  postGetVoteStatus,
   postSetVote,
+  postGetPRStatus,
   postGetVoteYesTotals,
   postGetVoteNoTotals,
-} = require("../lib");
+} = require("../src/requests");
 
 describe("Not enough voters vote to exceed quorum", function () {
   it("Should leave PR status as open if quorum is not exceeded", async function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*pr_id:*/ "pullRequest3",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
@@ -19,7 +19,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     const voteYesTotals50000 = await postGetVoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*pr_id:*/ "pullRequest3",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -27,15 +27,15 @@ describe("Not enough voters vote to exceed quorum", function () {
     const voteNoTotals0 = await postGetVoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*pr_id:*/ "pullRequest3",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
 
-    const openStatus = await postGetVoteStatus(
+    const openStatus = await postGetPRStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*pr_id:*/ "pullRequest3",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -43,15 +43,15 @@ describe("Not enough voters vote to exceed quorum", function () {
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*pr_id:*/ "pullRequest3",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
 
-    const mergeStatus = await postGetVoteStatus(
+    const mergeStatus = await postGetPRStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*pr_id:*/ "pullRequest3",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
