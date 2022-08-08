@@ -39,7 +39,7 @@ ctrl c
 ### Run tests
 
 ```
-./test/run-tests.sh
+./test-server/run-tests.sh
 ```
 
 ### N.B.:
