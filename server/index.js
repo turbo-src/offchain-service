@@ -20,6 +20,7 @@ const {
   getVoteNoTotals,
   setQuorum,
   getQuorum,
+  setVote,
 } = require("../lib");
 
 var schema = buildSchema(`
@@ -34,7 +35,7 @@ var schema = buildSchema(`
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
     transferTokens(owner: String, repo_id: String, from: String, to: String, amount: String): String,
-    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    setVote(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
     getPRStatus(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
     setQuorum(repo_id: String, contributor_id: String, quorum: String): String,
     getQuorum(repo_id: String): String,
@@ -130,7 +131,7 @@ var root = {
   setVote: async (args) => {
     return await setVote(
       args.owner,
-      args.repo,
+      args.repo_id,
       args.pr_id,
       args.contributor_id,
       args.side
@@ -139,7 +140,7 @@ var root = {
   getPRStatus: async (args) => {
     return await getPRStatus(
       args.owner,
-      args.repo,
+      args.repo_id,
       args.pr_id,
       args.contributor_id,
       args.side

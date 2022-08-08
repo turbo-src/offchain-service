@@ -146,97 +146,97 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.transferTokens;
   },
-  // postSetVote: async (owner, repo, pr_id, contributor_id, side) => {
-  //   const res = superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ setVote(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   //   .end((err, res) => {
-  //   //      Calling the end function will send the request
-  //   //   });
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
-  // postGetPRStatus: async (owner, repo, pr_id, contributor_id, side) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getPRStatus(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   //.end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
-  // postSetQuorum: async (repo_id, contributor_id, quorum) => {
-  //   const res = superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ setQuorum(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}", quorum: "${quorum}") }`,
-  //     })
-  //     .set("accept", "json")
-  //     .end((err, res) => {
-  //       // Calling the end function will send the request
-  //     });
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
-  // postGetQuorum: async (repo_id) => {
-  //   const res = superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getQuorum(repo_id: "${repo_id}") }`,
-  //     })
-  //     .set("accept", "json")
-  //     .end((err, res) => {
-  //       // Calling the end function will send the request
-  //     });
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
-  // postGetVoteTotals: async (owner, repo, pr_id, contributor_id, side) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getVoteTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   //.end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data.totalVotedTokens;
-  // },
-  // postGetVoteYesTotals: async (owner, repo, pr_id, contributor_id, side) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getVoteYesTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   //.end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data.getVoteYesTotals;
-  // },
-  // postGetVoteNoTotals: async (owner, repo, pr_id, contributor_id, side) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getVoteNoTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   //.end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data.getVoteNoTotals;
-  // },
+  postSetVote: async (owner, repo_id, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ setVote(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+    //   .end((err, res) => {
+    //      Calling the end function will send the request
+    //   });
+    const json = JSON.parse(res.text);
+    return json.data.setVote;
+  },
+  postGetPRStatus: async (owner, repo_id, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getPRStatus(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getPRStatus;
+  },
+  postSetQuorum: async (repo_id, contributor_id, quorum) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ setQuorum(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}", quorum: "${quorum}") }`,
+      })
+      .set("accept", "json")
+      .end((err, res) => {
+        // Calling the end function will send the request
+      });
+    const json = JSON.parse(res.text);
+    return json.data.setQuorum;
+  },
+  postGetQuorum: async (repo_id) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getQuorum(repo_id: "${repo_id}") }`,
+      })
+      .set("accept", "json")
+      .end((err, res) => {
+        // Calling the end function will send the request
+      });
+    const json = JSON.parse(res.text);
+    return json.data.getQuorum;
+  },
+  postGetVoteTotals: async (owner, repo, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getVoteTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getVoteTotals;
+  },
+  postGetVoteYesTotals: async (owner, repo, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getVoteYesTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getVoteYesTotals;
+  },
+  postGetVoteNoTotals: async (owner, repo, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getVoteNoTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getVoteNoTotals;
+  },
 };
 
 module.exports = root;
