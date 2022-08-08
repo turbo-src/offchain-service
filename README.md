@@ -137,7 +137,7 @@ a string of the total number of votes against a pull request
 ### getVoteStatus
 
 ```
-status of pr for a repo, string either open close or merge \*same as getPRStatus
+Use getPRStatus instead
 ```
 
 ### getQuorum
