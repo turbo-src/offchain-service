@@ -30,11 +30,7 @@ docker exec -it <privateStore_library_1 id> bash *or* sh
 npm start
 ```
 
-### Then
-
-```
-ctrl c
-```
+### New terminal window, root directory
 
 ### Run tests
 
