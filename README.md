@@ -12,16 +12,16 @@ docker-compose up --build -d
 docker pull node:16.15-bullseye
 ```
 
-### Get container id of getting-started-library_1
+### Get container id of privateStore_library_1
 
 ```
 docker ps
 ```
 
-### Enter bash or shell session in container getting-started-library_1
+### Enter bash or shell session in container privateStore_library_1
 
 ```
-docker exec -it <getting-started-library_1 id> bash *or* sh
+docker exec -it <privateStore_library_1 id> bash *or* sh
 ```
 
 ### Connect to the database, start the Graphql server, ports 5432 and 4000
