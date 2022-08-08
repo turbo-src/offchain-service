@@ -75,7 +75,7 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getContributorID;
   },
-  postGetContributorSignature: async (owner, repo, pr_id, contributor_id) => {
+  postGetContributorSignature: async (owner, repo, pr_id, contributor_name) => {
     const res = await superagent
       .post("http://localhost:4000/graphql")
       .send({
@@ -85,6 +85,7 @@ var root = {
     //.end((err, res) => {
     // Calling the end function will send the request
     //});
+    console.log("res =>", res.text);
     const json = JSON.parse(res.text);
     return json.data.getContributorSignature;
   },

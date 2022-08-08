@@ -9,6 +9,7 @@ const {
   createUser,
   getAuthorizedContributor,
   getContributorID,
+  getContributorSignature,
   getContributorName,
   getContributorTokenAmount,
   getPRStatus,
