@@ -27,7 +27,7 @@ var schema = buildSchema(`
     createPullRequest(owner: String, repo_id: String, pr_id: String, fork_branch: String, title: String): String,
     getContributorName(owner: String, repo: String, pr_id: String, contributor_id: String): String,
     getContributorID(owner: String, repo: String, pr_id: String, contributor_name: String): String,
-    getContributorSignature(owner: String, repo: String, pr_id: String, contributor_id: String): String,
+    getContributorSignature(owner: String, repo: String, pr_id: String, contributor_name: String): String,
     getRepoStatus(repo_id: String): String,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
@@ -92,7 +92,7 @@ var root = {
       args.owner,
       args.repo,
       args.pr_id,
-      args.contributor_id
+      args.contributor_name
     );
   },
   getRepoStatus: async (args) => {

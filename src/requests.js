@@ -75,19 +75,19 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getContributorID;
   },
-  // postGetContributorSignature: async (owner, repo, pr_id, contributor_id) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getContributorSignature(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}") }`,
-  //     })
-  //     .set("accept", "json");
-  //   //.end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
+  postGetContributorSignature: async (owner, repo, pr_id, contributor_id) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getContributorSignature(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_name: "${contributor_name}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getContributorSignature;
+  },
   // getRepoStatus: async (repo_id) => {
   //   const res = await superagent
   //     .post("http://localhost:4000/graphql")
