@@ -9,6 +9,7 @@ const {
   createUser,
   getAuthorizedContributor,
   getContributorID,
+  transferTokens,
   getContributorSignature,
   getContributorName,
   getContributorTokenAmount,
@@ -31,10 +32,10 @@ var schema = buildSchema(`
     getContributorSignature(owner: String, repo: String, pr_id: String, contributor_name: String): String,
     getRepoStatus(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
-    getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
+    getContributorTokenAmount(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
+    transferTokens(owner: String, repo_id: String, from: String, to: String, amount: String): String,
     setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRStatus(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
     setQuorum(repo_id: String, contributor_id: String, quorum: String): String,
     getQuorum(repo_id: String): String,
     getVoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
@@ -111,7 +112,7 @@ var root = {
   getContributorTokenAmount: async (args) => {
     return await getContributorTokenAmount(
       args.owner,
-      args.repo,
+      args.repo_id,
       args.pr_id,
       args.contributor_id,
       args.side
@@ -120,7 +121,7 @@ var root = {
   transferTokens: async (args) => {
     return await transferTokens(
       args.owner,
-      args.repo,
+      args.repo_id,
       args.from,
       args.to,
       args.amount
