@@ -62,11 +62,11 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getContributorName;
   },
-  postGetContributorID: async (owner, repo, pr_id, contributor_name) => {
+  postGetContributorID: async (owner, repo_id, pr_id, contributor_name) => {
     const res = await superagent
       .post("http://localhost:4000/graphql")
       .send({
-        query: `{ getContributorID(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_name: "${contributor_name}") }`,
+        query: `{ getContributorID(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_name: "${contributor_name}") }`,
       })
       .set("accept", "json");
     //.end((err, res) => {
@@ -85,58 +85,67 @@ var root = {
     //.end((err, res) => {
     // Calling the end function will send the request
     //});
-    console.log("res =>", res.text);
     const json = JSON.parse(res.text);
     return json.data.getContributorSignature;
   },
-  // getRepoStatus: async (repo_id) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({ query: `{ getRepoStatus(repo_id: "${repo_id}") }` })
-  //     .set("accept", "json");
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
-  // getAuthorizedContributor: async (contributor_id, repo_id) => {
-  //   return await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getAuthorizedContributor(contributor_id: "${contributor_id}", repo_id: "${repo_id}") }`,
-  //     })
-  //     .set("accept", "json");
-  // },
-  // postGetContributorTokenAmount: async (
-  //   owner,
-  //   repo,
-  //   pr_id,
-  //   contributor_id,
-  //   side
-  // ) => {
-  //   const res = await superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ getContributorTokenAmount(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
-  //     }) // sends a JSON post body
-  //     .set("accept", "json");
-  //   //.end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //});
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
-  // postTransferTokens: async (owner, repo, from, to, amount) => {
-  //   const res = superagent
-  //     .post("http://localhost:4000/graphql")
-  //     .send({
-  //       query: `{ transferTokens(owner: "${owner}", repo: "${repo}", from: "${from}", to: "${to}", amount: "${amount}") }`,
-  //     }) // sends a JSON post body
-  //     .set("accept", "json");
-  //   //   .end((err, res) => {
-  //   // Calling the end function will send the request
-  //   //   });
-  //   const json = JSON.parse(res);
-  //   return json.data;
-  // },
+  postGetRepoStatus: async (owner, repo_id, pr_id, contributor_id, side) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getRepoStatus(owner: "${owner}", repo_id: "${repo_id}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getRepoStatus;
+  },
+  postGetAuthorizedContributor: async (contributor_id, repo_id) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getAuthorizedContributor(contributor_id: "${contributor_id}", repo_id: "${repo_id}") }`,
+      })
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getAuthorizedContributor;
+  },
+  postGetContributorTokenAmount: async (
+    owner,
+    repo,
+    pr_id,
+    contributor_id,
+    side
+  ) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ getContributorTokenAmount(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+      }) // sends a JSON post body
+      .set("accept", "json");
+    //.end((err, res) => {
+    // Calling the end function will send the request
+    //});
+    const json = JSON.parse(res.text);
+    return json.data.getContributorTokenAmount;
+  },
+  postTransferTokens: async (owner, repo, from, to, amount) => {
+    const res = await superagent
+      .post("http://localhost:4000/graphql")
+      .send({
+        query: `{ transferTokens(owner: "${owner}", repo: "${repo}", from: "${from}", to: "${to}", amount: "${amount}") }`,
+      }) // sends a JSON post body
+      .set("accept", "json");
+    //   .end((err, res) => {
+    // Calling the end function will send the request
+    //   });
+    const json = JSON.parse(res.text);
+    return json.data.transferTokens;
+  },
   // postSetVote: async (owner, repo, pr_id, contributor_id, side) => {
   //   const res = superagent
   //     .post("http://localhost:4000/graphql")

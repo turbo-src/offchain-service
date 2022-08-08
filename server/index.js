@@ -27,9 +27,9 @@ var schema = buildSchema(`
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createPullRequest(owner: String, repo_id: String, pr_id: String, fork_branch: String, title: String): String,
     getContributorName(owner: String, repo: String, pr_id: String, contributor_id: String): String,
-    getContributorID(owner: String, repo: String, pr_id: String, contributor_name: String): String,
+    getContributorID(owner: String, repo_id: String, pr_id: String, contributor_name: String): String,
     getContributorSignature(owner: String, repo: String, pr_id: String, contributor_name: String): String,
-    getRepoStatus(repo_id: String): String,
+    getRepoStatus(owner: String, repo_id: String, pr_id: String, contributor_id: String, side: String): String,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
@@ -82,7 +82,7 @@ var root = {
   getContributorID: async (args) => {
     let contributorID = await getContributorID(
       args.owner,
-      args.repo,
+      args.repo_id,
       args.pr_id,
       args.contributor_name
     );
@@ -97,10 +97,16 @@ var root = {
     );
   },
   getRepoStatus: async (args) => {
-    return await getRepoStatus(args.repo_id);
+    return await getRepoStatus(
+      args.owner,
+      args.repo_id,
+      args.pr_id,
+      args.contributor_id,
+      args.side
+    );
   },
   getAuthorizedContributor: async (args) => {
-    return getAuthorizedContributor(args.contributor_id, args.repo_id);
+    return await getAuthorizedContributor(args.contributor_id, args.repo_id);
   },
   getContributorTokenAmount: async (args) => {
     return await getContributorTokenAmount(
