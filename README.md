@@ -137,7 +137,7 @@ a string of the total number of votes against a pull request
 ### getVoteYesTotals
 
 ```
-a string of the total number of votes against a pull request
+a string of the total number of votes in favor a pull request
 ```
 
 ### getVoteStatus
