@@ -6,7 +6,10 @@ const {
   postGetVoteNoTotals,
 } = require("../src/requests");
 
+let snooze_ms = 5000;
+
 describe("Duplicate voting should result in a 403 error", function () {
+  this.timeout(snooze_ms * 12);
   it("Should check if a vote with the contributor's id and pullrequest's id has been created. If so, return 403.", async function () {
     const gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
