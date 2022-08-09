@@ -12,16 +12,16 @@ docker-compose up --build -d
 docker pull node:16.15-bullseye
 ```
 
-### Get container id of getting-started-library_1
+### Get container id of privateStore_library_1
 
 ```
 docker ps
 ```
 
-### Enter bash or shell session in container getting-started-library_1
+### Enter bash or shell session in container privateStore_library_1
 
 ```
-docker exec -it <getting-started-library_1 id> bash *or* sh
+docker exec -it <privateStore_library_1 id> bash *or* sh
 ```
 
 ### Connect to the database, start the Graphql server, ports 5432 and 4000
@@ -30,16 +30,12 @@ docker exec -it <getting-started-library_1 id> bash *or* sh
 npm start
 ```
 
-### Then
-
-```
-ctrl c
-```
+### New terminal window
 
 ### Run tests
 
 ```
-./test/run-tests.sh
+./test-server/run-tests.sh
 ```
 
 ### N.B.:
@@ -81,7 +77,7 @@ docker-compose down
 ### setVote
 
 ```
-201
+201 if valid, 403 if user has voted on this pull request already
 ```
 
 ### transferTokens
@@ -100,6 +96,12 @@ a string with the contributor id
 
 ```
 a string with the contributor's name (github login)
+```
+
+### getRepoStatus
+
+```
+a boolean, true if repo is tokenized, else false
 ```
 
 ### getAuthorizedContributor
@@ -135,13 +137,13 @@ a string of the total number of votes against a pull request
 ### getVoteYesTotals
 
 ```
-a string of the total number of votes against a pull request
+a string of the total number of votes in favor of a pull request
 ```
 
 ### getVoteStatus
 
 ```
-status of pr for a repo, string either open close or merge \*same as getPRStatus
+Use getPRStatus instead
 ```
 
 ### getQuorum
