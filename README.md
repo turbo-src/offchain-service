@@ -30,7 +30,7 @@ docker exec -it <privateStore_library_1 id> bash *or* sh
 npm start
 ```
 
-### New terminal window, root directory
+### New terminal window
 
 ### Run tests
 
@@ -96,6 +96,12 @@ a string with the contributor id
 
 ```
 a string with the contributor's name (github login)
+```
+
+### getRepoStatus
+
+```
+a boolean, true if repo is tokenized, else false
 ```
 
 ### getAuthorizedContributor
