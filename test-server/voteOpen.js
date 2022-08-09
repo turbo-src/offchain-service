@@ -6,10 +6,10 @@ const {
   postGetVoteNoTotals,
 } = require("../src/requests");
 
-let snooze_ms = 2000;
-const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+let snooze_ms = 5000;
 
 describe("Not enough voters vote to exceed quorum", function () {
+  this.timeout(snooze_ms * 12);
   it("Should leave PR status as open if quorum is not exceeded", async function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",

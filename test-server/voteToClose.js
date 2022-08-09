@@ -6,10 +6,10 @@ const {
   postGetVoteNoTotals,
 } = require("../src/requests");
 
-let snooze_ms = 2000;
-const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+let snooze_ms = 5000;
 
 describe("Multiple voters vote to close Pull Request 2: pullRequest2", function () {
+  this.timeout(snooze_ms * 12);
   it("Should set PR status to closed when majority is reached", async function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
