@@ -12,6 +12,7 @@ services:
     build: ./
     environment:
       DB_URL: postgresql://user:password@db:5432/privatestore
+      PORT: http://localhost:4002
     tty: true
 
   db:

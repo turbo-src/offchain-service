@@ -2,6 +2,7 @@ const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const { db } = require("./db");
+require("dotenv").config();
 
 const {
   createPullRequest,
@@ -181,10 +182,12 @@ var root = {
   },
 };
 
+const port = process.env.PORT_NO;
+
 const app = express();
 
-app.listen(4002);
-console.log("Running a GraphQL API server at localhost:4002/graphql");
+app.listen(port);
+console.log(`Running a GraphQL API server at ${port}/graphql`);
 
 app.use(
   "/graphql",
