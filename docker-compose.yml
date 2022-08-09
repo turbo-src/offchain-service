@@ -6,9 +6,9 @@ services:
     depends_on:
       - db
     ports:
-      - 4000:4004
+      - 4000:4002
     expose:
-      - "4004"
+      - "4002"
     build: ./
     environment:
       DB_URL: postgresql://user:password@db:5432/privatestore
