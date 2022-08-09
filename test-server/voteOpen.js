@@ -28,7 +28,6 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side:*/ ""
     );
     await snooze(snooze_ms);
-    await snooze(snooze_ms);
 
     const voteNoTotals0 = await postGetVoteNoTotals(
       /*owner:*/ "joseph",
