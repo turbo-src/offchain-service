@@ -77,7 +77,7 @@ docker-compose down
 ### setVote
 
 ```
-201
+201 if valid, 403 if user has voted on this pull request already
 ```
 
 ### transferTokens
