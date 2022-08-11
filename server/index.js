@@ -184,7 +184,7 @@ var root = {
 const app = express();
 
 app.listen(4002);
-console.log("Running a GraphQL API server at localhost:4004/graphql");
+console.log("Running a GraphQL API server at localhost:4002/graphql");
 
 app.use(
   "/graphql",
