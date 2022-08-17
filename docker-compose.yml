@@ -1,12 +1,11 @@
 version: "3.0"
 
 services:
-
   library:
     depends_on:
       - db
     ports:
-      - 4000:4002
+      - 4002:4002
     expose:
       - "4002"
     build: ./
