@@ -3,8 +3,6 @@ FROM node:16.15-bullseye
 RUN apt update
 
 ENV NODE_PATH=/usr/local/node_modules
-ENV PORT=http://localhost:4002
-ENV PORT_NO=4002
 
 WORKDIR /project
 

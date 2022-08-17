@@ -1,7 +1,7 @@
 const superagent = require("superagent");
 require("dotenv").config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || "http://localhost:4002";
 
 var root = {
   postCreateUser: async (
