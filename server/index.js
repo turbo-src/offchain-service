@@ -182,7 +182,7 @@ var root = {
   },
 };
 
-const port = process.env.PORT_NO;
+const port = process.env.PORT || 4002;
 
 const app = express();
 
