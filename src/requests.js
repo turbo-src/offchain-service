@@ -95,7 +95,7 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ getRepoStatus(repo: "${repo_id}" }`,
+        query: `{ getRepoStatus(repo_id: "${repo_id}" }`,
       })
       .set("accept", "json");
     //.end((err, res) => {
