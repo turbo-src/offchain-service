@@ -1,20 +1,20 @@
 const assert = require("assert");
 const {
-  getVoteStatus,
+  getPRvoteStatus,
   setVote,
   getVoteYesTotals,
   getVoteNoTotals,
 } = require("../lib");
 
-var snooze_ms = 5000
+var snooze_ms = 5000;
 
 // We call this at the top of each test case, otherwise nodeosd could
 // throw duplication errors (ie, data races).
-const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
+const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("Multiple voters vote to close Pull Request 2: issue_2", function () {
   it("Should set PR status to closed when majority is reached", async function () {
-    this.timeout(snooze_ms*12);
+    this.timeout(snooze_ms * 12);
     let michaelVote = await setVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -39,7 +39,7 @@ describe("Multiple voters vote to close Pull Request 2: issue_2", function () {
       /*side:*/ ""
     );
 
-    const openStatus = await getVoteStatus(
+    const openStatus = await getPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "issue_2",
@@ -100,7 +100,7 @@ describe("Multiple voters vote to close Pull Request 2: issue_2", function () {
       /*side*/ "no"
     );
 
-    const mergeStatus = await getVoteStatus(
+    const mergeStatus = await getPRvoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "issue_2",

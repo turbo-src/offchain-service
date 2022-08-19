@@ -14,11 +14,11 @@ const {
   getContributorSignature,
   getContributorName,
   getContributorTokenAmount,
-  getPRStatus,
+  getPRvoteStatus,
   getRepoStatus,
   getVoteTotals,
-  getVoteYesTotals,
-  getVoteNoTotals,
+  getPRvoteYesTotals,
+  getPRvoteNoTotals,
   setQuorum,
   getQuorum,
   setVote,
@@ -37,12 +37,12 @@ var schema = buildSchema(`
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
     setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
     getVoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getVoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getVoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRvoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRvoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
   }
 `);
 
@@ -132,8 +132,8 @@ var root = {
       args.side
     );
   },
-  getPRStatus: async (args) => {
-    return await getPRStatus(
+  getPRvoteStatus: async (args) => {
+    return await getPRvoteStatus(
       args.owner,
       args.repo,
       args.pr_id,
@@ -156,8 +156,8 @@ var root = {
       args.side
     );
   },
-  getVoteYesTotals: async (args) => {
-    return getVoteYesTotals(
+  getPRvoteYesTotals: async (args) => {
+    return getPRvoteYesTotals(
       args.owner,
       args.repo,
       args.pr_id,
@@ -165,8 +165,8 @@ var root = {
       args.side
     );
   },
-  getVoteNoTotals: async (args) => {
-    return getVoteNoTotals(
+  getPRvoteNoTotals: async (args) => {
+    return getPRvoteNoTotals(
       args.owner,
       args.repo,
       args.pr_id,
