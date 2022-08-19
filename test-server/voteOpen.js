@@ -1,9 +1,9 @@
 const assert = require("assert");
 const {
   postSetVote,
-  postGetPRStatus,
-  postGetVoteYesTotals,
-  postGetVoteNoTotals,
+  postGetPRvoteStatus,
+  postGetPRvoteYesTotals,
+  postGetPRvoteNoTotals,
 } = require("../src/requests");
 
 let snooze_ms = 5000;
@@ -19,7 +19,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side:*/ "yes"
     );
 
-    const voteYesTotals50000 = await postGetVoteYesTotals(
+    const voteYesTotals50000 = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest3",
@@ -27,7 +27,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side:*/ ""
     );
 
-    const voteNoTotals0 = await postGetVoteNoTotals(
+    const voteNoTotals0 = await postGetPRvoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest3",
@@ -35,7 +35,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side:*/ ""
     );
 
-    const openStatus = await postGetPRStatus(
+    const openStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest3",
@@ -51,7 +51,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side*/ "yes"
     );
 
-    const mergeStatus = await postGetPRStatus(
+    const mergeStatus = await postGetPRvoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest3",

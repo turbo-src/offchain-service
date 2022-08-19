@@ -162,7 +162,7 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.setVote;
   },
-  postGetPRStatus: async (owner, repo, pr_id, contributor_id, side) => {
+  postGetPRvoteStatus: async (owner, repo, pr_id, contributor_id, side) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
@@ -201,7 +201,7 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getQuorum;
   },
-  postGetVoteTotals: async (owner, repo, pr_id, contributor_id, side) => {
+  postGetPRvoteTotals: async (owner, repo, pr_id, contributor_id, side) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
@@ -214,7 +214,7 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getVoteTotals;
   },
-  postGetVoteYesTotals: async (owner, repo, pr_id, contributor_id, side) => {
+  postGetPRvoteYesTotals: async (owner, repo, pr_id, contributor_id, side) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
@@ -227,7 +227,7 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getVoteYesTotals;
   },
-  postGetVoteNoTotals: async (owner, repo, pr_id, contributor_id, side) => {
+  postGetPRvoteNoTotals: async (owner, repo, pr_id, contributor_id, side) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({

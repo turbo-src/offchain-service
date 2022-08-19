@@ -1,9 +1,9 @@
 const assert = require("assert");
 const {
   postSetVote,
-  postGetVoteYesTotals,
-  postGetPRStatus,
-  postGetVoteNoTotals,
+  postGetPRvoteStatus,
+  postGetPRvoteYesTotals,
+  postGetPRvoteNoTotals,
 } = require("../src/requests");
 
 let snooze_ms = 5000;
@@ -19,7 +19,7 @@ describe("Multiple voters vote to close Pull Request 2: pullRequest2", function 
       /*side:*/ "yes"
     );
 
-    const voteYesTotals50000 = await postGetVoteYesTotals(
+    const voteYesTotals50000 = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest2",
@@ -27,7 +27,7 @@ describe("Multiple voters vote to close Pull Request 2: pullRequest2", function 
       /*side:*/ ""
     );
 
-    const voteNoTotals0 = await postGetVoteNoTotals(
+    const voteNoTotals0 = await postGetPRvoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest2",
@@ -35,7 +35,7 @@ describe("Multiple voters vote to close Pull Request 2: pullRequest2", function 
       /*side:*/ ""
     );
 
-    const openStatus = await postGetPRStatus(
+    const openStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest2",
@@ -99,7 +99,7 @@ describe("Multiple voters vote to close Pull Request 2: pullRequest2", function 
       /*side*/ "no"
     );
 
-    const mergeStatus = await postGetPRStatus(
+    const mergeStatus = await postGetPRvoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "pullRequest2",
