@@ -205,7 +205,7 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ getVoteTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+        query: `{ getPRvoteTotals(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
       })
       .set("accept", "json");
     //.end((err, res) => {
