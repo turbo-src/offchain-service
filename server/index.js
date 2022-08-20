@@ -16,7 +16,7 @@ const {
   getContributorTokenAmount,
   getPRvoteStatus,
   getRepoStatus,
-  getVoteTotals,
+  getPRvoteTotals,
   getPRvoteYesTotals,
   getPRvoteNoTotals,
   setQuorum,
@@ -40,7 +40,7 @@ var schema = buildSchema(`
     getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
-    getVoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRvoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getPRvoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getPRvoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
   }
@@ -147,8 +147,8 @@ var root = {
   getQuorum: async (args) => {
     return await getQuorum(args.repo);
   },
-  getVoteTotals: async (args) => {
-    return getVoteTotals(
+  getPRvoteTotals: async (args) => {
+    return getPRvoteTotals(
       args.owner,
       args.repo,
       args.pr_id,
