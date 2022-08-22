@@ -180,7 +180,7 @@ const port = 4002;
 
 const app = express();
 
-app.listen(4002, "0.0.0.0");
+app.listen(port, "0.0.0.0");
 console.log(`Running an Express-GraphQL server on port ${port}`);
 
 app.use(
