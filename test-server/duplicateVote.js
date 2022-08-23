@@ -1,10 +1,5 @@
 const assert = require("assert");
-const {
-  postGetPRStatus,
-  postSetVote,
-  postGetVoteYesTotals,
-  postGetVoteNoTotals,
-} = require("../src/requests");
+const { postSetVote } = require("../src/requests");
 
 let snooze_ms = 5000;
 
