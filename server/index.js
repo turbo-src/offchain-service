@@ -176,12 +176,12 @@ var root = {
   },
 };
 
-const port = process.env.PORT || 4002;
+const port = 4002;
 
 const app = express();
 
-app.listen(port);
-console.log(`Running a GraphQL API server at ${port}/graphql`);
+app.listen(port, "0.0.0.0");
+console.log(`Running an Express-GraphQL server on port ${port}`);
 
 app.use(
   "/graphql",

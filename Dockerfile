@@ -16,4 +16,8 @@ RUN npm install --save-dev -y sequelize --prefix /usr/local/
 RUN npm install --save-dev -y pg pg-hstore --prefix /usr/local/
 RUN npm install --save-dev -y dotenv --prefix /usr/local/
 
+EXPOSE 4002/tcp
+
 COPY . .
+
+CMD npm start

@@ -1,9 +1,12 @@
 const { Sequelize } = require("sequelize");
 
-const dbUrl = process.env.DB_URL || "postgres://localhost:5432/privatestore";
+const dbUrl =
+  process.env.DATABASE_URL || "postgres://localhost:5432/privatestore";
 
-const db = new Sequelize(dbUrl, {
+const config = {
   logging: false,
-});
+};
+
+const db = new Sequelize(dbUrl, config);
 
 module.exports = db;
