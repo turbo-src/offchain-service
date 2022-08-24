@@ -24,7 +24,7 @@ docker ps
 docker exec -it <privateStore_library_1 id> bash *or* sh
 ```
 
-### Connect to the database, start the Graphql server, ports 5432 and 4003
+### Connect to the database, start the Graphql server, ports 5432 and 4002
 
 ```
 npm start
