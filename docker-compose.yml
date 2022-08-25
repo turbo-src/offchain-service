@@ -10,7 +10,7 @@ services:
       - "4002"
     build: ./
     environment:
-      DB_URL: postgresql://user:password@db:5432/privatestore
+      DOCKER_DATABASE_URL: postgresql://user:password@db:5432/privatestore
     tty: true
 
   db:
