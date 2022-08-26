@@ -7,7 +7,7 @@ const {
 describe("postTransferTokens", function () {
   it("should transfer tokens between two contributors", async function () {
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
@@ -15,7 +15,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
@@ -23,7 +23,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
@@ -31,7 +31,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
@@ -39,7 +39,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
@@ -47,7 +47,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78",
@@ -55,7 +55,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0cea312808EdcdC905428D3922480930689F4500",
@@ -63,7 +63,7 @@ describe("postTransferTokens", function () {
     );
 
     await postTransferTokens(
-      /*owner*/ "joseph",
+      /*owner*/ "",
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*to*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
@@ -71,70 +71,70 @@ describe("postTransferTokens", function () {
     );
 
     const mary = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
       /*side:*/ ""
     );
     const gabriel = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side:*/ ""
     );
     const michael = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ ""
     );
     const magda = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side:*/ ""
     );
     const thomas = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
       /*side:*/ ""
     );
     const ben = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78",
       /*side:*/ ""
     );
     const louis = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0cea312808EdcdC905428D3922480930689F4500",
       /*side:*/ ""
     );
     const thibaut = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
       /*side:*/ ""
     );
     const joseph = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*side:*/ ""
     );
     const ignacius = await postGetContributorTokenAmount(
-      /*owner:*/ "joseph",
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*pr_id:*/ "",
       /*contributor_id:*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
