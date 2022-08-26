@@ -2,7 +2,7 @@ const superagent = require("superagent");
 require("dotenv").config();
 
 const port =
-  process.env.NODE_ENV === "development"
+  process.env.NODE_ENV === "fly"
     ? "https://private-store.fly.dev"
     : "http://localhost:4002";
 

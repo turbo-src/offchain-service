@@ -19,7 +19,7 @@ describe("postCreateRepo", function () {
       ""
     );
 
-    assert.equal(repo, "201", "Failed to create a repo in the database");
-    assert.equal(repo1, "201", "Failed to create a repo in the database");
+    assert.equal(repo, 201, "Failed to create a repo in the database");
+    assert.equal(repo1, 201, "Failed to create a repo in the database");
   });
 });
