@@ -99,6 +99,14 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
       /*side*/ "yes"
     );
 
+    const maryVote = await postSetVote(
+      /*owner:*/ "",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "pullRequest1",
+      /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
+      /*side:*/ "yes"
+    );
+
     const mergeStatus = await postGetPRvoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
@@ -118,6 +126,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     assert.equal(louisVote, 201, "Fail to add vote to database");
     assert.equal(thibautVote, 201, "Fail to add vote to database");
     assert.equal(ignaciusVote, 201, "Fail to add vote to database");
+    assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.equal(
       mergeStatus,
       "merge",
