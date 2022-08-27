@@ -24,7 +24,7 @@ var schema = buildSchema(`
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String): String,
-    getRepoStatus(repo_id: String): String,
+    getRepoStatus(repo_id: String): Boolean,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
