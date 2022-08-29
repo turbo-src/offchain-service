@@ -26,7 +26,7 @@ const Repo = db.define("repo", {
   },
   quorum: {
     type: Sequelize.STRING(),
-    defaultValue: ".34",
+    defaultValue: ".5",
   },
 });
 
