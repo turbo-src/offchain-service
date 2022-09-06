@@ -56,7 +56,6 @@ var root = {
       })
       .set("accept", "json");
     //.end((err, res) => {
-    // Calling the end function will send the request
     //});
     const json = JSON.parse(res.text);
     return json.data.getAuthorizedContributor;
@@ -166,7 +165,7 @@ var root = {
       })
       .set("accept", "json");
     //.end((err, res) => {
-    // Calling the end function will send the request
+    // // Calling the end function will send the request
     //});
     const json = JSON.parse(res.text);
     return json.data.getPRvoteYesTotals;
