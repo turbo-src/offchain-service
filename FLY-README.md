@@ -41,6 +41,14 @@ flyctl deploy
 
 https://fly.io/docs/getting-started/troubleshooting/
 
+# Restart service (clear database) \*
+
+```
+flyctl restart <app name>
+```
+
+- Takes ~ 2 minutes, ensure to log in correctly
+
 ### Notes:
 
 - Deploying reads your Dockerfile, builds and then deploys the Docker image to fly.io at https://private-store.fly.dev/
