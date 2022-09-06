@@ -21,10 +21,15 @@ const {
 } = require("../lib");
 
 var schema = buildSchema(`
+  type RepoStatus {
+    code: Int!
+    result: Boolean!
+  }
+
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String): String,
-    getRepoStatus(repo_id: String): Boolean,
+    getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
@@ -58,7 +63,16 @@ var root = {
     );
   },
   getRepoStatus: async (args) => {
-    return await getRepoStatus(args.repo_id);
+    const res = await getRepoStatus(args.repo_id)
+    if (res === true) {
+        return { code: 200, result: true }
+    } else if (res === false) {
+        return { code: 200, result: false }
+    } else if (res === 404) {
+        return { code: 404, result: false }
+    } else {
+        return { code: 500, result: false }
+    }
   },
   getAuthorizedContributor: async (args) => {
     return await getAuthorizedContributor(args.contributor_id, args.repo_id);
