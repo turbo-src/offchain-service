@@ -2,6 +2,8 @@ version: "3.0"
 
 services:
   library:
+    image: turbosrc-offchain-service:latest
+    restart: always
     depends_on:
       - db
     ports:
