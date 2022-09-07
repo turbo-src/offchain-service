@@ -22,8 +22,8 @@ const {
 
 var schema = buildSchema(`
   type RepoStatus {
-    code: Int!
-    result: Boolean!
+    status: Int!
+    exists: Boolean!
   }
 
   type Query {
@@ -65,13 +65,13 @@ var root = {
   getRepoStatus: async (args) => {
     const res = await getRepoStatus(args.repo_id)
     if (res === true) {
-        return { code: 200, result: true }
+        return { status: 200, exists: true }
     } else if (res === false) {
-        return { code: 200, result: false }
+        return { status: 200, exists: false }
     } else if (res === 404) {
-        return { code: 404, result: false }
+        return { status: 404, exists: false }
     } else {
-        return { code: 500, result: false }
+        return { status: 500, exists: false }
     }
   },
   getAuthorizedContributor: async (args) => {
