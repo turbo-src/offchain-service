@@ -26,12 +26,17 @@ var schema = buildSchema(`
     exists: Boolean!
   }
 
+  type ContributorTokenAmount {
+    status: Int!
+    amount: Int!
+  }
+
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
-    getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
     setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
@@ -96,6 +101,11 @@ var root = {
     );
   },
   setVote: async (args) => {
+    // Ensure token.status returns a 200
+    // and token.amount > 0.
+    // May want to incorporate all the into getAuthorizedContributor.
+    // Probably not best to check in lib/setVote.js
+    // for module encapsulation.
     return await setVote(
       args.owner,
       args.repo,

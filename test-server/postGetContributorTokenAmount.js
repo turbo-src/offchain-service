@@ -11,9 +11,9 @@ describe("postGetContributorTokenAmount", function () {
       /*side:*/ ""
     );
 
-    assert.equal(
-      Number(resMichaelTokenAmount),
-      50_000,
+    assert.deepEqual(
+      resMichaelTokenAmount,
+      { status: 200, amount: 50_000 },
       "Failed to get contributor token amount"
     );
   });

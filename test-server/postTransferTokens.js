@@ -141,53 +141,49 @@ describe("postTransferTokens", function () {
       /*side:*/ ""
     );
 
-    let maryTokenAmount = Number(mary);
-    const gabrielTokenAmount = Number(gabriel);
-    const michaelTokenAmount = Number(michael);
-    const magdaTokenAmount = Number(magda);
-    const thomasTokenAmount = Number(thomas);
-    const benTokenAmount = Number(ben);
-    const louisTokenAmount = Number(louis);
-    const thibautTokenAmount = Number(thibaut);
-    const ignaciusTokenAmount = Number(ignacius);
-    const josephTokenAmount = Number(joseph);
-
-    assert.equal(
-      maryTokenAmount,
-      5_00_001,
+    assert.deepEqual(
+      mary,
+      { status: 200, amount: 5_00_001 },
       "Failed to transfer tokens to Mary"
     );
-    assert.equal(
-      gabrielTokenAmount,
-      50_000,
+    assert.deepEqual(
+      gabriel,
+      { status: 200, amount: 50_000 },
       "Failed to transfer tokens to Gabriel"
     );
-    assert.equal(
-      michaelTokenAmount,
-      50_000,
+    assert.deepEqual(
+      michael,
+      { status: 200, amount: 50_000 },
       "Failed to transfer tokens to Michael"
     );
-    assert.equal(
-      magdaTokenAmount,
-      50_000,
+    assert.deepEqual(
+      magda,
+      { status: 200, amount: 50_000 },
       "Failed to transfer tokens to Magda"
     );
-    assert.equal(
-      thomasTokenAmount,
-      50_000,
+    assert.deepEqual(
+      thomas,
+      { status: 200, amount: 50_000 },
       "Failed to transfer tokens to Thomas"
     );
-    assert.equal(benTokenAmount, 50_000, "Failed to transfer tokens to Ben");
-    assert.equal(
-      louisTokenAmount,
-      50_000,
+    assert.deepEqual(
+      ben,
+      { status: 200, amount: 50_000 },
+      "Failed to transfer tokens to Ben");
+    assert.deepEqual(
+      louis,
+      { status: 200, amount: 50_000 },
       "Failed to transfer tokens to Louis"
     );
-    assert.equal(
-      thibautTokenAmount,
-      50_000,
+    assert.deepEqual(
+      thibaut,
+      { status: 200, amount: 50_000 },
       "Failed to transfer tokens to Thibaut"
     );
-    assert.equal(ignaciusTokenAmount, 0, "Ignacius should have 0 tokens");
+    assert.deepEqual(
+      ignacius,
+      { status: 200, amount: 0 },
+     "Ignacius should have 0 tokens"
+    );
   });
 });
