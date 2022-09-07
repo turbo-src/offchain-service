@@ -7,12 +7,12 @@ describe("postGetRepoStatus", function () {
     let repoStatusNotFound = await postGetRepoStatus("jeffrey/demo42");
     assert.deepEqual(
       repoStatus,
-      { code: 200, result: true },
+      { status: 200, exists: true },
       "Failed to find a tokenized repo"
     );
     assert.deepEqual(
       repoStatusNotFound,
-      { code: 200, result: false },
+      { status: 200, exists: false },
       "This repo should return 404 as it has not been created"
     );
   });
