@@ -2,8 +2,16 @@
 
 ### Build image and containers in detatched mode from root directory
 
+Build.
+
 ```
-docker-compose up --build -d
+docker build -t turbosrc-offchain-service:latest.
+```
+
+Launch, but perhaps build flag is redundant here (had issues of it not actually rebuilding image as thought).
+
+```
+docker-compose up --build
 ```
 
 ### If not building, may need to pull node image:
