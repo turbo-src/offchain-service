@@ -118,7 +118,11 @@ describe("Multiple voters vote to close Pull Request 2: pullRequest2", function 
     assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
-    assert.equal(openStatus, "open", "Fail to stay open.");
+    assert.deepEqual(
+      openStatus,
+      { status: 200, type: 0 },
+      "Fail to stay open."
+    );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
     assert.equal(magdaVote, 201, "Fail to add vote to database");
     assert.equal(thomasVote, 201, "Fail to add vote to database");
@@ -127,9 +131,9 @@ describe("Multiple voters vote to close Pull Request 2: pullRequest2", function 
     assert.equal(thibautVote, 201, "Fail to add vote to database");
     assert.equal(ignaciusVote, 201, "Fail to add vote to database");
     assert.equal(maryVote, 201, "Fail to add vote to database");
-    assert.equal(
+    assert.deepEqual(
       mergeStatus,
-      "close",
+     { status: 200, type: 1 },
       "Fail to close even though it was voted against."
     );
   });

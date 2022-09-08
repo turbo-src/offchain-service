@@ -26,6 +26,11 @@ var schema = buildSchema(`
     exists: Boolean!
   }
 
+  type PRvoteStatus {
+    status: Int!
+    type: Int!
+  }
+
   type ContributorTokenAmount {
     status: Int!
     amount: Int!
@@ -39,7 +44,7 @@ var schema = buildSchema(`
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
     setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): PRvoteStatus,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
     getPRvoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,

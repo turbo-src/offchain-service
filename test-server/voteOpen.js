@@ -62,13 +62,18 @@ describe("Not enough voters vote to exceed quorum", function () {
     assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
-    assert.equal(openStatus, "open", "Fail to stay open.");
+    assert.deepEqual(
+      openStatus,
+      { status: 200, type: 0 },
+      "Fail to stay open."
+    );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
 
-    assert.equal(
+    assert.deepEqual(
       mergeStatus,
-      "open",
+     { status: 200, type: 0 },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
+
   });
 });
