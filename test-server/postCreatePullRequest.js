@@ -8,7 +8,10 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*fork_branch:*/ "pullRequest1",
       /*pr_id:*/ "issue_1",
-      /*title:*/ "refactor: deploy with nix"
+      /*title:*/ "refactor: deploy with nix",
+      /*branch*/ "",
+      /*head*/ "",
+      /*defaultHash*/ ""
     );
 
     const issue_2 = await postCreatePullRequest(
@@ -16,7 +19,10 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*fork_branch:*/ "pullRequest2",
       /*pr_id:*/ "issue_2",
-      /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS"
+      /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS",
+      /*branch*/ "",
+      /*head*/ "",
+      /*defaultHash*/ ""
     );
 
     const issue_3 = await postCreatePullRequest(
@@ -24,7 +30,10 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*fork_branch:*/ "pullRequest3",
       /*pr_id:*/ "issue_3",
-      /*title:*/ "declare as type: module"
+      /*title:*/ "declare as type: module",
+      /*branch*/ "",
+      /*head*/ "",
+      /*defaultHash*/ ""
     );
 
     const issue_4 = await postCreatePullRequest(
@@ -32,7 +41,10 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*fork_branch:*/ "pullRequest4",
       /*pr_id:*/ "issue_4",
-      /*title:*/ "implement feature: read receipt"
+      /*title:*/ "implement feature: read receipt",
+      /*branch*/ "",
+      /*head*/ "",
+      /*defaultHash*/ ""
     );
 
     assert.equal(

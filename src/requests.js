@@ -23,12 +23,15 @@ var root = {
     /*repo:*/ repo,
     /*fork_branch:*/ fork_branch,
     /*pr_id:*/ pr_id,
-    /*title:*/ title
+    /*title:*/ title,
+    /*branch*/ branch,
+    /*head*/ head,
+    /*defaultHash*/ defaultHash
   ) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ createPullRequest(owner: "${owner}", repo: "${repo}", fork_branch: "${fork_branch}", pr_id: "${pr_id}", title: "${title}") }`,
+        query: `{ createPullRequest(owner: "${owner}", repo: "${repo}", fork_branch: "${fork_branch}", pr_id: "${pr_id}", title: "${title}", branch:"${branch}", head:"${head}", defaultHash:"${defaultHash}") }`,
       })
       .set("accept", "json");
 
@@ -92,11 +95,20 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.transferTokens;
   },
-  postSetVote: async (owner, repo, pr_id, contributor_id, side) => {
+  postSetVote: async (
+    owner,
+    repo,
+    pr_id,
+    contributor_id,
+    side,
+    branch,
+    head,
+    defaultHash
+  ) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ setVote(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}"), branch: "${branch}", head: "${head}", defaultHash: "${defaultHash}" }`,
+        query: `{ setVote(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}", branch: "${branch}", head: "${head}", defaultHash: "${defaultHash}") }`,
       })
       .set("accept", "json");
     //   .end((err, res) => {
