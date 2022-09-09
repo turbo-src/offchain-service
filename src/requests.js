@@ -39,7 +39,7 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ getRepoStatus(repo_id: "${repo_id}" ) { status, exists } }`
+        query: `{ getRepoStatus(repo_id: "${repo_id}" ) { status, exists } }`,
       })
       .set("accept", "json");
     //.end((err, res) => {
@@ -96,7 +96,7 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ setVote(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}") }`,
+        query: `{ setVote(owner: "${owner}", repo: "${repo}", pr_id: "${pr_id}", contributor_id: "${contributor_id}", side: "${side}"), branch: "${branch}", head: "${head}", defaultHash: "${defaultHash}" }`,
       })
       .set("accept", "json");
     //   .end((err, res) => {

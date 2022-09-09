@@ -38,12 +38,12 @@ var schema = buildSchema(`
 
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String): String,
+    createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String, branch: String, head: String, defaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
-    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String, branch: String, head: String, defaultHash: String): String,
     getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): PRvoteStatus,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
@@ -69,19 +69,22 @@ var root = {
       args.repo,
       args.pr_id,
       args.fork_branch,
-      args.title
+      args.title,
+      args.branch,
+      args.head,
+      args.defaultHash
     );
   },
   getRepoStatus: async (args) => {
-    const res = await getRepoStatus(args.repo_id)
+    const res = await getRepoStatus(args.repo_id);
     if (res === true) {
-        return { status: 200, exists: true }
+      return { status: 200, exists: true };
     } else if (res === false) {
-        return { status: 200, exists: false }
+      return { status: 200, exists: false };
     } else if (res === 404) {
-        return { status: 404, exists: false }
+      return { status: 404, exists: false };
     } else {
-        return { status: 500, exists: false }
+      return { status: 500, exists: false };
     }
   },
   getAuthorizedContributor: async (args) => {
@@ -116,7 +119,10 @@ var root = {
       args.repo,
       args.pr_id,
       args.contributor_id,
-      args.side
+      args.side,
+      args.branch,
+      args.head,
+      args.defaultHash
     );
   },
   getPRvoteStatus: async (args) => {
