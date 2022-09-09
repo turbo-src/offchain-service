@@ -26,6 +26,15 @@ const PullRequest = db.define(
     repo_id: {
       type: Sequelize.STRING(),
     },
+    branch: {
+      type: Sequelize.STRING(),
+    },
+    head: {
+      type: Sequelize.STRING(),
+    },
+    defaultHash: {
+      type: Sequelize.STRING(),
+    },
   },
   {
     hooks: {
