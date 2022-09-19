@@ -48,7 +48,7 @@ var schema = buildSchema(`
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
-    createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String): String,
+    createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String, defaultHash: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
@@ -82,7 +82,9 @@ var root = {
       args.repo,
       args.pr_id,
       args.fork_branch,
-      args.title
+      args.title,
+      args.defaultHash,
+      args.childDefaultHash
     );
   },
   getRepoStatus: async (args) => {
