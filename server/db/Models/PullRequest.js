@@ -15,6 +15,12 @@ const PullRequest = db.define(
       type: Sequelize.STRING(),
       defaultValue: "closed",
     },
+    defaultHash: {
+      type: Sequelize.STRING(),
+    },
+    childDefaultHash: {
+      type: Sequelize.STRING(),
+    },
     yesTokenAmount: {
       type: Sequelize.STRING(),
       defaultValue: "0",
