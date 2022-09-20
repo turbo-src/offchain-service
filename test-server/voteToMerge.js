@@ -8,13 +8,13 @@ const {
 
 let snooze_ms = 5000;
 
-describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function () {
+describe("Multiple voters vote to merge Pull Request 1: issue_1", function () {
   this.timeout(snooze_ms * 12);
   it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR state to merge when majority is reached", async function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
@@ -22,7 +22,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const voteYesTotals50000 = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -30,7 +30,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const voteNoTotals0 = await postGetPRvoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
@@ -38,7 +38,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const openStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -46,7 +46,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
@@ -54,7 +54,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const magdaVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side*/ "yes"
     );
@@ -62,7 +62,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const thomasVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
       /*side*/ "no"
     );
@@ -70,7 +70,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const benVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78",
       /*side*/ "no"
     );
@@ -78,7 +78,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const louisVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0cea312808EdcdC905428D3922480930689F4500",
       /*side*/ "no"
     );
@@ -86,7 +86,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const thibautVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
       /*side*/ "yes"
     );
@@ -94,7 +94,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const ignaciusVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
       /*side*/ "yes"
     );
@@ -102,7 +102,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const maryVote = await postSetVote(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
       /*side:*/ "yes"
     );
@@ -110,7 +110,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     const mergeStatus = await postGetPRvoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "pullRequest1",
+      /*pr_id:*/ "issue_1",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
@@ -121,7 +121,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
 
     assert.deepEqual(
       openStatus,
-     { state: 200, type: 0 },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest1" },
       "Fail to stay open."
     );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
@@ -134,7 +134,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
-     { state: 200, type: 2 },
+     { status: 200, state: "merge", repo_id: "joseph/demo", fork_branch: "pullRequest1" },
       "Fail to merge even though it was voted in."
     );
   });
