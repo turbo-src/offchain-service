@@ -51,10 +51,10 @@ var schema = buildSchema(`
   }
 
   type Query {
-    createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    createRepo(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
     createPullRequest(owner: String, repo: String, defaultHash: String, childDefaultHash: String, fork_branch: String, title: String): String,
-    updatePullRequest(repo: String, pr_id: String, childDefaultHash: String): String,
+    updatePullRequest(repo: String, defaultHash: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
@@ -63,9 +63,9 @@ var schema = buildSchema(`
     getPRvoteStatus(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PRvoteStatus,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
-    getPRvoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
+    getPRvoteYesTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
+    getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
   }
 `);
 
@@ -74,7 +74,7 @@ var root = {
     return await createRepo(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );
@@ -95,7 +95,7 @@ var root = {
   updatePullRequest: async (args) => {
     return await updatePullRequest(
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.childDefaultHash
     );
   },
@@ -165,7 +165,7 @@ var root = {
     return getPRvoteTotals(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );
@@ -174,7 +174,7 @@ var root = {
     return getPRvoteYesTotals(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );
@@ -183,7 +183,7 @@ var root = {
     return getPRvoteNoTotals(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );

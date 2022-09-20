@@ -6,7 +6,7 @@ describe("getPRvoteStatus", function () {
     const openStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*defaultHash:*/ "issue_1",
       /*contributor:*/ "",
       /*side:*/ ""
     );
