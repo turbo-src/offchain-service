@@ -10,7 +10,7 @@ let snooze_ms = 5000;
 
 describe("Not enough voters vote to exceed quorum", function () {
   this.timeout(snooze_ms * 12);
-  it("Should leave PR status as open if quorum is not exceeded", async function () {
+  it("Should leave PR state as open if quorum is not exceeded", async function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -64,14 +64,14 @@ describe("Not enough voters vote to exceed quorum", function () {
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
       openStatus,
-      { status: 200, type: 0 },
+      { state: 200, type: 0 },
       "Fail to stay open."
     );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
 
     assert.deepEqual(
       mergeStatus,
-     { status: 200, type: 0 },
+     { state: 200, type: 0 },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 

@@ -11,7 +11,7 @@ const PullRequest = db.define(
     title: {
       type: Sequelize.STRING(),
     },
-    status: {
+    state: {
       type: Sequelize.STRING(),
       defaultValue: "closed",
     },
@@ -45,18 +45,18 @@ const PullRequest = db.define(
           const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
           if (yesRatio > 1) {
             await PullRequest.update(
-              { status: "merge" },
+              { state: "merge" },
               { where: { id: pr.id } }
             );
           } else {
             await PullRequest.update(
-              { status: "close" },
+              { state: "close" },
               { where: { id: pr.id } }
             );
           }
         } else {
           await PullRequest.update(
-            { status: "open" },
+            { state: "open" },
             { where: { id: pr.id } }
           );
         }

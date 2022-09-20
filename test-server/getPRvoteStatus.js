@@ -14,14 +14,14 @@ describe("getPRvoteStatus", function () {
     assert.deepEqual(
       prStatus,
       {
-        status: 200,
+        state: 200,
 	type: 2
       },
       "Failed to find a tokenized repo"
     );
     //assert.deepEqual(
     //  prStatusNotFound,
-    //  { status: 200, exists: false },
+    //  { state: 200, exists: false },
     //  "This repo should return 404 as it has not been created"
     //);
   });

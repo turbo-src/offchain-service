@@ -10,7 +10,7 @@ let snooze_ms = 5000;
 
 describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function () {
   this.timeout(snooze_ms * 12);
-  it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR status to merge when majority is reached", async function () {
+  it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR state to merge when majority is reached", async function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -121,7 +121,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
 
     assert.deepEqual(
       openStatus,
-     { status: 200, type: 0 },
+     { state: 200, type: 0 },
       "Fail to stay open."
     );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
@@ -134,7 +134,7 @@ describe("Multiple voters vote to merge Pull Request 1: pullRequest1", function 
     assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
-     { status: 200, type: 2 },
+     { state: 200, type: 2 },
       "Fail to merge even though it was voted in."
     );
   });
