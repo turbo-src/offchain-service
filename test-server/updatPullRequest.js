@@ -1,24 +1,24 @@
 const assert = require("assert");
 const { updatePullRequest, postGetPRvoteStatus } = require("../src/requests");
 
-describe("getPRvoteStatus", function () {
-  it("should return 200 if a repo has been tokenized", async function () {
+describe("update pull request", function () {
+  it("should return 201 if pull request is updated", async function () {
     const openStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "issue_1",
+      /*defaultHash:*/ "defaultHash1",
       /*contributor:*/ "",
       /*side:*/ ""
     );
     const updateRes = await updatePullRequest(
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "issue_1",
+      /*defaultHash:*/ "defaultHash1",
       /*childDefaultHash:*/ "ab3fc"
     );
     const updateStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "issue_1",
+      /*defaultHash:*/ "defaultHash1",
       /*contributor:*/ "",
       /*side:*/ ""
     );

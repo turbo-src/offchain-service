@@ -9,7 +9,7 @@ describe("Duplicate voting should result in a 403 error", function () {
     const gabrielVote1 = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side:*/ "yes"
     );
@@ -17,7 +17,7 @@ describe("Duplicate voting should result in a 403 error", function () {
     const gabrielVote2 = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side:*/ "yes"
     );
@@ -25,7 +25,7 @@ describe("Duplicate voting should result in a 403 error", function () {
     const magdaVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side:*/ "yes"
     );

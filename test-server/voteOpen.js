@@ -14,7 +14,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
@@ -22,7 +22,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     const voteYesTotals50000 = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -30,7 +30,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     const voteNoTotals0 = await postGetPRvoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
@@ -38,7 +38,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     const openStatus = await postGetPRvoteStatus(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -46,7 +46,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
@@ -54,7 +54,7 @@ describe("Not enough voters vote to exceed quorum", function () {
     const mergeStatus = await postGetPRvoteStatus(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "pullRequest3",
+      /*defaultHash:*/ "defaultHash3",
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
