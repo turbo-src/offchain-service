@@ -44,7 +44,7 @@ const PullRequest = db.define(
         const voteTotals = Number(pr.yesTokenAmount) + Number(pr.noTokenAmount);
         const percentVoted = voteTotals / 1000000;
 
-        if (percentVoted >= quorum) {
+        if (percentVoted >= quorum && pr.defaultHash === pr.childDefaultHash) {
           const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
           if (yesRatio > 1) {
             await PullRequest.update(
@@ -57,6 +57,11 @@ const PullRequest = db.define(
               { where: { id: pr.id } }
             );
           }
+        } else if (pr.defaultHash !== pr.childDefaultHash) {
+            await PullRequest.update(
+              { state: "conflict" },
+              { where: { id: pr.id } }
+            );
         } else {
           await PullRequest.update(
             { state: "open" },
