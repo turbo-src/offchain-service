@@ -120,7 +120,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
       openStatus,
-      { state: 200, type: 0 },
+      { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest2", "childDefaultHash": "defaultHash2", "defaultHash": "defaultHash2" },
       "Fail to stay open."
     );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
@@ -133,7 +133,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
     assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
-     { state: 200, type: 1 },
+      { status: 200, state: "close", repo_id: "joseph/demo",  fork_branch: "pullRequest2", "childDefaultHash": "defaultHash2", "defaultHash": "defaultHash2" },
       "Fail to close even though it was voted against."
     );
   });
