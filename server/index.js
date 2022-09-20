@@ -12,7 +12,7 @@ const {
   getAuthorizedContributor,
   transferTokens,
   getContributorTokenAmount,
-  getPRvoteStatus,
+  getPullRequest,
   getRepoStatus,
   getPRvoteTotals,
   getPRvoteYesTotals,
@@ -28,7 +28,7 @@ var schema = buildSchema(`
     exists: Boolean!
   }
 
-  type PRvoteStatus {
+  type PullRequest {
     status: Int!
     state: String!
     repo_id: String!
@@ -60,7 +60,7 @@ var schema = buildSchema(`
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
     setVote(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
-    getPRvoteStatus(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PRvoteStatus,
+    getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
     getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
@@ -146,8 +146,8 @@ var root = {
       args.side
     );
   },
-  getPRvoteStatus: async (args) => {
-    return await getPRvoteStatus(
+  getPullRequest: async (args) => {
+    return await getPullRequest(
       args.owner,
       args.repo,
       args.defaultHash,

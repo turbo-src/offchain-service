@@ -1,9 +1,9 @@
 const assert = require("assert");
-const { updatePullRequest, postGetPRvoteStatus } = require("../src/requests");
+const { updatePullRequest, postGetPullRequest } = require("../src/requests");
 
 describe("update pull request", function () {
   it("should return 201 if pull request is updated", async function () {
-    const openStatus = await postGetPRvoteStatus(
+    const openStatus = await postGetPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash1",
@@ -15,7 +15,7 @@ describe("update pull request", function () {
       /*defaultHash:*/ "defaultHash1",
       /*childDefaultHash:*/ "ab3fc"
     );
-    const updateStatus = await postGetPRvoteStatus(
+    const updateStatus = await postGetPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash1",

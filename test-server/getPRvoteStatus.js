@@ -1,9 +1,9 @@
 const assert = require("assert");
-const { postGetPRvoteStatus } = require("../src/requests");
+const { postGetPullRequest } = require("../src/requests");
 
-describe("getPRvoteStatus", function () {
+describe("getPullRequest", function () {
   it("should return 200 if a repo has been tokenized", async function () {
-    const openStatus = await postGetPRvoteStatus(
+    const openStatus = await postGetPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "issue_1",

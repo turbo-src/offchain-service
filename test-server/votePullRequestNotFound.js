@@ -1,7 +1,7 @@
 const assert = require("assert");
 const {
   postSetVote,
-  postGetPRvoteStatus,
+  postGetPullRequest,
   postGetPRvoteYesTotals,
   postGetPRvoteNoTotals,
 } = require("../src/requests");
