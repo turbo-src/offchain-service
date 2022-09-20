@@ -53,14 +53,14 @@ var schema = buildSchema(`
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
-    createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String, defaultHash: String, childDefaultHash: String): String,
+    createPullRequest(owner: String, repo: String, defaultHash: String, childDefaultHash: String, fork_branch: String, title: String): String,
     updatePullRequest(repo: String, pr_id: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
     setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    getPRvoteStatus(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): PRvoteStatus,
+    getPRvoteStatus(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PRvoteStatus,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
     getPRvoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
@@ -86,11 +86,10 @@ var root = {
     return await createPullRequest(
       args.owner,
       args.repo,
-      args.pr_id,
-      args.fork_branch,
-      args.title,
       args.defaultHash,
-      args.childDefaultHash
+      args.childDefaultHash,
+      args.fork_branch,
+      args.title
     );
   },
   updatePullRequest: async (args) => {
@@ -151,7 +150,7 @@ var root = {
     return await getPRvoteStatus(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );
