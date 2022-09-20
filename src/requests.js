@@ -32,16 +32,15 @@ var root = {
   postCreatePullRequest: async (
     owner,
     repo,
-    pr_id,
-    fork_branch,
-    title,
     defaultHash,
-    childDefaultHash
+    childDefaultHash,
+    fork_branch,
+    title
   ) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ createPullRequest(owner: "${owner}", repo: "${repo}", fork_branch: "${fork_branch}", pr_id: "${pr_id}", title: "${title}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}") }`,
+        query: `{ createPullRequest(owner: "${owner}", repo: "${repo}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}", fork_branch: "${fork_branch}", title: "${title}") }`,
       })
       .set("accept", "json");
 
@@ -50,13 +49,13 @@ var root = {
   },
   updatePullRequest: async (
     repo,
-    pr_id,
+    defaultHash,
     childDefaultHash
   ) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ updatePullRequest(repo: "${repo}", pr_id: "${pr_id}", childDefaultHash: "${childDefaultHash}") }`,
+        query: `{ updatePullRequest(repo: "${repo}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}") }`,
       })
       .set("accept", "json");
 
