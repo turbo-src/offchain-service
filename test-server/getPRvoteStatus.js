@@ -3,21 +3,17 @@ const { postGetPRvoteStatus } = require("../src/requests");
 
 describe("getPRvoteStatus", function () {
   it("should return 200 if a repo has been tokenized", async function () {
-    let prStatus = await postGetPRvoteStatus(
-	    "",
-	    "joseph/demo",
-	    "pullRequest1",
-	    "",
-	    ""
+    const openStatus = await postGetPRvoteStatus(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*pr_id:*/ "issue_1",
+      /*contributor:*/ "",
+      /*side:*/ ""
     );
-    //let prStatusNotFound = await getPRvoteStatus("jeffrey/demo42", "issue_1");
     assert.deepEqual(
-      prStatus,
-      {
-        state: 200,
-	type: 2
-      },
-      "Failed to find a tokenized repo"
+      openStatus,
+     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash", "defaultHash": "defaultHash" },
+      "Fail to stay open."
     );
     //assert.deepEqual(
     //  prStatusNotFound,
