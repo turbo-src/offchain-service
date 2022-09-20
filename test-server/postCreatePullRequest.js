@@ -6,33 +6,41 @@ describe("postCreatePullRequest", function () {
     const issue_1 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*fork_branch:*/ "pullRequest1",
       /*pr_id:*/ "issue_1",
-      /*title:*/ "refactor: deploy with nix"
+      /*fork_branch:*/ "pullRequest1",
+      /*title:*/ "refactor: deploy with nix",
+      /*defaultHash:*/ "defaultHash",
+      /*childDefaultHash:*/ "defaultHash"
     );
 
     const issue_2 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*fork_branch:*/ "pullRequest2",
       /*pr_id:*/ "issue_2",
-      /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS"
+      /*fork_branch:*/ "pullRequest2",
+      /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS",
+      /*defaultHash:*/ "defaultHash",
+      /*childDefaultHash:*/ "defaultHash"
     );
 
     const issue_3 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*fork_branch:*/ "pullRequest3",
       /*pr_id:*/ "issue_3",
-      /*title:*/ "declare as type: module"
+      /*fork_branch:*/ "pullRequest3",
+      /*title:*/ "declare as type: module",
+      /*defaultHash:*/ "defaultHash",
+      /*childDefaultHash:*/ "defaultHash"
     );
 
     const issue_4 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*fork_branch:*/ "pullRequest4",
       /*pr_id:*/ "issue_4",
-      /*title:*/ "implement feature: read receipt"
+      /*fork_branch:*/ "pullRequest4",
+      /*title:*/ "implement feature: read receipt",
+      /*defaultHash:*/ "defaultHash",
+      /*childDefaultHash:*/ "defaultHash"
     );
 
     assert.equal(
