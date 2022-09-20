@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const {
   createPullRequest,
+  updatePullRequest,
   createRepo,
   getRepo,
   getAuthorizedContributor,
@@ -53,6 +54,7 @@ var schema = buildSchema(`
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
     createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String, defaultHash: String, childDefaultHash: String): String,
+    updatePullRequest(repo: String, pr_id: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
@@ -88,6 +90,13 @@ var root = {
       args.fork_branch,
       args.title,
       args.defaultHash,
+      args.childDefaultHash
+    );
+  },
+  updatePullRequest: async (args) => {
+    return await updatePullRequest(
+      args.repo,
+      args.pr_id,
       args.childDefaultHash
     );
   },

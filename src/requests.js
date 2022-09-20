@@ -48,6 +48,21 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.createPullRequest;
   },
+  updatePullRequest: async (
+    repo,
+    pr_id,
+    childDefaultHash
+  ) => {
+    const res = await superagent
+      .post(`${port}/graphql`)
+      .send({
+        query: `{ updatePullRequest(repo: "${repo}", pr_id: "${pr_id}", childDefaultHash: "${childDefaultHash}") }`,
+      })
+      .set("accept", "json");
+
+    const json = JSON.parse(res.text);
+    return json.data.updatePullRequest;
+  },
   getRepoStatus: async (repo_id) => {
     const res = await superagent
       .post(`${port}/graphql`)
