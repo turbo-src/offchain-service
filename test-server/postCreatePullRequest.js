@@ -6,41 +6,37 @@ describe("postCreatePullRequest", function () {
     const issue_1 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*pr_id:*/ "issue_1",
+      /*defaultHash:*/ "defaultHash1",
+      /*childDefaultHash:*/ "defaultHash1",
       /*fork_branch:*/ "pullRequest1",
-      /*title:*/ "refactor: deploy with nix",
-      /*defaultHash:*/ "defaultHash",
-      /*childDefaultHash:*/ "defaultHash"
+      /*title:*/ "refactor: deploy with nix"
     );
 
     const issue_2 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*pr_id:*/ "issue_2",
+      /*defaultHash:*/ "defaultHash2",
+      /*childDefaultHash:*/ "defaultHash2",
       /*fork_branch:*/ "pullRequest2",
-      /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS",
-      /*defaultHash:*/ "defaultHash",
-      /*childDefaultHash:*/ "defaultHash"
+      /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS"
     );
 
     const issue_3 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*pr_id:*/ "issue_3",
+      /*defaultHash:*/ "defaultHash3",
+      /*childDefaultHash:*/ "defaultHash3",
       /*fork_branch:*/ "pullRequest3",
-      /*title:*/ "declare as type: module",
-      /*defaultHash:*/ "defaultHash",
-      /*childDefaultHash:*/ "defaultHash"
+      /*title:*/ "declare as type: module"
     );
 
     const issue_4 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*pr_id:*/ "issue_4",
+      /*defaultHash:*/ "defaultHash4",
+      /*childDefaultHash:*/ "defaultHash4",
       /*fork_branch:*/ "pullRequest4",
-      /*title:*/ "implement feature: read receipt",
-      /*defaultHash:*/ "defaultHash",
-      /*childDefaultHash:*/ "defaultHash"
+      /*title:*/ "implement feature: read receipt"
     );
 
     assert.equal(
