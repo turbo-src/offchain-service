@@ -5,7 +5,7 @@ const Vote = db.define("vote", {
   contributor_id: {
     type: Sequelize.STRING(),
   },
-  pr_id: {
+  defaultHash: {
     type: Sequelize.STRING(),
   },
   side: {

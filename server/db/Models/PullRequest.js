@@ -7,6 +7,7 @@ const PullRequest = db.define(
   {
     fork_branch: {
       type: Sequelize.STRING(),
+      allowNull: false,
     },
     title: {
       type: Sequelize.STRING(),
@@ -14,12 +15,16 @@ const PullRequest = db.define(
     state: {
       type: Sequelize.STRING(),
       defaultValue: "closed",
+      allowNull: false,
     },
     defaultHash: {
       type: Sequelize.STRING(),
+      unique: true,
+      allowNull: false,
     },
     childDefaultHash: {
       type: Sequelize.STRING(),
+      allowNull: false,
     },
     yesTokenAmount: {
       type: Sequelize.STRING(),
@@ -31,6 +36,7 @@ const PullRequest = db.define(
     },
     repo_id: {
       type: Sequelize.STRING(),
+      allowNull: false,
     },
   },
   {

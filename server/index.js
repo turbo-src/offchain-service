@@ -57,9 +57,9 @@ var schema = buildSchema(`
     updatePullRequest(repo: String, pr_id: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
-    getContributorTokenAmount(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): ContributorTokenAmount,
+    getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
-    setVote(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    setVote(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteStatus(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PRvoteStatus,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
@@ -118,7 +118,7 @@ var root = {
     return await getContributorTokenAmount(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );
@@ -141,7 +141,7 @@ var root = {
     return await setVote(
       args.owner,
       args.repo,
-      args.pr_id,
+      args.defaultHash,
       args.contributor_id,
       args.side
     );
