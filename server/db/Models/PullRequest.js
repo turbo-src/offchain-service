@@ -8,6 +8,9 @@ const PullRequest = db.define(
     pr_id: {
       type: Sequelize.STRING(),
     },
+    fork_branch: {
+      type: Sequelize.STRING(),
+    },
     title: {
       type: Sequelize.STRING(),
     },

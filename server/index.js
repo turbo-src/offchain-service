@@ -31,6 +31,7 @@ var schema = buildSchema(`
     status: Int!
     state: String!
     repo_id: String!
+    fork_branch: String!
   }
 
   type ContributorTokenAmount {
