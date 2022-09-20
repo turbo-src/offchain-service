@@ -29,7 +29,7 @@ var schema = buildSchema(`
 
   type PRvoteStatus {
     status: Int!
-    state: Int!
+    state: String!
   }
 
   type ContributorTokenAmount {
