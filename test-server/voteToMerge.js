@@ -172,7 +172,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
     assert.equal(benVote, "201", "Fail to add vote to database");
     assert.equal(louisVote, "201", "Fail to add vote to database");
     assert.equal(thibautVote, "201", "Fail to add vote to database");
-    assert.equal(ignaciusVote, "201", "Fail to add vote to database");
+    assert.equal(ignaciusVote, "403", "Fail to add vote to database");
 
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.equal(voteYesTotalsAfterIganacius, "200000", "Fail to add votes yes.");
