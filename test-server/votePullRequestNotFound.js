@@ -15,6 +15,7 @@ describe("Voting on non-existant pull request", function () {
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash5",
+      /*childDefaultHash:*/ "defaultHash5",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
