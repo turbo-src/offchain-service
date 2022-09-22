@@ -48,6 +48,24 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "fix: prevent vote if not new or open"
     );
 
+    const issue_7 = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash7",
+      /*childDefaultHash:*/ "defaultHash7",
+      /*fork_branch:*/ "pullRequest7",
+      /*title:*/ "fix: prevent vote if not new or open"
+    );
+
+    const issue_8 = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash8",
+      /*childDefaultHash:*/ "defaultHash8",
+      /*fork_branch:*/ "pullRequest8",
+      /*title:*/ "feat:prevent vote when PR in conflict."
+    );
+
     assert.equal(
       issue_1,
       "201",
@@ -71,7 +89,17 @@ describe("postCreatePullRequest", function () {
     assert.equal(
       issue_5,
       "201",
-      "Failed to create a pull request issue_4 in the database"
+      "Failed to create a pull request issue_5 in the database"
+    );
+    assert.equal(
+      issue_7,
+      "201",
+      "Failed to create a pull request issue_7 in the database"
+    );
+    assert.equal(
+      issue_8,
+      "201",
+      "Failed to create a pull request issue_8 in the database"
     );
   });
 });
