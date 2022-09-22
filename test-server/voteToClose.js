@@ -138,7 +138,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
     assert.equal(benVote, 201, "Fail to add vote to database");
     assert.equal(louisVote, 201, "Fail to add vote to database");
     assert.equal(thibautVote, 201, "Fail to add vote to database");
-    assert.equal(ignaciusVote, 201, "Fail to add vote to database");
+    assert.equal(ignaciusVote, "403", "Fail to add vote to database");
     assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
