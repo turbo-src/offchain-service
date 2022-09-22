@@ -143,8 +143,13 @@ describe("postTransferTokens", function () {
 
     assert.deepEqual(
       mary,
-      { status: 200, amount: 5_00_001 },
+      { status: 200, amount: 500_001 },
       "Failed to transfer tokens to Mary"
+    );
+    assert.deepEqual(
+      joseph,
+      { status: 200, amount: 149_999 },
+      "Failed to transfer tokens to Gabriel"
     );
     assert.deepEqual(
       gabriel,

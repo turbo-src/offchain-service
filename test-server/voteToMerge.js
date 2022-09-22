@@ -107,6 +107,22 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*side*/ "yes"
     );
 
+    const voteYesTotalsAfterIganacius = await postGetPRvoteYesTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash1",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+    const voteNoTotalsAfterIganacius = await postGetPRvoteNoTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash1",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+
+
     const maryVote = await postSetVote(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
@@ -124,23 +140,45 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*side:*/ ""
     );
 
-    assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
+    const voteYesTotalsAfterMary = await postGetPRvoteYesTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash1",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+    const voteNoTotalsAfterMary = await postGetPRvoteNoTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash1",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+
+    const totalVotes = Number(voteYesTotalsAfterMary) + Number(voteNoTotalsAfterMary)
+
+    assert.equal(totalVotes, 850_001, "Fail to get total votes.");
+    assert.equal(michaelVote, "201", "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
-    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
 
     assert.deepEqual(
       openStatus,
      { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash1", "defaultHash": "defaultHash1" },
       "Fail to stay open."
     );
-    assert.equal(gabrielVote, 201, "Fail to add vote to database");
-    assert.equal(magdaVote, 201, "Fail to add vote to database");
-    assert.equal(thomasVote, 201, "Fail to add vote to database");
-    assert.equal(benVote, 201, "Fail to add vote to database");
-    assert.equal(louisVote, 201, "Fail to add vote to database");
-    assert.equal(thibautVote, 201, "Fail to add vote to database");
-    assert.equal(ignaciusVote, 201, "Fail to add vote to database");
-    assert.equal(maryVote, 201, "Fail to add vote to database");
+    assert.equal(gabrielVote, "201", "Fail to add vote to database");
+    assert.equal(magdaVote, "201", "Fail to add vote to database");
+    assert.equal(thomasVote, "201", "Fail to add vote to database");
+    assert.equal(benVote, "201", "Fail to add vote to database");
+    assert.equal(louisVote, "201", "Fail to add vote to database");
+    assert.equal(thibautVote, "201", "Fail to add vote to database");
+    assert.equal(ignaciusVote, "201", "Fail to add vote to database");
+
+    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
+    assert.equal(voteYesTotalsAfterIganacius, "200000", "Fail to add votes yes.");
+    assert.equal(voteNoTotalsAfterIganacius, "150000", "Fail to add votes no.");
+
+    assert.equal(maryVote, "201", "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
      { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash1", "defaultHash": "defaultHash1" },
