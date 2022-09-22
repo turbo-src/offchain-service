@@ -39,6 +39,15 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "implement feature: read receipt"
     );
 
+    const issue_5 = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash5",
+      /*childDefaultHash:*/ "defaultHash5",
+      /*fork_branch:*/ "pullRequest5",
+      /*title:*/ "fix: prevent vote if not new or open"
+    );
+
     assert.equal(
       issue_1,
       "201",
@@ -56,6 +65,11 @@ describe("postCreatePullRequest", function () {
     );
     assert.equal(
       issue_4,
+      "201",
+      "Failed to create a pull request issue_4 in the database"
+    );
+    assert.equal(
+      issue_5,
       "201",
       "Failed to create a pull request issue_4 in the database"
     );
