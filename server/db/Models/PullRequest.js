@@ -14,7 +14,7 @@ const PullRequest = db.define(
     },
     state: {
       type: Sequelize.STRING(),
-      defaultValue: "closed",
+      defaultValue: "new",
       allowNull: false,
     },
     defaultHash: {
