@@ -48,7 +48,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8",
-      /*childDefaultHash:*/ "defaultHashConflcit8",
+      /*childDefaultHash:*/ "defaultHashConclict8",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
@@ -62,7 +62,6 @@ describe("Not enough voters vote to exceed quorum", function () {
     );
 
     assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
-    assert.equal(gabrielVote, 201, "Fail to add vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
@@ -71,6 +70,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       "Fail to stay open."
     );
 
+    assert.equal(gabrielVote, 403, "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
      { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8", "defaultHash": "defaultHash8" },
