@@ -58,7 +58,7 @@ var schema = buildSchema(`
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
-    transferTokens(owner: String, repo: String, from: String, to: String, amount: String): String,
+    transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): String,
     setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, contributor_id: String, side: String): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
