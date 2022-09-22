@@ -14,8 +14,8 @@ describe("Voting on non-existant pull request", function () {
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash5",
-      /*childDefaultHash:*/ "defaultHash5",
+      /*defaultHash:*/ "defaultHash6",
+      /*childDefaultHash:*/ "defaultHash6",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
