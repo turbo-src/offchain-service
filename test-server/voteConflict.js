@@ -48,7 +48,7 @@ describe("Pull request goes into conflict", function () {
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8",
-      /*childDefaultHash:*/ "defaultHashConflict8",
+      /*childDefaultHash:*/ "defaultHash8b",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
@@ -73,7 +73,7 @@ describe("Pull request goes into conflict", function () {
     assert.equal(gabrielVote, 403, "Fail to prevent adding vote to database when vote is conflict");
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHashConflict8", "defaultHash": "defaultHash8" },
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 

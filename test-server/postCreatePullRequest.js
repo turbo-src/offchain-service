@@ -67,12 +67,12 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
 
-    const issue_8_conflict = await postCreatePullRequest(
+    const issue_8b = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHashConflict8",
-      /*childDefaultHash:*/ "defaultHashConflict8",
-      /*fork_branch:*/ "pullRequestConflict8",
+      /*defaultHash:*/ "defaultHash8b",
+      /*childDefaultHash:*/ "defaultHash8b",
+      /*fork_branch:*/ "pullRequest8b",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
 
@@ -112,9 +112,9 @@ describe("postCreatePullRequest", function () {
       "Failed to create a pull request issue_8 in the database"
     );
     assert.equal(
-      issue_8_conflict,
+      issue_8b,
       "201",
-      "Failed to create a pull request issue_8 in the database"
+      "Failed to create a pull request issue_8b in the database"
     );
   });
 });
