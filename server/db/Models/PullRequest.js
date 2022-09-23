@@ -72,6 +72,11 @@ const PullRequest = db.define(
               { state: "conflict" },
               { where: { id: pr.id } }
             );
+        } else if (pr.mergeable && updated) {
+            await PullRequest.update(
+              { state: "link" }, // There is a child PR so can't vote.
+              { where: { id: pr.id } }
+            );
         } else {
           await PullRequest.update(
             { state: "open" },
