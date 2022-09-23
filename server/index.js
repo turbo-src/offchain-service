@@ -13,6 +13,7 @@ const {
   transferTokens,
   getContributorTokenAmount,
   getPullRequest,
+  getMostRecentLinkedPullRequest,
   getRepoStatus,
   getPRvoteTotals,
   getPRvoteYesTotals,
@@ -61,6 +62,7 @@ var schema = buildSchema(`
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): String,
     setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: String): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
+    getMostRecentLinkedPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
     getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
@@ -150,6 +152,15 @@ var root = {
   },
   getPullRequest: async (args) => {
     return await getPullRequest(
+      args.owner,
+      args.repo,
+      args.defaultHash,
+      args.contributor_id,
+      args.side
+    );
+  },
+  getMostRecentLinkedPullRequest: async (args) => {
+    return await getMostRecentLinkedPullRequest(
       args.owner,
       args.repo,
       args.defaultHash,
