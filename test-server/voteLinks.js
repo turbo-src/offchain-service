@@ -52,22 +52,22 @@ describe("Pull request goes into conflict", function () {
       /*side:*/ ""
     );
 
-    //let gabrielVoteLinkedPR = await postSetVote(
-    //  /*owner:*/ "joseph",
-    //  /*repo:*/ "joseph/demo",
-    //  /*defaultHash:*/ "defaultHash8b",
-    //  /*childDefaultHash:*/ "defaultHash8b",
-    //  /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-    //  /*side*/ "yes"
-    //);
+    let gabrielVoteLinkedPR = await postSetVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash8b",
+      /*childDefaultHash:*/ "defaultHash8c",
+      /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
+      /*side*/ "yes"
+    );
 
-    //const mergeStatusLinkedPR = await postGetPullRequest(
-    //  /*owner:*/ "",
-    //  /*repo:*/ "joseph/demo",
-    //  /*defaultHash:*/ "defaultHash8b",
-    //  /*contributor_id:*/ "",
-    //  /*side:*/ ""
-    //);
+    const conflictStatusLinkedPR = await postGetPullRequest(
+      /*owner:*/ "",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash8b",
+      /*contributor_id:*/ "",
+      /*side:*/ ""
+    );
 
     //let magdaVoteLinkedPR = await postSetVote(
     //  /*owner:*/ "joseph",
@@ -93,12 +93,12 @@ describe("Pull request goes into conflict", function () {
       "Fail to stay open."
     );
 
-    //assert.equal(gabrielVoteLinkedPR, 403, "Fail to prevent adding vote to database when vote is conflict");
-    //assert.deepEqual(
-    //  mergeStatus,
-    // { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
-    //  "Fail to stay open even though it was vote on and did not exceed quorum"
-    //);
+    assert.equal(gabrielVoteLinkedPR, 403, "fail to prevent conflict vote added to database");
+    assert.deepEqual(
+      conflictStatus,
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
+      "Fail to stay open even though it was vote on and did not exceed quorum"
+    );
 
   });
 });

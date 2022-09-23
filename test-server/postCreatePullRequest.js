@@ -76,6 +76,15 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
 
+    const issue_8c = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash8c",
+      /*childDefaultHash:*/ "defaultHash8c",
+      /*fork_branch:*/ "pullRequest8c",
+      /*title:*/ "feat:prevent vote when PR in conflict."
+    );
+
     assert.equal(
       issue_1,
       "201",
@@ -115,6 +124,11 @@ describe("postCreatePullRequest", function () {
       issue_8b,
       "201",
       "Failed to create a pull request issue_8b in the database"
+    );
+    assert.equal(
+      issue_8c,
+      "201",
+      "Failed to create a pull request issue_8c in the database"
     );
   });
 });
