@@ -156,7 +156,7 @@ var root = {
     // Calling the end function will send the request
     //});
     const json = JSON.parse(res.text);
-    return json.data.getPullRequest;
+    return json.data.getMostRecentLinkedPullRequest;
   },
   postSetQuorum: async (repo, contributor_id, quorum) => {
     const res = await superagent
