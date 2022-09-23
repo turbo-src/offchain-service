@@ -26,6 +26,11 @@ const PullRequest = db.define(
       type: Sequelize.STRING(),
       allowNull: false,
     },
+    mergeable: {
+      type: Sequelize.BOOLEAN(),
+      defaultValue: true,
+      allowNull: false,
+    },
     yesTokenAmount: {
       type: Sequelize.STRING(),
       defaultValue: "0",
@@ -46,8 +51,10 @@ const PullRequest = db.define(
         const quorum = repo.quorum;
         const voteTotals = Number(pr.yesTokenAmount) + Number(pr.noTokenAmount);
         const percentVoted = voteTotals / 1000000;
+        
+	const updated = (pr.defaultHash !== pr.childDefaultHash)
 
-        if (percentVoted >= quorum && pr.defaultHash === pr.childDefaultHash) {
+        if (percentVoted >= quorum && !updated && pr.mergeable) {
           const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
           if (yesRatio > 1) {
             await PullRequest.update(
@@ -60,7 +67,7 @@ const PullRequest = db.define(
               { where: { id: pr.id } }
             );
           }
-        } else if (pr.defaultHash !== pr.childDefaultHash) {
+        } else if (!pr.mergeable && updated) {
             await PullRequest.update(
               { state: "conflict" },
               { where: { id: pr.id } }
