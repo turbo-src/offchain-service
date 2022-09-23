@@ -59,7 +59,7 @@ var schema = buildSchema(`
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): String,
-    setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, contributor_id: String, side: String): String,
+    setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: String): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
@@ -143,6 +143,7 @@ var root = {
       args.repo,
       args.defaultHash,
       args.childDefaultHash,
+      args.mergeable,
       args.contributor_id,
       args.side
     );

@@ -16,6 +16,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash5", function 
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash5",
       /*childDefaultHash:*/ "defaultHash5",
+      /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
       /*side:*/ "yes"
     );
@@ -48,6 +49,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash5", function 
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash5",
       /*childDefaultHash:*/ "defaultHash5",
+      /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );

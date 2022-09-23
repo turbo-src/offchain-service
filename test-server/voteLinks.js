@@ -25,6 +25,7 @@ describe("Pull request goes into conflict", function () {
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8b",
       /*childDefaultHash:*/ "defaultHash8b",
+      /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
@@ -57,6 +58,7 @@ describe("Pull request goes into conflict", function () {
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8b",
       /*childDefaultHash:*/ "defaultHash8c",
+      /*mergeable:*/ false,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
@@ -74,6 +76,7 @@ describe("Pull request goes into conflict", function () {
     //  /*repo:*/ "joseph/demo",
     //  /*defaultHash:*/ "defaultHash8b",
     //  /*childDefaultHash:*/ "defaultHash8b",
+    //  /*mergeable:*/ true,
     //  /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
     //  /*side*/ "yes"
     //);
@@ -96,7 +99,7 @@ describe("Pull request goes into conflict", function () {
     assert.equal(gabrielVoteLinkedPR, 403, "fail to prevent conflict vote added to database");
     assert.deepEqual(
       pullRequest8bConflict,
-     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8bc", "defaultHash": "defaultHash8b" },
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8c", "defaultHash": "defaultHash8b" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 
