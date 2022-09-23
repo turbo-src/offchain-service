@@ -96,7 +96,7 @@ describe("Pull request goes into conflict", function () {
     assert.equal(gabrielVoteLinkedPR, 403, "fail to prevent conflict vote added to database");
     assert.deepEqual(
       pullRequest8bConflict,
-     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8bc", "defaultHash": "defaultHash8b" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 
