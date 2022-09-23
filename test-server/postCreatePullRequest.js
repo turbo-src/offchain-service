@@ -66,6 +66,15 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
 
+    const issue_8_conflict = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHashConflict8",
+      /*childDefaultHash:*/ "defaultHashConflict8",
+      /*fork_branch:*/ "pullRequestConflict8",
+      /*title:*/ "feat:prevent vote when PR in conflict."
+    );
+
     assert.equal(
       issue_1,
       "201",
@@ -98,6 +107,11 @@ describe("postCreatePullRequest", function () {
     );
     assert.equal(
       issue_8,
+      "201",
+      "Failed to create a pull request issue_8 in the database"
+    );
+    assert.equal(
+      issue_8_conflict,
       "201",
       "Failed to create a pull request issue_8 in the database"
     );
