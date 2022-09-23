@@ -74,7 +74,7 @@ const PullRequest = db.define(
             );
         } else if (pr.mergeable && updated) {
             await PullRequest.update(
-              { state: "link" }, // There is a child PR so can't vote.
+              { state: "update" }, // PR is updated.
               { where: { id: pr.id } }
             );
         } else {
