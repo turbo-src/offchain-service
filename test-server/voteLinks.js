@@ -44,7 +44,7 @@ describe("Pull request goes into conflict", function () {
       /*side:*/ ""
     );
 
-    const openStatusLinkedPR = await postGetPullRequest(
+    const pullRequest8b = await postGetPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8b",
@@ -61,7 +61,7 @@ describe("Pull request goes into conflict", function () {
       /*side*/ "yes"
     );
 
-    const conflictStatusLinkedPR = await postGetPullRequest(
+    const pullRequest8bConflict = await postGetPullRequest(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8b",
@@ -88,15 +88,15 @@ describe("Pull request goes into conflict", function () {
     assert.equal(voteYesTotalsLinkedPR, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotalsLinkedPR, "0", "Fail to add votes no.");
     assert.deepEqual(
-      openStatusLinkedPR,
+      pullRequest8b,
      { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
       "Fail to stay open."
     );
 
     assert.equal(gabrielVoteLinkedPR, 403, "fail to prevent conflict vote added to database");
     assert.deepEqual(
-      conflictStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
+      pullRequest8bConflict,
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 
