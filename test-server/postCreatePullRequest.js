@@ -85,6 +85,33 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
 
+    const issue_9 = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash9",
+      /*childDefaultHash:*/ "defaultHash9",
+      /*fork_branch:*/ "pullRequest9",
+      /*title:*/ "feat:prevent vote when PR in conflict."
+    );
+
+    const issue_9b = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash9b",
+      /*childDefaultHash:*/ "defaultHash9b",
+      /*fork_branch:*/ "pullRequest9b",
+      /*title:*/ "feat:prevent vote when PR in conflict."
+    );
+
+    const issue_9c = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash9c",
+      /*childDefaultHash:*/ "defaultHash9c",
+      /*fork_branch:*/ "pullRequest9c",
+      /*title:*/ "feat:prevent vote when PR in conflict."
+    );
+
     assert.equal(
       issue_1,
       "201",
@@ -129,6 +156,21 @@ describe("postCreatePullRequest", function () {
       issue_8c,
       "201",
       "Failed to create a pull request issue_8c in the database"
+    );
+    assert.equal(
+      issue_9,
+      "201",
+      "Failed to create a pull request issue_9 in the database"
+    );
+    assert.equal(
+      issue_9b,
+      "201",
+      "Failed to create a pull request issue_9b in the database"
+    );
+    assert.equal(
+      issue_9c,
+      "201",
+      "Failed to create a pull request issue_9c in the database"
     );
   });
 });
