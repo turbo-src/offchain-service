@@ -6,14 +6,14 @@ describe("getMostRecentLinkedPullRequest", function () {
     const pullRequest = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash8",
+      /*defaultHash:*/ "defaultHash9",
       /*contributor:*/ "",
       /*side:*/ ""
     );
 
     assert.deepEqual(
       pullRequest,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8", "defaultHash": "defaultHash8" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest9", "childDefaultHash": "defaultHash9c", "defaultHash": "defaultHash9c" },
       "Fail to stay open."
     );
   });
