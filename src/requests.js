@@ -194,16 +194,7 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getPRvoteNoTotals;
   },
-  mostRecentMerge: async (repo) => {
-    const res = await superagent
-      .post(`${port}/graphql`)
-      .send({
-        query: `{ mostRecentMerge(repo: "${repo}") }`,
-      })
-      .set("accept", "json");
-    const json = JSON.parse(res.text);
-    return json.data.mostRecentMerge;
-  },
+  
 };
 
 module.exports = root;

@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { mostRecentMerge } = require("../src/requests");
+const { mostRecentMerge } = require("../lib");
 
 describe("mostRecentMerge", function () {
   it("should return the pr_id of the most recently merged pull request for a repo", async function () {

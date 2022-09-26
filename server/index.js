@@ -19,7 +19,6 @@ const {
   setQuorum,
   getQuorum,
   setVote,
-  mostRecentMerge,
 } = require("../lib");
 
 var schema = buildSchema(`
@@ -61,7 +60,6 @@ var schema = buildSchema(`
     getPRvoteTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getPRvoteYesTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
     getPRvoteNoTotals(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
-    mostRecentMerge(repo: String): String
   }
 `);
 
@@ -175,9 +173,6 @@ var root = {
       args.contributor_id,
       args.side
     );
-  },
-  mostRecentMerge: async (args) => {
-    return mostRecentMerge(args.repo);
   },
 };
 
