@@ -18,6 +18,17 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.createRepo;
   },
+  getRepo: async (repo) => {
+    const res = await superagent
+      .post(`${port}/graphql`)
+      .send({
+        query: `{ getRepo(repo: "${repo}") }`,
+      })
+      .set("accept", "json");
+
+    const json = JSON.parse(res.text);
+    return json.data.getRepo;
+  },
   postCreatePullRequest: async (
     /*owner:*/ owner,
     /*repo:*/ repo,

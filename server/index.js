@@ -7,6 +7,7 @@ require("dotenv").config();
 const {
   createPullRequest,
   createRepo,
+  getRepo,
   getAuthorizedContributor,
   transferTokens,
   getContributorTokenAmount,
@@ -37,8 +38,17 @@ var schema = buildSchema(`
     amount: Int!
   }
 
+  type Repo {
+    owner: String
+    repo_id: String!
+    contributor_id: String!
+    head: String!
+    quorum: String!
+  }
+
   type Query {
     createRepo(owner: String, repo: String, pr_id: String, contributor_id: String, side: String): String,
+    getRepo(repo: String): Repo,
     createPullRequest(owner: String, repo: String, pr_id: String, fork_branch: String, title: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
@@ -64,6 +74,9 @@ var root = {
       args.contributor_id,
       args.side
     );
+  },
+  getRepo: async (args) => {
+    return await getRepo(args.repo);
   },
   createPullRequest: async (args) => {
     return await createPullRequest(
