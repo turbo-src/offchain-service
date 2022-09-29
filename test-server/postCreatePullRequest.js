@@ -3,7 +3,7 @@ const { postCreatePullRequest } = require("../src/requests");
 
 describe("postCreatePullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
-    this.timeout(3000);
+    this.timeout(4000);
     const issue_1 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
