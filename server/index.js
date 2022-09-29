@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const {
   createPullRequest,
+  createLinkedPullRequest,
   updatePullRequest,
   createRepo,
   getRepo,
@@ -104,7 +105,7 @@ var root = {
     );
   },
   createLinkedPullRequest: async (args) => {
-    return await createPullRequest(
+    return await createLinkedPullRequest(
       args.owner,
       args.repo,
       args.defaultHash,
