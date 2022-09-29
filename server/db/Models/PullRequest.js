@@ -5,6 +5,18 @@ const Repo = require("./Repo");
 const PullRequest = db.define(
   "pullrequest",
   {
+    head: {
+      type: Sequelize.STRING(),
+      allowNull: false,
+    },
+    branchDefaultHash: {
+      type: Sequelize.STRING(),
+      allowNull: false,
+    },
+    remoteURL: {
+      type: Sequelize.STRING(),
+      allowNull: false,
+    },
     baseBranch: {
       type: Sequelize.STRING(),
       allowNull: false,
