@@ -20,7 +20,7 @@ describe("getMostRecentLinkedPullRequest", function () {
     );
     assert.deepEqual(
       pullRequestConflicts,
-     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest8c", "childDefaultHash": "defaultHash8c", "defaultHash": "defaultHash8c" },
+     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
       "Fail to stay open."
     );
 
