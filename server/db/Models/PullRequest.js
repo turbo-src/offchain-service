@@ -5,6 +5,10 @@ const Repo = require("./Repo");
 const PullRequest = db.define(
   "pullrequest",
   {
+    baseBranch: {
+      type: Sequelize.STRING(),
+      allowNull: false,
+    },
     fork_branch: {
       type: Sequelize.STRING(),
       allowNull: false,

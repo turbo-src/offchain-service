@@ -9,6 +9,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash1",
       /*childDefaultHash:*/ "defaultHash1",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest1",
       /*title:*/ "refactor: deploy with nix"
     );
@@ -18,6 +19,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash2",
       /*childDefaultHash:*/ "defaultHash2",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest2",
       /*title:*/ "insert column FAVORITE_COLOR on table CONTRIBUTORS"
     );
@@ -27,6 +29,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash3",
       /*childDefaultHash:*/ "defaultHash3",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest3",
       /*title:*/ "declare as type: module"
     );
@@ -36,6 +39,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash4",
       /*childDefaultHash:*/ "defaultHash4",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest4",
       /*title:*/ "implement feature: read receipt"
     );
@@ -45,6 +49,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash5",
       /*childDefaultHash:*/ "defaultHash5",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest5",
       /*title:*/ "fix: prevent vote if not new or open"
     );
@@ -54,6 +59,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash7",
       /*childDefaultHash:*/ "defaultHash7",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest7",
       /*title:*/ "fix: prevent vote if not new or open"
     );
@@ -63,6 +69,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8",
       /*childDefaultHash:*/ "defaultHash8",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest8",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
@@ -72,6 +79,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8b",
       /*childDefaultHash:*/ "defaultHash8b",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest8b",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
@@ -81,6 +89,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8c",
       /*childDefaultHash:*/ "defaultHash8c",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest8c",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
@@ -90,6 +99,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash9",
       /*childDefaultHash:*/ "defaultHash9",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest9",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
@@ -99,6 +109,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash9b",
       /*childDefaultHash:*/ "defaultHash9b",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest9b",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
@@ -108,6 +119,7 @@ describe("postCreatePullRequest", function () {
       /*repo_id:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash9c",
       /*childDefaultHash:*/ "defaultHash9c",
+      /*baseBranch:*/ "master",
       /*fork_branch:*/ "pullRequest9c",
       /*title:*/ "feat:prevent vote when PR in conflict."
     );
