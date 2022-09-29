@@ -54,6 +54,7 @@ var root = {
   createLinkedPullRequest: async (
     owner,
     repo,
+    parentDefaultHash,
     defaultHash,
     childDefaultHash,
     head,
@@ -66,7 +67,7 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ createLinkedPullRequest(owner: "${owner}", repo: "${repo}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}", head: "${head}", branchDefaultHash: "${branchDefaultHash}", remoteURL: "${remoteURL}", baseBranch: "${baseBranch}"fork_branch: "${fork_branch}", title: "${title}") }`,
+        query: `{ createLinkedPullRequest(owner: "${owner}", repo: "${repo}", parentDefaultHash: "${parentDefaultHash}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}", head: "${head}", branchDefaultHash: "${branchDefaultHash}", remoteURL: "${remoteURL}", baseBranch: "${baseBranch}"fork_branch: "${fork_branch}", title: "${title}") }`,
       })
       .set("accept", "json");
 

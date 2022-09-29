@@ -4,11 +4,12 @@ const { createLinkedPullRequest } = require("../src/requests");
 describe("createLinkedPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
     this.timeout(4000);
-    const issue_10 = await createLinkedPullRequest(
+    const issue_10b = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10",
-      /*childDefaultHash:*/ "defaultHash10",
+      /*parentDefaultHash:*/ "defaultHash10",
+      /*defaultHash:*/ "defaultHash10b",
+      /*childDefaultHash:*/ "defaultHash10b",
       /*head:*/ "head",
       /*branchDefaultHash*/ "branchDefaultHash",
       /*remoteURL*/ "remoteURL",
@@ -18,7 +19,7 @@ describe("createLinkedPullRequest", function () {
     );
 
     assert.equal(
-      issue_10,
+      issue_10b,
       "201",
       "Failed to create a pull request issue_10 in the database"
     );

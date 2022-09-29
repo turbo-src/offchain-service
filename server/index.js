@@ -60,7 +60,7 @@ var schema = buildSchema(`
     createRepo(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
     createPullRequest(owner: String, repo: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String): String,
-    createLinkedPullRequest(owner: String, repo: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String): String,
+    createLinkedPullRequest(owner: String, repo: String, parentDefaultHash: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String): String,
     updatePullRequest(repo: String, defaultHash: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
@@ -108,6 +108,7 @@ var root = {
     return await createLinkedPullRequest(
       args.owner,
       args.repo,
+      args.parentDefaultHash,
       args.defaultHash,
       args.childDefaultHash,
       args.head,
