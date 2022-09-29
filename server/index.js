@@ -36,6 +36,10 @@ var schema = buildSchema(`
     fork_branch: String!
     defaultHash: String!
     childDefaultHash: String!
+    head: String!
+    branchDefaultHash:String!
+    remoteURL: String!
+    baseBranch: String!
   }
 
   type ContributorTokenAmount {

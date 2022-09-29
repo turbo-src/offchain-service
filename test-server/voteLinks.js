@@ -83,7 +83,7 @@ describe("Pull request goes into conflict", function () {
 
     assert.deepEqual(
       newStatus,
-     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
+     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "baseBranch" },
       "Fail to be conflicted state."
     );
 
@@ -92,14 +92,14 @@ describe("Pull request goes into conflict", function () {
     assert.equal(voteNoTotalsLinkedPR, "0", "Fail to add votes no.");
     assert.deepEqual(
       pullRequest8b,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "baseBranch" },
       "Fail to stay open."
     );
 
     assert.equal(gabrielVoteLinkedPR, 403, "fail to prevent conflict vote added to database");
     assert.deepEqual(
       pullRequest8bConflict,
-     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8c", "defaultHash": "defaultHash8b" },
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8c", "defaultHash": "defaultHash8b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "baseBranch" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 

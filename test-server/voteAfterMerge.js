@@ -82,7 +82,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash5", function 
     assert.equal(voteNoTotalsMerge, "0", "Fail to add votes no.");
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest5", "childDefaultHash": "defaultHash5", "defaultHash": "defaultHash5" },
+     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest5", "childDefaultHash": "defaultHash5", "defaultHash": "defaultHash5", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to merge even though it was voted in."
     );
 
@@ -91,7 +91,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash5", function 
     assert.equal(voteNoTotalsAfterMerge, "0", "Fail to add votes no.");
     assert.deepEqual(
       afterMergeStatus,
-     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest5", "childDefaultHash": "defaultHash5", "defaultHash": "defaultHash5" },
+     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest5", "childDefaultHash": "defaultHash5", "defaultHash": "defaultHash5", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to merge even though it was voted in."
     );
   });

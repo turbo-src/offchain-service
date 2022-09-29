@@ -20,13 +20,13 @@ describe("getMostRecentLinkedPullRequest", function () {
     );
     assert.deepEqual(
       pullRequestConflicts,
-     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b" },
+     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest8b", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
 
     assert.deepEqual(
       pullRequestUpdates,
-     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest9c", "childDefaultHash": "defaultHash9c", "defaultHash": "defaultHash9c" },
+     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest9c", "childDefaultHash": "defaultHash9c", "defaultHash": "defaultHash9c", "head": "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
   });

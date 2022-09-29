@@ -68,14 +68,14 @@ describe("Pull request goes into conflict", function () {
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
       openStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8", "defaultHash": "defaultHash8" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8", "defaultHash": "defaultHash8", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
 
     assert.equal(gabrielVote, 403, "Fail to prevent adding vote to database when vote is conflict");
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8" },
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 

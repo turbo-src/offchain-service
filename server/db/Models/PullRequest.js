@@ -12,6 +12,7 @@ const PullRequest = db.define(
     branchDefaultHash: {
       type: Sequelize.STRING(),
       allowNull: false,
+      defaultValue: "branchDefaultHash",
     },
     remoteURL: {
       type: Sequelize.STRING(),

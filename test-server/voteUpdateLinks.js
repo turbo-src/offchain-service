@@ -83,7 +83,7 @@ describe("Pull request is updated", function () {
 
     assert.deepEqual(
       newStatus,
-     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest9b", "childDefaultHash": "defaultHash9b", "defaultHash": "defaultHash9b" },
+     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest9b", "childDefaultHash": "defaultHash9b", "defaultHash": "defaultHash9b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to be new state."
     );
 
@@ -92,14 +92,14 @@ describe("Pull request is updated", function () {
     assert.equal(voteNoTotalsLinkedPR, "0", "Fail to add votes no.");
     assert.deepEqual(
       pullRequest9b,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest9b", "childDefaultHash": "defaultHash9b", "defaultHash": "defaultHash9b" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest9b", "childDefaultHash": "defaultHash9b", "defaultHash": "defaultHash9b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
 
     assert.equal(gabrielVoteLinkedPR, 403, "fail to prevent vote on PR parent that was updated");
     assert.deepEqual(
       pullRequest9bConflict,
-     { status: 200, state: "update", repo_id: "joseph/demo",  fork_branch: "pullRequest9b", "childDefaultHash": "defaultHash9c", "defaultHash": "defaultHash9b" },
+     { status: 200, state: "update", repo_id: "joseph/demo",  fork_branch: "pullRequest9b", "childDefaultHash": "defaultHash9c", "defaultHash": "defaultHash9b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 

@@ -18,6 +18,10 @@ describe("getPullRequest", function () {
       state: pr.state,
       defaultHash: pr.defaultHash,
       childDefaultHash: pr.childDefaultHash,
+      head: pr.head,
+      branchDefaultHash: pr.branchDefaultHash,
+      remoteURL: pr.remoteURL,
+      baseBranch: pr.baseBranch
     }
       "Failed to get pull request"
     );
