@@ -55,6 +55,22 @@ describe("Pull request goes into conflict", function () {
       /*side*/ "yes"
     );
 
+    const voteYesTotals50000After = await postGetPRvoteYesTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash8",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+
+    const voteNoTotals0After = await postGetPRvoteNoTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash8",
+      /*contributor_id:*/ "",
+      /*side:*/ ""
+    );
+
     const mergeStatus = await postGetPullRequest(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
@@ -66,6 +82,8 @@ describe("Pull request goes into conflict", function () {
     assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
+    assert.equal(voteYesTotals50000After, "50000", "Fail to prevent adding yes votes on conflict.");
+    assert.equal(voteNoTotals0After, "0", "Fail to prevent adding no votes on conflict.");
     assert.deepEqual(
       openStatus,
      { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8", "defaultHash": "defaultHash8", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
