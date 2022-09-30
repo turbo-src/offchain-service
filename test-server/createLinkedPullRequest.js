@@ -79,7 +79,7 @@ describe("createLinkedPullRequest", function () {
 
     const totalVotes = Number(voteYesTotals) + Number(voteNoTotals)
 
-    assert.equal(totalVotes, 0, "Fail to rollover votes to linked pull request.");
+    assert.equal(totalVotes, 50_000, "Fail to rollover votes to linked pull request.");
 
     assert.equal(
       issue_10b,
@@ -88,7 +88,7 @@ describe("createLinkedPullRequest", function () {
     );
     assert.deepEqual(
       pullRequestLatest,
-     { status: 200, state: "new", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
   });
