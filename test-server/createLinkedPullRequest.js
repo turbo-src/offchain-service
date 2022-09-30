@@ -45,6 +45,15 @@ describe("createLinkedPullRequest", function () {
       /*title:*/ "feat: create linked pull request."
     );
 
+    let magda = await postSetVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10b",
+      /*childDefaultHash:*/ "defaultHash10b",
+      /*mergeable:*/ true,
+      /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
+      /*side*/ "yes"
+    );
     const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -55,18 +64,22 @@ describe("createLinkedPullRequest", function () {
     const voteYesTotals = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash1",
+      /*defaultHash:*/ "defaultHash10b",
       /*contributor:*/ "",
       /*side:*/ ""
     );
 
-    const voteNoTotalsAfterMary = await postGetPRvoteNoTotals(
+    const voteNoTotals = await postGetPRvoteNoTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash1",
+      /*defaultHash:*/ "defaultHash10b",
       /*contributor:*/ "",
       /*side:*/ ""
     );
+
+    const totalVotes = Number(voteYesTotals) + Number(voteNoTotals)
+
+    assert.equal(totalVotes, 0, "Fail to rollover votes to linked pull request.");
 
     assert.equal(
       issue_10b,
