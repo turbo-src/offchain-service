@@ -78,7 +78,7 @@ const PullRequest = db.define(
               { state: "merge" },
               { where: { id: pr.id } }
             );
-          } else {
+	  } else {
             await PullRequest.update(
               { state: "close" },
               { where: { id: pr.id } }
@@ -94,7 +94,13 @@ const PullRequest = db.define(
               { state: "update" }, // PR is updated.
               { where: { id: pr.id } }
             );
-        } else {
+	// Pre-open votes
+	} else if (percentVoted > 0 && percentVoted <= 0.10 && !updated && pr.mergeable) {
+          await PullRequest.update(
+            { state: "pre-open" },
+            { where: { id: pr.id } }
+          );
+	} else {
           await PullRequest.update(
             { state: "open" },
             { where: { id: pr.id } }
