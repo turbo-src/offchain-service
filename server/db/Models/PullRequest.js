@@ -74,37 +74,49 @@ const PullRequest = db.define(
         if (percentVoted >= quorum && !updated && pr.mergeable) {
           const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
           if (yesRatio > 1) {
-            await PullRequest.update(
-              { state: "merge" },
-              { where: { id: pr.id } }
-            );
+            if (pr.status !== "merge") {
+              await PullRequest.update(
+                { state: "merge" },
+                { where: { id: pr.id } }
+              );
+	    }
 	  } else {
-            await PullRequest.update(
-              { state: "close" },
-              { where: { id: pr.id } }
-            );
+            if (pr.status !== "close") {
+              await PullRequest.update(
+                { state: "close" },
+                { where: { id: pr.id } }
+              );
+	    }
           }
         } else if (!pr.mergeable && updated) {
-            await PullRequest.update(
-              { state: "conflict" },
-              { where: { id: pr.id } }
-            );
+            if (pr.status !== "conflict") {
+              await PullRequest.update(
+                { state: "conflict" },
+                { where: { id: pr.id } }
+              );
+	    }
         } else if (pr.mergeable && updated) {
-            await PullRequest.update(
-              { state: "update" }, // PR is updated.
-              { where: { id: pr.id } }
-            );
+            if (pr.status !== "update") {
+              await PullRequest.update(
+                { state: "update" }, // PR is updated.
+                { where: { id: pr.id } }
+              );
+            }
 	// Pre-open votes
 	} else if (percentVoted > 0 && percentVoted <= 0.10 && !updated && pr.mergeable) {
-          await PullRequest.update(
-            { state: "pre-open" },
-            { where: { id: pr.id } }
-          );
+            if (pr.status !== "pre-open") {
+              await PullRequest.update(
+                { state: "pre-open" },
+                { where: { id: pr.id } }
+              );
+	    }
 	} else {
-          await PullRequest.update(
-            { state: "open" },
-            { where: { id: pr.id } }
-          );
+          if (pr.status !== "open") {
+            await PullRequest.update(
+              { state: "open" },
+              { where: { id: pr.id } }
+            );
+	  }
         }
       },
     },
