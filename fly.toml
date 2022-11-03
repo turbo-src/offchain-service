@@ -1,6 +1,6 @@
-# fly.toml file generated for private-store on 2022-08-22T10:13:40-04:00
+# fly.toml file generated for turbosrc-reibase-engine on 2022-11-03T10:52:58-04:00
 
-app = "private-store"
+app = "turbosrc-reibase-engine"
 kill_signal = "SIGINT"
 kill_timeout = 30
 processes = []
