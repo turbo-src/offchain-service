@@ -5,10 +5,12 @@ const dbUrl =
   process.env.DOCKER_DATABASE_URL ||
   "postgres://localhost:5432/privatestore";
 
-const config = {
-  logging: false,
-};
-
-const db = new Sequelize(dbUrl, config);
-
+  const db = new Sequelize(dbUrl, {
+    logging: false,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true
+    }
+  });
+  
 module.exports = db;
