@@ -173,6 +173,32 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "feat: create a pull request."
     );
 
+    const issue_11 = await postCreatePullRequest(
+      /*owner:*/ "michael",
+      /*repo_id:*/ "michael/demo",
+      /*defaultHash:*/ "defaultHash10",
+      /*childDefaultHash:*/ "defaultHash10",
+      /*head:*/ "head",
+      /*branchDefaultHash*/ "branchDefaultHash",
+      /*remoteURL*/ "remoteURL",
+      /*baseBranch:*/ "master",
+      /*fork_branch:*/ "pullRequest10",
+      /*title:*/ "feat: create a pull request."
+    );
+
+    const issue_12 = await postCreatePullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10",
+      /*childDefaultHash:*/ "defaultHash10",
+      /*head:*/ "head",
+      /*branchDefaultHash*/ "branchDefaultHash",
+      /*remoteURL*/ "remoteURL",
+      /*baseBranch:*/ "master",
+      /*fork_branch:*/ "pullRequest10",
+      /*title:*/ "feat: create a pull request."
+    );
+
     assert.equal(
       issue_1,
       "201",
@@ -237,6 +263,16 @@ describe("postCreatePullRequest", function () {
       issue_10,
       "201",
       "Failed to create a pull request issue_9c in the database"
+    );
+    assert.equal(
+      issue_11,
+      "201",
+      "You should be able to create a pull request which has the same default hash as another PR in an unrelated repo. Default hashes are only unique to repos, not globally."
+    );
+    assert.equal(
+      issue_12,
+      "403",
+      "You should not be able to create a pull request which has the same default hash as another PR in the same repo."
     );
   });
 });
