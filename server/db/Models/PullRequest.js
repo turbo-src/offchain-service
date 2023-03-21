@@ -36,7 +36,6 @@ const PullRequest = db.define(
     },
     defaultHash: {
       type: Sequelize.STRING(),
-      unique: true,
       allowNull: false,
     },
     childDefaultHash: {
