@@ -43,6 +43,19 @@ describe("postCreatePullRequest", function () {
       /*title:*/ "declare as type: module"
     );
 
+    const issue_3_michael = await postCreatePullRequest(
+      /*owner:*/ "michael",
+      /*repo_id:*/ "michael/demo",
+      /*defaultHash:*/ "defaultHash3",
+      /*childDefaultHash:*/ "defaultHash3",
+      /*head:*/ "head",
+      /*branchDefaultHash*/ "branchDefaultHash",
+      /*remoteURL*/ "remoteURL",
+      /*baseBranch:*/ "master",
+      /*fork_branch:*/ "pullRequest3",
+      /*title:*/ "declare as type: module"
+    );
+
     const issue_4 = await postCreatePullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
@@ -213,6 +226,11 @@ describe("postCreatePullRequest", function () {
       issue_3,
       "201",
       "Failed to create a pull request issue_3 in the database"
+    );
+    assert.equal(
+      issue_3_michael,
+      "201",
+      "Failed to create a pull request issue_3_michael in the database"
     );
     assert.equal(
       issue_4,
