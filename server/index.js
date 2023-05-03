@@ -60,6 +60,7 @@ var schema = buildSchema(`
   type Vote {
     contributor_id: String!
     side: String!
+    votePower: String!
     createdAt: String!
   }
 
