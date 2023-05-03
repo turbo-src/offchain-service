@@ -22,6 +22,7 @@ const {
   setQuorum,
   getQuorum,
   setVote,
+  getVotes
 } = require("../lib");
 
 var schema = buildSchema(`
@@ -56,6 +57,17 @@ var schema = buildSchema(`
     quorum: String!
   }
 
+  type Vote {
+    contributor_id: String!
+    side: String!
+    createdAt: String!
+  }
+
+  type VoteData {
+    status: Int!
+    votes: [Vote]!
+  }
+
   type Query {
     createRepo(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
@@ -74,6 +86,7 @@ var schema = buildSchema(`
     getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteYesTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
+    getVotes(repo: String, defaultHash: String): VoteData,
   }
 `);
 
@@ -224,6 +237,12 @@ var root = {
       args.defaultHash,
       args.contributor_id,
       args.side
+    );
+  },
+  getVotes: async (args) => {
+    return await getVotes(
+      args.repo,
+      args.defaultHash,
     );
   },
 };
