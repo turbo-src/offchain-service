@@ -87,7 +87,7 @@ var schema = buildSchema(`
     getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteYesTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
-    getVotes(repo: String, defaultHash: String): VoteData,
+    getVotes(repo: String, defaultHash: String, contributor_id: String): VoteData,
   }
 `);
 
@@ -244,6 +244,7 @@ var root = {
     return await getVotes(
       args.repo,
       args.defaultHash,
+      args.contributor_id
     );
   },
 };

@@ -250,11 +250,11 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getPRvoteNoTotals;
   },
-  getVotes: async (repo, defaultHash) => {
+  getVotes: async (repo, defaultHash, contributor_id) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ getVotes(repo: "${repo}", defaultHash: "${defaultHash}") { status, votes { contributor_id, side, votePower, createdAt } } }`,
+        query: `{ getVotes(repo: "${repo}", defaultHash: "${defaultHash}", contributor_id: "${contributor_id}" ) { status, votes { contributor_id, side, votePower, createdAt } } }`,
       })
       .set("accept", "json");
     const json = JSON.parse(res.text);
