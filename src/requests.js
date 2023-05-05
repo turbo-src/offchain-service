@@ -254,7 +254,21 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ getVotes(repo: "${repo}", defaultHash: "${defaultHash}", contributor_id: "${contributor_id}" ) { status, votes { contributor_id, side, votePower, createdAt } } }`,
+        query: `
+        { getVotes(repo: "${repo}", defaultHash: "${defaultHash}", contributor_id:"${contributor_id}") 
+{ status,
+            voteData {
+              contributor {
+                voted, side, votePower, createdAt, contributor_id
+              },
+              voteTotals {
+                totalVotes, totalYesVotes, totalNoVotes, votesToQuorum, votesToMerge, votesToClose, totalVotePercent, yesPercent, noPercent 
+              },
+              votes { contributor_id, side, votePower, createdAt }
+              },
+            }
+}
+      `,
       })
       .set("accept", "json");
     const json = JSON.parse(res.text);
