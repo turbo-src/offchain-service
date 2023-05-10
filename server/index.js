@@ -95,7 +95,7 @@ var schema = buildSchema(`
     repo_id: String!
     title: String!
     head: String!
-    remoteUrl: String!
+    remoteURL: String!
     baseBranch: String!
     forkBranch: String!
     childDefaultHash: String!

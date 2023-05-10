@@ -256,7 +256,7 @@ var root = {
       .send({
         query: `
         { getVotes(repo: "${repo}", defaultHash: "${defaultHash}", contributor_id:"${contributor_id}") 
-{ status,
+{ status, repo_id, title, head, remoteURL, baseBranch, forkBranch, childDefaultHash, defaultHash, mergeable, state
             voteData {
               contributor {
                 voted, side, votePower, createdAt, contributor_id
