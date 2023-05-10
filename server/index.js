@@ -22,7 +22,8 @@ const {
   setQuorum,
   getQuorum,
   setVote,
-  getRepoData
+  getRepoData,
+  getVotes
 } = require("../lib");
 
 var schema = buildSchema(`
@@ -79,6 +80,53 @@ var schema = buildSchema(`
       contributor: RepoContributor!
       pullRequests: [PullRequest]!
     }
+  type Vote {
+    contributor_id: String!
+    side: String!
+    votePower: Int!
+    createdAt: String!
+  }
+
+  type ContributorVoteData {
+    voted: Boolean!
+    side: String!
+    votePower: Int!
+    createdAt: String!
+    contributor_id: String!
+  }
+
+  type VoteTotals {
+    totalVotes: Int!
+    totalYesVotes: Int!
+    totalNoVotes: Int!
+    votesToQuorum: Int!
+    votesToMerge: Int!
+    votesToClose: Int!
+    totalVotePercent: String!
+    yesPercent: String!
+    noPercent: String!
+  }
+
+  type VoteData {
+    contributor: ContributorVoteData!
+    voteTotals: VoteTotals!
+    votes: [Vote]!
+  }
+
+  type GetVotes {
+    status: Int!
+    repo_id: String!
+    title: String!
+    head: String!
+    remoteURL: String!
+    baseBranch: String!
+    forkBranch: String!
+    childDefaultHash: String!
+    defaultHash: String!
+    mergeable: Boolean!
+    state: String!
+    voteData: VoteData!
+  }
 
   type Query {
     createRepo(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
@@ -99,6 +147,7 @@ var schema = buildSchema(`
     getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteYesTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
+    getVotes(repo: String, defaultHash: String, contributor_id: String): GetVotes,
   }
 `);
 
@@ -253,6 +302,13 @@ var root = {
   },
   getRepoData: async (args) => {
     return await getRepoData(args.repo_id, args.contributor_id);
+  },
+    getVotes: async (args) => {
+    return await getVotes(
+      args.repo,
+      args.defaultHash,
+      args.contributor_id
+    );
   },
 };
 
