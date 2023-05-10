@@ -257,6 +257,11 @@ var root = {
         query: `{ getRepoData(repo_id: "${repo_id}", contributor_id: "${contributor_id}")
         {   
           status, 
+          repo_id,
+          owner,
+          contributor_id,
+          head,
+          quorum,
           contributor { 
             contributor,
             votePower,

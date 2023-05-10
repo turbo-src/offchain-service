@@ -38,7 +38,7 @@ var schema = buildSchema(`
     votePower: Int!
     createdAt: String!
   }
-  
+
   type PullRequest {
     state: String!
     repo_id: String!
@@ -76,7 +76,7 @@ var schema = buildSchema(`
       owner: String!
       contributor_id: String!
       head: String!
-      quorum: Int!
+      quorum: Float!
       contributor: RepoContributor!
       pullRequests: [PullRequest]!
     }
