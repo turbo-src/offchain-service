@@ -11,6 +11,9 @@ const Vote = db.define("vote", {
   side: {
     type: Sequelize.STRING(),
   },
+  votePower: {
+    type: Sequelize.STRING(),
+  }
 });
 
 module.exports = Vote;
