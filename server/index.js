@@ -32,13 +32,6 @@ var schema = buildSchema(`
     exists: Boolean!
   }
 
-  type Vote {
-    contributor_id: String!
-    side: String!
-    votePower: Int!
-    createdAt: String!
-  }
-
   type PullRequest {
     state: String!
     repo_id: String!
@@ -50,6 +43,13 @@ var schema = buildSchema(`
     remoteURL: String!
     baseBranch: String!
     votes: [Vote]!
+  }
+
+  type Vote {
+    contributor_id: String!
+    side: String!
+    votePower: Int!
+    createdAt: String!
   }
 
   type ContributorTokenAmount {
@@ -80,12 +80,6 @@ var schema = buildSchema(`
       contributor: RepoContributor!
       pullRequests: [PullRequest]!
     }
-  type Vote {
-    contributor_id: String!
-    side: String!
-    votePower: Int!
-    createdAt: String!
-  }
 
   type ContributorVoteData {
     voted: Boolean!
