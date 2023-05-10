@@ -22,6 +22,7 @@ const {
   setQuorum,
   getQuorum,
   setVote,
+  getRepoData
 } = require("../lib");
 
 var schema = buildSchema(`
@@ -30,8 +31,14 @@ var schema = buildSchema(`
     exists: Boolean!
   }
 
+  type Vote {
+    contributor_id: String!
+    side: String!
+    votePower: Int!
+    createdAt: String!
+  }
+
   type PullRequest {
-    status: Int!
     state: String!
     repo_id: String!
     fork_branch: String!
@@ -41,6 +48,7 @@ var schema = buildSchema(`
     branchDefaultHash:String!
     remoteURL: String!
     baseBranch: String!
+    votes: [Vote]!
   }
 
   type ContributorTokenAmount {
@@ -56,6 +64,22 @@ var schema = buildSchema(`
     quorum: String!
   }
 
+  type RepoContributor {
+      contributor: Boolean!
+      votePower: Int!
+  }
+
+  type RepoData {
+      status: Int!  
+      repo_id: String!
+      owner: String!
+      contributor_id: String!
+      head: String!
+      quorum: Int!
+      contributor: RepoContributor!
+      pullRequests: [PullRequest]!
+    }
+
   type Query {
     createRepo(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
     getRepo(repo: String): Repo,
@@ -63,6 +87,7 @@ var schema = buildSchema(`
     createLinkedPullRequest(owner: String, repo: String, parentDefaultHash: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String): String,
     updatePullRequest(repo: String, defaultHash: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
+    getRepoData(repo_id: String, contributor_id: String): RepoData,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): String,
@@ -225,6 +250,9 @@ var root = {
       args.contributor_id,
       args.side
     );
+  },
+  getRepoData: async (args) => {
+    return await getRepoData(args.repo_id, args.contributor_id);
   },
 };
 
