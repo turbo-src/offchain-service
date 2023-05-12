@@ -10,6 +10,11 @@ describe("getRepoData", function () {
       200,
       "Failed to find a repo's data"
     );
+    assert.deepEqual(
+      repoData.contributor.contributor,
+      true,
+      "Failed to find a repo's data"
+    );
     // assert.deepEqual(
     //   repoDataNotFound.status,
     //   500,

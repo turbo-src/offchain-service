@@ -70,17 +70,6 @@ var schema = buildSchema(`
       votePower: Int!
   }
 
-  type RepoData {
-      status: Int!  
-      repo_id: String!
-      owner: String!
-      contributor_id: String!
-      head: String!
-      quorum: Float!
-      contributor: RepoContributor!
-      pullRequests: [PullRequest]!
-    }
-
   type ContributorVoteData {
     voted: Boolean!
     side: String!
@@ -96,15 +85,32 @@ var schema = buildSchema(`
     votesToQuorum: Int!
     votesToMerge: Int!
     votesToClose: Int!
-    totalVotePercent: String!
-    yesPercent: String!
-    noPercent: String!
+    totalVotePercent: Float!
+    yesPercent: Float!
+    noPercent: Float!
   }
 
   type VoteData {
     contributor: ContributorVoteData!
     voteTotals: VoteTotals!
     votes: [Vote]!
+  }
+  //Need to return a list of pull requests with meta data, vote totals,
+  PullRequestData {
+    voteTotals: VoteTotals!
+    pullRequest: PullRequest!
+    voteData: VoteData!
+  }
+  //
+  type RepoData {
+    status: Int!  
+    repo_id: String!
+    owner: String!
+    contributor_id: String!
+    head: String!
+    quorum: Float!
+    contributor: RepoContributor!
+    pullRequests: [PullRequestData]! // <========== ?
   }
 
   type GetVotes {
