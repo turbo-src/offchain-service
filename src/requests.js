@@ -251,6 +251,7 @@ var root = {
     return json.data.getPRvoteNoTotals;
   },
   getVotes: async (repo, defaultHash, contributor_id) => {
+    console.log('REQS ENGINE', repo, defaultHash, contributor_id)
     const res = await superagent
       .post(`${port}/graphql`)
       .send({

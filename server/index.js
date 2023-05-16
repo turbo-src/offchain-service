@@ -277,11 +277,13 @@ var root = {
     );
   },
   getVotes: async (args) => {
-    return await getVotes(
+    const res = await getVotes(
       args.repo,
       args.defaultHash,
       args.contributor_id
     );
+    console.log('RES ENGINE', res)
+    return res
   },
 };
 
