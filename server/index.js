@@ -283,7 +283,6 @@ var root = {
       args.defaultHash,
       args.contributor_id
     );
-    console.log('RES ENGINE', res)
     return res
   },
 };
