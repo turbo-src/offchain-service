@@ -263,24 +263,35 @@ var root = {
           head,
           quorum,
           contributor { 
+            contributorID,
             contributor,
             votePower,
           }, 
         pullRequests { 
-          state,
-          repo_id,
-          fork_branch,
-          defaultHash,
-          childDefaultHash,
-          head,
-          branchDefaultHash,
-          remoteURL,
-          baseBranch,
-          votes {
-            contributor_id,
-            side,
-            votePower,
-            createdAt
+          pullRequest {
+            state,
+            repo_id,
+            fork_branch,
+            defaultHash,
+            childDefaultHash,
+            head,
+            branchDefaultHash,
+            remoteURL,
+            baseBranch,
+          voteData {
+            voteTotals {
+
+            },
+            contributor {
+
+            },
+            votes {
+              contributor_id,
+              side,
+              votePower,
+              createdAt
+            },
+          }
           }
           } 
         } 
