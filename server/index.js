@@ -89,6 +89,7 @@ var schema = buildSchema(`
     totalVotePercent: Float!
     yesPercent: Float!
     noPercent: Float!
+    quorum: Float!
   }
 
   type VoteData {
@@ -298,12 +299,13 @@ var root = {
   getRepoData: async (args) => {
     return await getRepoData(args.repo_id, args.contributor_id);
   },
-    getVotes: async (args) => {
-    return await getVotes(
+  getVotes: async (args) => {
+    const res = await getVotes(
       args.repo,
       args.defaultHash,
       args.contributor_id
     );
+    return res
   },
 };
 

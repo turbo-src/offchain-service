@@ -18,5 +18,20 @@ describe("get votes", function () {
        true,
        "Fail to get vote's votepower for a PR"
      );
+     assert.deepEqual(
+      res.voteData.voteTotals.yesPercent,
+       .05,
+       "Fail to get vote's yes percent decimal"
+     );
+     assert.deepEqual(
+      res.voteData.voteTotals.noPercent,
+       .800001,
+       "Fail to get vote's no percent decimal"
+     );
+     assert.deepEqual(
+      res.voteData.voteTotals.totalVotePercent,
+       0.850001,
+       "Fail to get vote's total percent decimal"
+     );
 });
 });

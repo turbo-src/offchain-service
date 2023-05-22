@@ -263,39 +263,44 @@ var root = {
           head,
           quorum,
           contributor { 
-            contributorID,
+            contributor_id,
             contributor,
             votePower,
           }, 
         pullRequests { 
-          pullRequest {
-            state,
-            repo_id,
-            fork_branch,
-            defaultHash,
-            childDefaultHash,
-            head,
-            branchDefaultHash,
-            remoteURL,
-            baseBranch,
-          voteData {
-            voteTotals {
-
-            },
-            contributor {
-
-            },
-            votes {
-              contributor_id,
-              side,
-              votePower,
-              createdAt
-            },
-          }
-          }
-          } 
-        } 
-        }`,
+          state,
+          repo_id,
+          forkBranch,
+          baseBranch,
+          defaultHash,
+          childDefaultHash,
+          head,
+          defaultHash,
+          remoteURL
+        voteData {
+          contributor {
+          contributor_id,
+          voted,
+          votePower,
+          createdAt,
+          },
+        voteTotals {
+          yesPercent,
+          noPercent,
+          totalVotes,
+          totalYesVotes,
+          totalNoVotes,
+        },
+        votes {
+      		contributor_id,
+          side,
+          votePower,
+          createdAt
+        }
+      }
+    } 
+  } 
+}`,
       })
       .set("accept", "json");
     const json = JSON.parse(res.text);
@@ -313,7 +318,7 @@ var root = {
                 voted, side, votePower, createdAt, contributor_id
               },
               voteTotals {
-                totalVotes, totalYesVotes, totalNoVotes, votesToQuorum, votesToMerge, votesToClose, totalVotePercent, yesPercent, noPercent 
+                totalVotes, totalYesVotes, totalNoVotes, votesToQuorum, votesToMerge, votesToClose, totalVotePercent, yesPercent, noPercent, quorum
               },
               votes { contributor_id, side, votePower, createdAt }
               },
