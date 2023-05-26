@@ -79,9 +79,10 @@ var schema = buildSchema(`
     votesToQuorum: Int!
     votesToMerge: Int!
     votesToClose: Int!
-    totalVotePercent: String!
-    yesPercent: String!
-    noPercent: String!
+    totalVotePercent: Float!
+    yesPercent: Float!
+    noPercent: Float!
+    quorum: Float!
   }
 
   type VoteData {
@@ -277,11 +278,12 @@ var root = {
     );
   },
   getVotes: async (args) => {
-    return await getVotes(
+    const res = await getVotes(
       args.repo,
       args.defaultHash,
       args.contributor_id
     );
+    return res
   },
 };
 
