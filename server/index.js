@@ -40,6 +40,7 @@ var schema = buildSchema(`
   }
 
   type PullRequest {
+    status: Int!
     state: String!
     repo_id: String!
     fork_branch: String!
