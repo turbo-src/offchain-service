@@ -123,7 +123,8 @@ var schema = buildSchema(`
     quorum: Float!
     contributor: RepoContributor!
     pullRequests: [GetVotes]! 
-
+  }
+  
   type TransferReceipt {
     status: Int!
     repo: String!
