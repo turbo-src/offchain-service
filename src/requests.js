@@ -137,7 +137,7 @@ var root = {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ transferTokens(owner: "${owner}", repo: "${repo}", from: "${from}", to: "${to}", amount: ${amount} ) }`,
+        query: `{ transferTokens(owner: "${owner}", repo: "${repo}", from: "${from}", to: "${to}", amount: ${amount} ) { status, repo, from, to, amount, createdAt, network, id } }`,
       }) // sends a JSON post body
       .set("accept", "json");
     //   .end((err, res) => {
