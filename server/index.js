@@ -22,6 +22,7 @@ const {
   setQuorum,
   getQuorum,
   setVote,
+  getRepoData,
   getVotes
 } = require("../lib");
 
@@ -29,6 +30,13 @@ var schema = buildSchema(`
   type RepoStatus {
     status: Int!
     exists: Boolean!
+  }
+
+  type Vote {
+    contributor_id: String!
+    side: String!
+    votePower: Int!
+    createdAt: String!
   }
 
   type PullRequest {
@@ -42,6 +50,7 @@ var schema = buildSchema(`
     branchDefaultHash:String!
     remoteURL: String!
     baseBranch: String!
+    votes: [Vote]!
   }
 
   type ContributorTokenAmount {
@@ -57,11 +66,10 @@ var schema = buildSchema(`
     quorum: String!
   }
 
-  type Vote {
-    contributor_id: String!
-    side: String!
-    votePower: Int!
-    createdAt: String!
+  type RepoContributor {
+      contributor_id: String!
+      contributor: Boolean!
+      votePower: Int!
   }
 
   type ContributorVoteData {
@@ -106,6 +114,16 @@ var schema = buildSchema(`
     voteData: VoteData!
   }
 
+  type RepoData {
+    status: Int!  
+    repo_id: String!
+    owner: String!
+    contributor_id: String!
+    head: String!
+    quorum: Float!
+    contributor: RepoContributor!
+    pullRequests: [GetVotes]! 
+
   type TransferReceipt {
     status: Int!
     repo: String!
@@ -115,6 +133,7 @@ var schema = buildSchema(`
     createdAt: String!
     network: String!
     id: String!
+
   }
 
   type Query {
@@ -124,6 +143,7 @@ var schema = buildSchema(`
     createLinkedPullRequest(owner: String, repo: String, parentDefaultHash: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String): String,
     updatePullRequest(repo: String, defaultHash: String, childDefaultHash: String): String,
     getRepoStatus(repo_id: String): RepoStatus,
+    getRepoData(repo_id: String, contributor_id: String): RepoData,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): TransferReceipt,
@@ -287,6 +307,9 @@ var root = {
       args.contributor_id,
       args.side
     );
+  },
+  getRepoData: async (args) => {
+    return await getRepoData(args.repo_id, args.contributor_id);
   },
   getVotes: async (args) => {
     const res = await getVotes(

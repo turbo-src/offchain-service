@@ -250,7 +250,63 @@ var root = {
     const json = JSON.parse(res.text);
     return json.data.getPRvoteNoTotals;
   },
-  getVotes: async (repo, defaultHash, contributor_id) => {
+  getRepoData: async (repo_id, contributor_id) => {
+    const res = await superagent
+      .post(`${port}/graphql`)
+      .send({
+        query: `{ getRepoData(repo_id: "${repo_id}", contributor_id: "${contributor_id}")
+        {   
+          status, 
+          repo_id,
+          owner,
+          contributor_id,
+          head,
+          quorum,
+          contributor { 
+            contributor_id,
+            contributor,
+            votePower,
+          }, 
+        pullRequests { 
+          state,
+          repo_id,
+          forkBranch,
+          baseBranch,
+          defaultHash,
+          childDefaultHash,
+          head,
+          defaultHash,
+          remoteURL
+        voteData {
+          contributor {
+          contributor_id,
+          voted,
+          votePower,
+          createdAt,
+          },
+        voteTotals {
+          yesPercent,
+          noPercent,
+          totalVotes,
+          totalYesVotes,
+          totalNoVotes,
+        },
+        votes {
+      		contributor_id,
+          side,
+          votePower,
+          createdAt
+        }
+      }
+    } 
+  } 
+}`,
+      })
+      .set("accept", "json");
+    const json = JSON.parse(res.text);
+    return json.data.getRepoData;
+  },
+    getVotes: async (repo, defaultHash, contributor_id) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
