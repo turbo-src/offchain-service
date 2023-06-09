@@ -123,6 +123,17 @@ var schema = buildSchema(`
     quorum: Float!
     contributor: RepoContributor!
     pullRequests: [GetVotes]! 
+
+  type TransferReceipt {
+    status: Int!
+    repo: String!
+    to: String!
+    from: String!
+    amount: Int!
+    createdAt: String!
+    network: String!
+    id: String!
+
   }
 
   type Query {
@@ -135,7 +146,7 @@ var schema = buildSchema(`
     getRepoData(repo_id: String, contributor_id: String): RepoData,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
-    transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): String,
+    transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): TransferReceipt,
     setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: String): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     getMostRecentLinkedPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
