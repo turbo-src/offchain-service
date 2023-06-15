@@ -5,6 +5,10 @@ const Repo = require("./Repo");
 const PullRequest = db.define(
   "pullrequest",
   {
+    issue_id: {
+      type: Sequelize.STRING(),
+      allowNull: false,
+    },
     head: {
       type: Sequelize.STRING(),
       allowNull: false,
