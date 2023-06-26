@@ -271,6 +271,7 @@ var root = {
           state,
           repo_id,
           issue_id,
+          title,
           forkBranch,
           baseBranch,
           defaultHash,
