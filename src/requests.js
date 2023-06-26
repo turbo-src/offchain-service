@@ -270,6 +270,7 @@ var root = {
         pullRequests { 
           state,
           repo_id,
+          issue_id,
           forkBranch,
           baseBranch,
           defaultHash,
