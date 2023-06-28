@@ -154,9 +154,9 @@ var schema = buildSchema(`
     getMostRecentLinkedPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
     getQuorum(repo: String): String,
-    getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
-    getPRvoteYesTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
-    getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
+    getPRvoteTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): Float,
+    getPRvoteYesTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): Float,
+    getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): Float,
     getVotes(repo: String, defaultHash: String, contributor_id: String): GetVotes,
   }
 `);

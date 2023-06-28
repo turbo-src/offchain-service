@@ -52,12 +52,12 @@ const PullRequest = db.define(
       allowNull: false,
     },
     yesTokenAmount: {
-      type: Sequelize.STRING(),
-      defaultValue: "0",
+      type: Sequelize.INTEGER(),
+      defaultValue: 0,
     },
     noTokenAmount: {
-      type: Sequelize.STRING(),
-      defaultValue: "0",
+      type: Sequelize.INTEGER(),
+      defaultValue: 0,
     },
     repo_id: {
       type: Sequelize.STRING(),
