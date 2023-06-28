@@ -19,7 +19,7 @@ const Repo = db.define("repo", {
   },
   tokenAmount: {
     type: Sequelize.STRING(),
-    defaultValue: "1000000",
+    defaultValue: 1_000_000,
   },
   contributor_id: {
     type: Sequelize.STRING(),

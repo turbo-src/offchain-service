@@ -12,7 +12,7 @@ const Token = db.define("token", {
     type: Sequelize.STRING(),
   },
   amount: {
-    type: Sequelize.STRING(),
+    type: Sequelize.INTEGER(),
   },
 });
 
