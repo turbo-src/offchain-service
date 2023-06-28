@@ -1,6 +1,6 @@
 const assert = require("assert");
 const {
-  postGetContributorTokenAmount,
+  postGetVotePowerAmount,
   postTransferTokens,
 } = require("../src/requests");
 
@@ -70,70 +70,70 @@ describe("postTransferTokens", function () {
       /*amount*/ 50000
     );
 
-    const mary = await postGetContributorTokenAmount(
+    const mary = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
       /*side:*/ ""
     );
-    const gabriel = await postGetContributorTokenAmount(
+    const gabriel = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side:*/ ""
     );
-    const michael = await postGetContributorTokenAmount(
+    const michael = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ ""
     );
-    const magda = await postGetContributorTokenAmount(
+    const magda = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side:*/ ""
     );
-    const thomas = await postGetContributorTokenAmount(
+    const thomas = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
       /*side:*/ ""
     );
-    const ben = await postGetContributorTokenAmount(
+    const ben = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78",
       /*side:*/ ""
     );
-    const louis = await postGetContributorTokenAmount(
+    const louis = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0cea312808EdcdC905428D3922480930689F4500",
       /*side:*/ ""
     );
-    const thibaut = await postGetContributorTokenAmount(
+    const thibaut = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
       /*side:*/ ""
     );
-    const joseph = await postGetContributorTokenAmount(
+    const joseph = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
       /*contributor_id:*/ "0x0c0DDaD894E3436C34AecD5722F0798Da88Bc971",
       /*side:*/ ""
     );
-    const ignacius = await postGetContributorTokenAmount(
+    const ignacius = await postGetVotePowerAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
