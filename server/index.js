@@ -12,7 +12,7 @@ const {
   getRepo,
   getAuthorizedContributor,
   transferTokens,
-  getContributorTokenAmount,
+  getVotePowerAmount,
   getPullRequest,
   getMostRecentLinkedPullRequest,
   getRepoStatus,
@@ -147,7 +147,7 @@ var schema = buildSchema(`
     getRepoStatus(repo_id: String): RepoStatus,
     getRepoData(repo_id: String, contributor_id: String): RepoData,
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
-    getContributorTokenAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
+    getVotePowerAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): TransferReceipt,
     setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: String): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
@@ -226,8 +226,8 @@ var root = {
   getAuthorizedContributor: async (args) => {
     return await getAuthorizedContributor(args.contributor_id, args.repo_id);
   },
-  getContributorTokenAmount: async (args) => {
-    return await getContributorTokenAmount(
+  getVotePowerAmount: async (args) => {
+    return await getVotePowerAmount(
       args.owner,
       args.repo,
       args.defaultHash,
