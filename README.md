@@ -130,10 +130,10 @@ a string of either closed open or merge
 a string of 1000000
 ```
 
-### getContributorTokenAmount
+### getVotePowerAmount
 
 ```
-a string of the amount of tokens a user has in the given repo
+a string of the amount of votepower a user has in the given repo
 ```
 
 ### getVoteNoTotals
