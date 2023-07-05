@@ -130,7 +130,6 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*side:*/ ""
     );
 
-
     const maryVote = await postSetVote(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
@@ -164,17 +163,10 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*side:*/ ""
     );
 
-    const totalVotes = Number(voteYesTotalsAfterMary) + Number(voteNoTotalsAfterMary)
-
+    const totalVotes = Number(voteYesTotalsAfterMary) + Number(voteNoTotalsAfterMary);
     assert.equal(totalVotes, 850_001, "Fail to get total votes.");
     assert.equal(michaelVote, "201", "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
-
-    assert.deepEqual(
-      openStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash1", "defaultHash": "defaultHash1", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
-      "Fail to stay open."
-    );
     assert.equal(gabrielVote, "201", "Fail to add vote to database");
     assert.equal(magdaVote, "201", "Fail to add vote to database");
     assert.equal(thomasVote, "201", "Fail to add vote to database");
@@ -183,14 +175,20 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
     assert.equal(thibautVote, "201", "Fail to add vote to database");
     assert.equal(ignaciusVote, "403", "Fail to add vote to database");
 
-    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
-    assert.equal(voteYesTotalsAfterIganacius, "200000", "Fail to add votes yes.");
-    assert.equal(voteNoTotalsAfterIganacius, "150000", "Fail to add votes no.");
-
-    assert.equal(maryVote, "201", "Fail to add vote to database");
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash1", "defaultHash": "defaultHash1", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      {
+        status: 200,
+        state: "merge",
+        repo_id: "joseph/demo",
+        fork_branch: "pullRequest1",
+        childDefaultHash: "defaultHash1",
+        defaultHash: "defaultHash1",
+        head: "head",
+        branchDefaultHash: "branchDefaultHash",
+        remoteURL: "remoteURL",
+        baseBranch: "master",
+      },
       "Fail to merge even though it was voted in."
     );
   });

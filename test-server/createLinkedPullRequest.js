@@ -25,7 +25,7 @@ describe("createLinkedPullRequest", function () {
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash10",
-      /*childDefaultHash:*/ "defaultHash10b",
+      /*childDefaultHash:*/ "defaultHash10",
       /*mergeable:*/ false,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
@@ -54,10 +54,11 @@ describe("createLinkedPullRequest", function () {
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side*/ "yes"
     );
+    
     const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10",
+      /*defaultHash:*/ "defaultHash10b",
       /*contributor:*/ "",
       /*side:*/ ""
     );
@@ -79,16 +80,16 @@ describe("createLinkedPullRequest", function () {
 
     const totalVotes = Number(voteYesTotals) + Number(voteNoTotals)
 
-    assert.equal(totalVotes, 50_000, "Fail to rollover votes to linked pull request.");
+    assert.equal(totalVotes, 150_000, "Fail to rollover votes to linked pull request.");
 
     assert.equal(
       issue_10b,
       "201",
-      "Failed to create a pull request issue_10 in the database"
+      "Failed to create a pull request issue_10 with defaultHash10b in the database"
     );
     assert.deepEqual(
       pullRequestLatest,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", childDefaultHash: "defaultHash10b", defaultHash: "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
   });
