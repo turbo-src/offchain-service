@@ -9,7 +9,7 @@ const Vote = db.define("vote", {
     type: Sequelize.STRING(),
   },
   side: {
-    type: Sequelize.STRING(),
+    type: Sequelize.BOOLEAN(),
   },
   votePower: {
     type: Sequelize.STRING(),

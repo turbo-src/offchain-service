@@ -27,7 +27,7 @@ describe("Pull request goes into conflict", function () {
       /*childDefaultHash:*/ "defaultHash8b",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
     const voteYesTotalsLinkedPR = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
@@ -60,7 +60,7 @@ describe("Pull request goes into conflict", function () {
       /*childDefaultHash:*/ "defaultHash8c",
       /*mergeable:*/ false,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side*/ "yes"
+      /*side*/ true
     );
 
     const pullRequest8bConflict = await postGetPullRequest(
@@ -78,7 +78,7 @@ describe("Pull request goes into conflict", function () {
     //  /*childDefaultHash:*/ "defaultHash8b",
     //  /*mergeable:*/ true,
     //  /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-    //  /*side*/ "yes"
+    //  /*side*/ true
     //);
 
     assert.deepEqual(

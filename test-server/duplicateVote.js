@@ -13,7 +13,7 @@ describe("Duplicate voting should result in a 403 error", function () {
       /*childDefaultHash:*/ "defaultHash3",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     const gabrielVote2 = await postSetVote(
@@ -23,7 +23,7 @@ describe("Duplicate voting should result in a 403 error", function () {
       /*childDefaultHash:*/ "defaultHash3",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     const magdaVote = await postSetVote(
@@ -33,7 +33,7 @@ describe("Duplicate voting should result in a 403 error", function () {
       /*childDefaultHash:*/ "defaultHash3",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     assert.equal(gabrielVote1, 403);

@@ -18,7 +18,7 @@ describe("createLinkedPullRequest", function () {
       /*childDefaultHash:*/ "defaultHash10",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     let gabrielVote = await postSetVote(
@@ -28,7 +28,7 @@ describe("createLinkedPullRequest", function () {
       /*childDefaultHash:*/ "defaultHash10b",
       /*mergeable:*/ false,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side*/ "yes"
+      /*side*/ true
     );
 
     const issue_10b = await createLinkedPullRequest(
@@ -52,7 +52,7 @@ describe("createLinkedPullRequest", function () {
       /*childDefaultHash:*/ "defaultHash10b",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
-      /*side*/ "yes"
+      /*side*/ true
     );
     const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "joseph",
