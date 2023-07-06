@@ -11,7 +11,7 @@ describe("Invalid transfers should return 403, valid should return 201", functio
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
       /*to*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
-      /*amount*/ "1"
+      /*amount*/ 1
     );
 
     const thibautTransfer = await postTransferTokens(
@@ -19,7 +19,7 @@ describe("Invalid transfers should return 403, valid should return 201", functio
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
       /*to*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
-      /*amount*/ "50001"
+      /*amount*/ 50001
     );
 
     const thibautTransferSuccess = await postTransferTokens(
@@ -27,7 +27,7 @@ describe("Invalid transfers should return 403, valid should return 201", functio
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
       /*to*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
-      /*amount*/ "50"
+      /*amount*/ 50
     );
 
     const ignaciusTransferSuccess = await postTransferTokens(
@@ -35,12 +35,12 @@ describe("Invalid transfers should return 403, valid should return 201", functio
       /*repo_id*/ "joseph/demo",
       /*from*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
       /*to*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
-      /*amount*/ "25"
+      /*amount*/ 25
     );
 
-    assert.equal(ignaciusTransfer, "403");
-    assert.equal(thibautTransfer, "403");
-    assert.equal(thibautTransferSuccess, "201");
-    assert.equal(ignaciusTransferSuccess, "201");
+    assert.equal(ignaciusTransfer.status, 403);
+    assert.equal(thibautTransfer.status, 403);
+    assert.equal(thibautTransferSuccess.status, 201);
+    assert.equal(ignaciusTransferSuccess.status, 201);
   });
 });

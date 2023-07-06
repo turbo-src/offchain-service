@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 const db = require("../db");
-const Token = require("./Token");
+const Transfer = require("./Transfer");
 
 const Repo = db.define("repo", {
   owner: {
@@ -31,7 +31,7 @@ const Repo = db.define("repo", {
 });
 
 const initialBalance = async (Repo) => {
-  await Token.create({
+  await Transfer.create({
     from: Repo.contributor_id,
     to: Repo.contributor_id,
     repo_id: Repo.repo_id,

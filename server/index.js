@@ -23,7 +23,7 @@ const {
   getQuorum,
   setVote,
   getRepoData,
-  getVotes
+  getVotes,
 } = require("../lib");
 
 var schema = buildSchema(`
@@ -320,7 +320,7 @@ var root = {
       args.defaultHash,
       args.contributor_id
     );
-    return res
+    return res;
   },
 };
 
