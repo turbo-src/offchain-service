@@ -4,8 +4,13 @@ const {
   postGetMostRecentLinkedPullRequest,
   postGetPRvoteYesTotals,
   postGetPRvoteNoTotals,
-  createLinkedPullRequest
+  createLinkedPullRequest,
+  getRepoData,
+  getVotes,
 } = require("../src/requests");
+
+var snooze_ms = 1500;
+const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("createLinkedPullRequest", function () {
   it("create a pull request associated with the repo_id supplied", async function () {
@@ -20,17 +25,18 @@ describe("createLinkedPullRequest", function () {
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
+    console.log("michael vote=>", michaelVote);
 
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash10",
       /*childDefaultHash:*/ "defaultHash10",
-      /*mergeable:*/ false,
+      /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
-
+    console.log("gabriel vote=>", gabrielVote);
     const issue_10b = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
@@ -45,7 +51,9 @@ describe("createLinkedPullRequest", function () {
       /*title:*/ "feat: create linked pull request."
     );
 
-    let magda = await postSetVote(
+    await snooze(snooze_ms);
+
+    let magdaVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash10b",
@@ -54,7 +62,8 @@ describe("createLinkedPullRequest", function () {
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side*/ "yes"
     );
-    
+    console.log("magda vote=>", magdaVote);
+
     const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -62,25 +71,18 @@ describe("createLinkedPullRequest", function () {
       /*contributor:*/ "",
       /*side:*/ ""
     );
-    const voteYesTotals = await postGetPRvoteYesTotals(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10b",
-      /*contributor:*/ "",
-      /*side:*/ ""
+
+    const prData = await getVotes(
+      "joseph/demo",
+      "defaultHash10b",
+      "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925"
     );
 
-    const voteNoTotals = await postGetPRvoteNoTotals(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10b",
-      /*contributor:*/ "",
-      /*side:*/ ""
+    assert.equal(
+      prData.voteData.voteTotals.totalVotes,
+      150_000,
+      "Fail to rollover votes to linked pull request."
     );
-
-    const totalVotes = Number(voteYesTotals) + Number(voteNoTotals)
-
-    assert.equal(totalVotes, 150_000, "Fail to rollover votes to linked pull request.");
 
     assert.equal(
       issue_10b,
@@ -89,7 +91,18 @@ describe("createLinkedPullRequest", function () {
     );
     assert.deepEqual(
       pullRequestLatest,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", childDefaultHash: "defaultHash10b", defaultHash: "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      {
+        status: 200,
+        state: "open",
+        repo_id: "joseph/demo",
+        fork_branch: "pullRequest10",
+        childDefaultHash: "defaultHash10b",
+        defaultHash: "defaultHash10b",
+        head: "head",
+        branchDefaultHash: "branchDefaultHash",
+        remoteURL: "remoteURL",
+        baseBranch: "master",
+      },
       "Fail to stay open."
     );
   });
