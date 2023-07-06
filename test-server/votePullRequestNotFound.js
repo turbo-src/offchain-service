@@ -18,7 +18,7 @@ describe("Voting on non-existant pull request", function () {
       /*childDefaultHash:*/ "defaultHash6",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     assert.equal(michaelVote, 404, "Fail to preven voting on a non-existing pull request");

@@ -18,7 +18,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*childDefaultHash:*/ "defaultHash1",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     const voteYesTotals50000 = await postGetPRvoteYesTotals(
@@ -52,7 +52,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*childDefaultHash:*/ "defaultHash1",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side*/ "yes"
+      /*side*/ true
     );
 
     const magdaVote = await postSetVote(
@@ -62,7 +62,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*childDefaultHash:*/ "defaultHash1",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
-      /*side*/ "yes"
+      /*side*/ true
     );
 
     const thomasVote = await postSetVote(
@@ -102,7 +102,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*childDefaultHash:*/ "defaultHash1",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
-      /*side*/ "yes"
+      /*side*/ true
     );
 
     const ignaciusVote = await postSetVote(
@@ -112,7 +112,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*childDefaultHash:*/ "defaultHash1",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
-      /*side*/ "yes"
+      /*side*/ true
     );
 
     const voteYesTotalsAfterIganacius = await postGetPRvoteYesTotals(
@@ -138,7 +138,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
       /*childDefaultHash:*/ "defaultHash1",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     const mergeStatus = await postGetPullRequest(

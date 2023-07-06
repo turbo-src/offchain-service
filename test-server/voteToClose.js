@@ -18,7 +18,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
-      /*side:*/ "yes"
+      /*side:*/ true
     );
 
     const voteYesTotals50000 = await postGetPRvoteYesTotals(
@@ -52,7 +52,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const magdaVote = await postSetVote(
@@ -62,7 +62,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const thomasVote = await postSetVote(
@@ -72,7 +72,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const benVote = await postSetVote(
@@ -82,7 +82,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const louisVote = await postSetVote(
@@ -92,7 +92,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cea312808EdcdC905428D3922480930689F4500",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const thibautVote = await postSetVote(
@@ -102,7 +102,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const ignaciusVote = await postSetVote(
@@ -112,7 +112,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
-      /*side*/ "no"
+      /*side*/ false
     );
 
     const maryVote = await postSetVote(
@@ -122,7 +122,7 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*childDefaultHash:*/ "defaultHash2",
       /*mergeable:*/ true,
       /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
-      /*side:*/ "no"
+      /*side:*/ false
     );
 
     const mergeStatus = await postGetPullRequest(

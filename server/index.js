@@ -34,7 +34,7 @@ var schema = buildSchema(`
 
   type Vote {
     contributor_id: String!
-    side: String!
+    side: Boolean!
     votePower: Int!
     createdAt: String!
   }
@@ -149,7 +149,7 @@ var schema = buildSchema(`
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getVotePowerAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): TransferReceipt,
-    setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: String): String,
+    setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: Boolean): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     getMostRecentLinkedPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
