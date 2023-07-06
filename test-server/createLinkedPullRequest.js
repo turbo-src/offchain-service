@@ -25,7 +25,6 @@ describe("createLinkedPullRequest", function () {
       /*contributor_id:*/ "0x0c55D3B26A1229B9D707a4272F55E66103301858",
       /*side:*/ "yes"
     );
-    console.log("michael vote=>", michaelVote);
 
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
@@ -36,7 +35,6 @@ describe("createLinkedPullRequest", function () {
       /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
       /*side*/ "yes"
     );
-    console.log("gabriel vote=>", gabrielVote);
     const issue_10b = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
@@ -62,7 +60,6 @@ describe("createLinkedPullRequest", function () {
       /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
       /*side*/ "yes"
     );
-    console.log("magda vote=>", magdaVote);
 
     const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "joseph",
