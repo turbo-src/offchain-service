@@ -23,18 +23,40 @@ describe("update pull request", function () {
       /*side:*/ ""
     );
     assert.equal(
-	updateRes,
-	201,
-	"fail to update pull request child defaultHash"
+      updateRes,
+      201,
+      "fail to update pull request child defaultHash"
     );
     assert.deepEqual(
       openStatus,
-     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest1", childDefaultHash: "defaultHash", defaultHash: "defaultHash", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "baseBranch" },
+      {
+        status: 200,
+        state: "merge",
+        repo_id: "joseph/demo",
+        fork_branch: "pullRequest1",
+        childDefaultHash: "defaultHash",
+        defaultHash: "defaultHash",
+        head: "head",
+        branchDefaultHash: "branchDefaultHash",
+        remoteURL: "remoteURL",
+        baseBranch: "baseBranch",
+      },
       "Fail to stay open."
     );
     assert.deepEqual(
       updateStatus,
-     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest1", childDefaultHash: "defaultHash", defaultHash: "ab3fc", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "baseBranch" },
+      {
+        status: 200,
+        state: "merge",
+        repo_id: "joseph/demo",
+        fork_branch: "pullRequest1",
+        childDefaultHash: "defaultHash",
+        defaultHash: "ab3fc",
+        head: "head",
+        branchDefaultHash: "branchDefaultHash",
+        remoteURL: "remoteURL",
+        baseBranch: "baseBranch",
+      },
       "Fail to stay open."
     ); //assert.deepEqual( prStatusNotFound,
     //  { state: 200, exists: false },
