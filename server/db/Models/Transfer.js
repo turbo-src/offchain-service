@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const db = require("../db");
 
-const Token = db.define("token", {
+const Transfer = db.define("transfer", {
   to: {
     type: Sequelize.STRING(),
   },
@@ -16,4 +16,4 @@ const Token = db.define("token", {
   },
 });
 
-module.exports = Token;
+module.exports = Transfer;
