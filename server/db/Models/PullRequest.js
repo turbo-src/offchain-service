@@ -35,7 +35,7 @@ const PullRequest = db.define(
     },
     state: {
       type: Sequelize.STRING(),
-      defaultValue: "new",
+      defaultValue: "vote",
       allowNull: false,
     },
     defaultHash: {
