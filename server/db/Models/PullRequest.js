@@ -74,7 +74,7 @@ const PullRequest = db.define(
         
 	const updated = (pr.defaultHash !== pr.childDefaultHash)
 
-        if (percentVoted >= quorum && !updated && pr.mergeable) {
+        if (percentVoted > quorum && !updated && pr.mergeable) {
           const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
           if (yesRatio > 1) {
             if (pr.status !== "merge") {
