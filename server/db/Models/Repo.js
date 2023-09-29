@@ -28,6 +28,10 @@ const Repo = db.define("repo", {
     type: Sequelize.STRING(),
     defaultValue: ".5",
   },
+  inSession: {
+    type: Sequelize.BOOLEAN(),
+    defaultValue: false,
+  }
 });
 
 const initialBalance = async (Repo) => {

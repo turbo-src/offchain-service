@@ -86,6 +86,10 @@ const PullRequest = db.define(
 								{ state: "pre-open" },
 								{ where: { state: "frozen" } }
 							);
+							await Repo.update(
+								{ inSession: false },
+								{ where: { repo_id: repo.repo_id } }
+							);
 						}
 					} else {
 						if (pr.status !== "close") {
@@ -96,6 +100,10 @@ const PullRequest = db.define(
 							await PullRequest.update(
 								{ state: "pre-open" },
 								{ where: { state: "frozen" } }
+							);
+							await Repo.update(
+								{ inSession: false },
+								{ where: { repo_id: repo.repo_id } }
 							);
 						}
 					}
@@ -135,6 +143,10 @@ const PullRequest = db.define(
 						await PullRequest.update(
 							{ state: "frozen" },
 							{ where: { state: "pre-open" } }
+						);
+						await Repo.update(
+							{ inSession: true },
+							{ where: { repo_id: repo.repo_id } }
 						);
 					}
 				}
