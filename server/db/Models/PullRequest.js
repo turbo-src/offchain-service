@@ -68,10 +68,9 @@ const PullRequest = db.define(
 		hooks: {
 			afterUpdate: async (pr) => {
 				const repo = await Repo.findOne({ where: { repo_id: pr.repo_id } });
-				const quorum = Number(repo.quorum);
+				const quorum = repo.quorum;
 				const voteTotals = Number(pr.yesTokenAmount) + Number(pr.noTokenAmount);
-				const difference = 1 / quorum;
-				const percentVoted = (voteTotals / 1000000) * difference;
+				const percentVoted = voteTotals / 1000000;
 
 				const updated = pr.defaultHash !== pr.childDefaultHash;
 
