@@ -72,8 +72,33 @@ const PullRequest = db.define(
 				const quorum = repo.quorum;
 				const voteTotals = Number(pr.yesTokenAmount) + Number(pr.noTokenAmount);
 				const percentVoted = voteTotals / 1000000;
-
 				const updated = pr.defaultHash !== pr.childDefaultHash;
+
+				const unFreeze = async () => {
+					// Get all frozen votes and toggle them back to vote or pre-open respectively
+					const frozen = await PullRequest.findAll({
+						where: { repo_id: repo.repo_id, state: "frozen" },
+					});
+					for (let i = 0; i < frozen.length; i++) {
+						if (
+							frozen[i].dataValues.yesTokenAmount === 0 &&
+							frozen[i].dataValues.noTokenAmount === 0
+						) {
+							await frozen[i].update({
+								state: "vote",
+							});
+						} else {
+							await frozen[i].update({
+								state: "pre-open",
+							});
+						}
+					}
+					// Set inSession to false on repo
+					await Repo.update(
+						{ inSession: false },
+						{ where: { repo_id: repo.repo_id } }
+					);
+				};
 
 				if (percentVoted > quorum && !updated && pr.mergeable) {
 					const yesRatio = pr.yesTokenAmount / pr.noTokenAmount;
@@ -83,27 +108,7 @@ const PullRequest = db.define(
 								{ state: "merge" },
 								{ where: { id: pr.id } }
 							);
-							const frozen = await PullRequest.findAll({
-								where: { repo_id: repo.repo_id, state: "frozen" },
-							});
-							for (let i = 0; i < frozen.length; i++) {
-								if (
-									frozen[i].dataValues.yesTokenAmount === 0 &&
-									frozen[i].dataValues.noTokenAmount === 0
-								) {
-									await frozen[i].update({
-										state: "vote",
-									});
-								} else {
-									await frozen[i].update({
-										state: "pre-open",
-									});
-								}
-							}
-							await Repo.update(
-								{ inSession: false },
-								{ where: { repo_id: repo.repo_id } }
-							);
+							unFreeze();
 						}
 					} else {
 						if (pr.status !== "close") {
@@ -111,10 +116,7 @@ const PullRequest = db.define(
 								{ state: "close" },
 								{ where: { id: pr.id } }
 							);
-							await Repo.update(
-								{ inSession: false },
-								{ where: { repo_id: repo.repo_id } }
-							);
+							unFreeze();
 						}
 					}
 				} else if (!pr.mergeable && updated) {
