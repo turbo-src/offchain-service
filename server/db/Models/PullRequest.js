@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 const db = require("../db");
 const Repo = require("./Repo");
 
@@ -82,10 +83,23 @@ const PullRequest = db.define(
 								{ state: "merge" },
 								{ where: { id: pr.id } }
 							);
-							await PullRequest.update(
-								{ state: "pre-open" },
-								{ where: { state: "frozen" } }
-							);
+							const frozen = await PullRequest.findAll({
+								where: { repo_id: repo.repo_id, state: "frozen" },
+							});
+							for (let i = 0; i < frozen.length; i++) {
+								if (
+									frozen[i].dataValues.yesTokenAmount === 0 &&
+									frozen[i].dataValues.noTokenAmount === 0
+								) {
+									await frozen[i].update({
+										state: "vote",
+									});
+								} else {
+									await frozen[i].update({
+										state: "pre-open",
+									});
+								}
+							}
 							await Repo.update(
 								{ inSession: false },
 								{ where: { repo_id: repo.repo_id } }
@@ -96,10 +110,6 @@ const PullRequest = db.define(
 							await PullRequest.update(
 								{ state: "close" },
 								{ where: { id: pr.id } }
-							);
-							await PullRequest.update(
-								{ state: "pre-open" },
-								{ where: { state: "frozen" } }
 							);
 							await Repo.update(
 								{ inSession: false },
@@ -122,18 +132,18 @@ const PullRequest = db.define(
 						);
 					}
 					// Pre-open votes
+				} else if (percentVoted <= 0 && !updated && pr.mergeable) {
+					await PullRequest.update({ state: "vote" }, { where: { id: pr.id } });
 				} else if (
 					percentVoted > 0 &&
 					percentVoted <= 0.1 &&
 					!updated &&
 					pr.mergeable
 				) {
-					if (pr.status !== "pre-open") {
-						await PullRequest.update(
-							{ state: "pre-open" },
-							{ where: { id: pr.id } }
-						);
-					}
+					await PullRequest.update(
+						{ state: "pre-open" },
+						{ where: { id: pr.id } }
+					);
 				} else {
 					if (pr.status !== "open") {
 						await PullRequest.update(
@@ -142,12 +152,12 @@ const PullRequest = db.define(
 						);
 						await PullRequest.update(
 							{ state: "frozen" },
-							{ where: { state: "pre-open" } }
-						);
-						await Repo.update(
-							{ inSession: true },
-							{ where: { repo_id: repo.repo_id } }
-						);
+							{ where: { state: ["vote", "pre-open"], repo_id: repo.repo_id } }
+						),
+							await Repo.update(
+								{ inSession: true },
+								{ where: { repo_id: repo.repo_id } }
+							);
 					}
 				}
 			},
