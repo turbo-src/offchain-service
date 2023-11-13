@@ -40,12 +40,13 @@ var root = {
     baseBranch,
     fork_branch,
     title,
-    issue_id
+    issue_id,
+    state
   ) => {
     const res = await superagent
       .post(`${port}/graphql`)
       .send({
-        query: `{ createPullRequest(owner: "${owner}", repo: "${repo}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}", head: "${head}", branchDefaultHash: "${branchDefaultHash}", remoteURL: "${remoteURL}", baseBranch: "${baseBranch}"fork_branch: "${fork_branch}", title: "${title}",  issue_id: "${issue_id}") }`,
+        query: `{ createPullRequest(owner: "${owner}", repo: "${repo}", defaultHash: "${defaultHash}", childDefaultHash: "${childDefaultHash}", head: "${head}", branchDefaultHash: "${branchDefaultHash}", remoteURL: "${remoteURL}", baseBranch: "${baseBranch}"fork_branch: "${fork_branch}", title: "${title}",  issue_id: "${issue_id}", state: "${state}") }`,
       })
       .set("accept", "json");
 
