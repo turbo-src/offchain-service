@@ -187,9 +187,7 @@ var root = {
       args.baseBranch,
       args.fork_branch,
       args.title,
-      args.issue_id,
-      args.state
-    );
+      args.issue_id    );
   },
   createLinkedPullRequest: async (args) => {
     return await createLinkedPullRequest(
