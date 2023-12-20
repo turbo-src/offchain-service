@@ -68,7 +68,7 @@ describe("Pull request is updated", function () {
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
       openStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest9", "childDefaultHash": "defaultHash9", "defaultHash": "defaultHash9", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest9", "childDefaultHash": "defaultHash9", "defaultHash": "defaultHash9", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
 

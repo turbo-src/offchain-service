@@ -172,7 +172,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash1", function 
 
     assert.deepEqual(
       openStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash1", "defaultHash": "defaultHash1", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest1", "childDefaultHash": "defaultHash1", "defaultHash": "defaultHash1", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
     assert.equal(gabrielVote, "201", "Fail to add vote to database");

@@ -88,7 +88,7 @@ describe("createLinkedPullRequest", function () {
     );
     assert.deepEqual(
       pullRequestLatest,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
   });

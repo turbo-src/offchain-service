@@ -68,14 +68,14 @@ describe("Not enough voters vote to exceed quorum", function () {
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
       openStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
 
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 
