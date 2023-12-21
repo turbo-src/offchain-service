@@ -127,12 +127,6 @@ const PullRequest = db.define(
 						);
 					}
 				} else if (pr.mergeable && updated) {
-					if (pr.status !== "update") {
-						await PullRequest.update(
-							{ state: "update" }, // PR is updated.
-							{ where: { id: pr.id } }
-						);
-					}
 					// Pre-open votes
 				} else if (percentVoted <= 0 && !updated && pr.mergeable) {
 					await PullRequest.update({ state: "vote" }, { where: { id: pr.id } });
