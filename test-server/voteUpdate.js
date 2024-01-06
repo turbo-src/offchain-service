@@ -68,41 +68,16 @@ describe("Pull request is updated", function () {
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
       openStatus,
-      {
-        status: 200,
-        state: "open",
-        repo_id: "joseph/demo",
-        fork_branch: "pullRequest9",
-        childDefaultHash: "defaultHash9",
-        defaultHash: "defaultHash9",
-        head: "head",
-        branchDefaultHash: "branchDefaultHash",
-        remoteURL: "remoteURL",
-        baseBranch: "master",
-      },
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest9", "childDefaultHash": "defaultHash9", "defaultHash": "defaultHash9", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
 
-    assert.equal(
-      gabrielVote,
-      403,
-      "Fail to prevent adding vote to database when vote is conflict"
-    );
+    assert.equal(gabrielVote, 403, "Fail to prevent adding vote to database when vote is conflict");
     assert.deepEqual(
       mergeStatus,
-      {
-        status: 200,
-        state: "update",
-        repo_id: "joseph/demo",
-        fork_branch: "pullRequest9",
-        childDefaultHash: "defaultHash9b",
-        defaultHash: "defaultHash9",
-        head: "head",
-        branchDefaultHash: "branchDefaultHash",
-        remoteURL: "remoteURL",
-        baseBranch: "master",
-      },
+     { status: 200, state: "update", repo_id: "joseph/demo",  fork_branch: "pullRequest9", "childDefaultHash": "defaultHash9b", "defaultHash": "defaultHash9", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
+
   });
 });

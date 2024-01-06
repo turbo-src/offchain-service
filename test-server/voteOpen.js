@@ -21,6 +21,30 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side:*/ "yes"
     );
 
+    const voteYesTotals50000 = await postGetPRvoteYesTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash3",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+
+    const voteNoTotals0 = await postGetPRvoteNoTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash3",
+      /*contributor_id:*/ "",
+      /*side:*/ ""
+    );
+
+    const openStatus = await postGetPullRequest(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash3",
+      /*contributor:*/ "",
+      /*side:*/ ""
+    );
+
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -31,81 +55,29 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side*/ "yes"
     );
 
-    const thomasVote = await postSetVote(
-      /*owner:*/ "joseph",
+    const mergeStatus = await postGetPullRequest(
+      /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash3",
-      /*childDefaultHash:*/ "defaultHash3",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
-      /*side*/ "no"
-    );
-
-    const benVote = await postSetVote(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash3",
-      /*childDefaultHash:*/ "defaultHash3",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0ceeed31E39a896CB5f69f1a05c013a7840A5f78",
-      /*side*/ "no"
-    );
-
-    const louisVote = await postSetVote(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash3",
-      /*childDefaultHash:*/ "defaultHash3",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0cea312808EdcdC905428D3922480930689F4500",
-      /*side*/ "no"
-    );
-
-    const thibautVote = await postSetVote(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash3",
-      /*childDefaultHash:*/ "defaultHash3",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0c587fB3EBA5e824Df543bDE5d972Fd9F7cFC164",
-      /*side*/ "yes"
-    );
-
-    const ignaciusVote = await postSetVote(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash3",
-      /*childDefaultHash:*/ "defaultHash3",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0c16EFDc6e6490fd6066AB794Dc841A50eB5C90C",
-      /*side*/ "yes"
-    );
-    const openStatus = await postGetPullRequest(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash3",
-      /*contributor:*/ "",
+      /*contributor_id:*/ "",
       /*side:*/ ""
     );
 
     assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
+    assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
+    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
+    assert.deepEqual(
+      openStatus,
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
     assert.equal(gabrielVote, 201, "Fail to add vote to database");
 
     assert.deepEqual(
-      openStatus,
-      {
-        status: 200,
-        state: "open",
-        repo_id: "joseph/demo",
-        fork_branch: "pullRequest3",
-        childDefaultHash: "defaultHash3",
-        defaultHash: "defaultHash3",
-        head: "head",
-        branchDefaultHash: "branchDefaultHash",
-        remoteURL: "remoteURL",
-        baseBranch: "master",
-      },
-      "Fail to stay open."
+      mergeStatus,
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open even though it was vote on and did not exceed quorum"
     );
+
   });
 });

@@ -1,9 +1,9 @@
 const assert = require("assert");
-const { postGetVotePowerAmount } = require("../src/requests");
+const { postGetContributorTokenAmount } = require("../src/requests");
 
-describe("postGetVotePowerAmount", function () {
+describe("postGetContributorTokenAmount", function () {
   it("should return the number of tokens a contributor has for a repo", async function () {
-    let resMichaelTokenAmount = await postGetVotePowerAmount(
+    let resMichaelTokenAmount = await postGetContributorTokenAmount(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "",
