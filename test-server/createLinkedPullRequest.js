@@ -74,7 +74,7 @@ describe("createLinkedPullRequest", function () {
     );
 
     console.log('create linked b\n')
-    const issue_10b = await createLinkedPullRequest(
+    const linkedPR10b = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
       /*parentDefaultHash:*/ "defaultHash10",
@@ -137,7 +137,7 @@ describe("createLinkedPullRequest", function () {
       /*side*/ "yes"
     );
 
-    const issue_10c = await createLinkedPullRequest(
+    const linkedPR10c = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
       /*parentDefaultHash:*/ "defaultHash10b",
@@ -189,29 +189,19 @@ describe("createLinkedPullRequest", function () {
 
     const totalVotes = Number(voteYesTotals) + Number(voteNoTotals)
 
-    console.log('michaelVote', michaelVote)
-    console.log('gabrielVote', gabrielVote)
-    console.log('magdaVote', magdaVote)
-    console.log('thomasVote', thomasVote)
+    assert.equal(michaelVote, '201', 'michael failed to vote')
+    assert.equal(gabrielVote, '201', 'gabriel failed to vote')
+    assert.equal(magdaVote, '201', 'magda failed to vote')
+    assert.equal(thomasVote, '201', 'thomas failed to vote')
 
-    console.log('totalVotes', totalVotes)
+    assert.equal(linkedPR10b, '201', 'failed to create linked pull request')
+    assert.equal(linkedPR10c, '201', 'failed to create linked pull request')
 
-    console.log(pullRequestLatest, pullRequestLatest)
+    assert.equal(totalVotes, 200_000, "Fail to rollover votes to linked pull request.");
 
-    console.log('issue_10b', issue_10b)
-
-    console.log('issue_10c', issue_10c)
-
-    assert.equal(totalVotes, 150_000, "Fail to rollover votes to linked pull request.");
-
-    assert.equal(
-      issue_10b,
-      "201",
-      "Failed to create a pull request issue_10 in the database"
-    );
     assert.deepEqual(
       pullRequestLatest,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10c", "defaultHash": "defaultHash10c", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
   });
