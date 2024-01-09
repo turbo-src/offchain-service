@@ -49,6 +49,30 @@ describe("createLinkedPullRequest", function () {
       )
     );
 
+    console.log('grabriel vote - a b\n')
+    let gabrielVote = await postSetVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10",
+      /*childDefaultHash:*/ "defaultHash10b",
+      /*mergeable:*/ true,
+      /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
+      /*side*/ "yes"
+    );
+
+    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
+    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes"))
+    console.log(
+      'most recent pull request',
+      await postGetMostRecentLinkedPullRequest(
+          /*owner:*/ "joseph",
+          /*repo:*/ "joseph/demo",
+          /*defaultHash:*/ "defaultHash10",
+          /*contributor:*/ "",
+          /*side:*/ ""
+      )
+    );
+
     console.log('create linked b\n')
     const issue_10b = await createLinkedPullRequest(
       /*owner:*/ "joseph",
@@ -64,30 +88,6 @@ describe("createLinkedPullRequest", function () {
       /*title:*/ "feat: create linked pull request."
     );
 
-
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes"))
-    console.log(
-      'most recent pull request',
-      await postGetMostRecentLinkedPullRequest(
-          /*owner:*/ "joseph",
-          /*repo:*/ "joseph/demo",
-          /*defaultHash:*/ "defaultHash10",
-          /*contributor:*/ "",
-          /*side:*/ ""
-      )
-    );
-
-    console.log('grabriel vote - a b\n')
-    let gabrielVote = await postSetVote(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10",
-      /*childDefaultHash:*/ "defaultHash10b",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0cf39Fb66C908A8aAb733F52BaDbf1ED58036983",
-      /*side*/ "yes"
-    );
 
     console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
     console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes"))
@@ -126,6 +126,17 @@ describe("createLinkedPullRequest", function () {
       )
     );
 
+    console.log('thomas vote - b b\n')
+    let thomasVote = await postSetVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10b",
+      /*childDefaultHash:*/ "defaultHash10c",
+      /*mergeable:*/ true,
+      /*contributor_id:*/ "0x0c3B10A0B8bC506833A1CD54672a3b67502d7a53",
+      /*side*/ "yes"
+    );
+
     const issue_10c = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
@@ -140,14 +151,17 @@ describe("createLinkedPullRequest", function () {
       /*title:*/ "feat: create linked pull request."
     );
 
-    let thomasVote = await postSetVote(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10b",
-      /*childDefaultHash:*/ "defaultHash10c",
-      /*mergeable:*/ true,
-      /*contributor_id:*/ "0x0cBA86ac2Cd45DfA9bA798e86b24dCb074E92925",
-      /*side*/ "yes"
+    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
+    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes"))
+    console.log(
+      'most recent pull request',
+      await postGetMostRecentLinkedPullRequest(
+          /*owner:*/ "joseph",
+          /*repo:*/ "joseph/demo",
+          /*defaultHash:*/ "defaultHash10",
+          /*contributor:*/ "",
+          /*side:*/ ""
+      )
     );
 
     const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
