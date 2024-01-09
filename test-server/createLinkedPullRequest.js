@@ -37,16 +37,25 @@ describe("createLinkedPullRequest", function () {
       /*side:*/ "yes"
     );
 
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
-    console.log(
-      'most recent pull request',
-      await postGetMostRecentLinkedPullRequest(
+    let michaelPullRequestOnDefaultHash10DefaultHash10 = await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes")
+
+    let michaelMostRecentPullRequestOnDefaultHash10DefaultHash10  = await postGetMostRecentLinkedPullRequest(
           /*owner:*/ "joseph",
           /*repo:*/ "joseph/demo",
           /*defaultHash:*/ "defaultHash10",
           /*contributor:*/ "",
           /*side:*/ ""
-      )
+    );
+
+    assert.deepEqual(
+      michaelPullRequestOnDefaultHash10DefaultHash10,
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10", "defaultHash": "defaultHash10", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
+    assert.deepEqual(
+      michaelMostRecentPullRequestOnDefaultHash10DefaultHash10,
+     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10", "defaultHash": "defaultHash10", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
     );
 
     console.log('grabriel vote - a b\n')
