@@ -1,16 +1,52 @@
 const assert = require("assert");
+const fsPromises = require('fs').promises;
 const {
   postSetVote,
   postGetPullRequest,
   postGetPRvoteYesTotals,
   postGetPRvoteNoTotals,
+  postGetMostRecentLinkedPullRequest
 } = require("../src/requests");
 
-let snooze_ms = 5000;
+var snooze_ms = 1500;
+
+// We call this at the top of each test case, otherwise nodeosd could
+// throw duplication errors (ie, data races).
+const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 describe("Multiple voters vote to close Pull Request 2: defaultHash2", function () {
-  this.timeout(snooze_ms * 12);
+  this.timeout(snooze_ms*70);
   it("Should set PR state to closed when majority is reached", async function () {
+    //assert.deepEqual(
+    //  await postGetPullRequest,
+    //  await postGetMostRecentLinkedPullRequest,
+    //  'pull request state is incorrect'
+    //);
+    await snooze(snooze_ms);
+
+    assert.deepEqual(
+      await postGetPullRequest(
+          /*owner:*/ "joseph",
+          /*repo:*/ "joseph/demo",
+          /*defaultHash:*/ "defaultHash2",
+          /*contributor:*/ "",
+          /*side:*/ ""
+      ),
+     { status: 200, state: "vote", repo_id: "joseph/demo",  fork_branch: "pullRequest2", "childDefaultHash": "defaultHash2", defaultHash: "defaultHash2", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
+    assert.deepEqual(
+      await postGetMostRecentLinkedPullRequest(
+          /*owner:*/ "joseph",
+          /*repo:*/ "joseph/demo",
+          /*defaultHash:*/ "defaultHash2",
+          /*contributor:*/ "",
+          /*side:*/ ""
+      ),
+     { status: 200, state: "vote", repo_id: "joseph/demo",  fork_branch: "pullRequest2", "childDefaultHash": "defaultHash2", defaultHash: "defaultHash2", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
+
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -36,13 +72,20 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*contributor_id:*/ "",
       /*side:*/ ""
     );
-
     const openStatus = await postGetPullRequest(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash2",
       /*contributor:*/ "",
       /*side:*/ ""
+    );
+    assert.equal(michaelVote, '201', "Fail to add Michael's vote to database");
+    assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
+    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
+    assert.deepEqual(
+      openStatus,
+      { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest2", "childDefaultHash": "defaultHash2", "defaultHash": "defaultHash2", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
     );
 
     let gabrielVote = await postSetVote(
@@ -133,20 +176,12 @@ describe("Multiple voters vote to close Pull Request 2: defaultHash2", function 
       /*side:*/ ""
     );
 
-    assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
-    assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
-    assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
-    assert.deepEqual(
-      openStatus,
-      { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest2", "childDefaultHash": "defaultHash2", "defaultHash": "defaultHash2", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
-      "Fail to stay open."
-    );
-    assert.equal(gabrielVote, 201, "Fail to add vote to database");
-    assert.equal(magdaVote, 201, "Fail to add vote to database");
-    assert.equal(thomasVote, 201, "Fail to add vote to database");
-    assert.equal(benVote, 201, "Fail to add vote to database");
-    assert.equal(louisVote, 201, "Fail to add vote to database");
-    assert.equal(thibautVote, 201, "Fail to add vote to database");
+    assert.equal(gabrielVote, '201', "Fail to add vote to database");
+    assert.equal(magdaVote, '201', "Fail to add vote to database");
+    assert.equal(thomasVote, '201', "Fail to add vote to database");
+    assert.equal(benVote, '201', "Fail to add vote to database");
+    assert.equal(louisVote, '201', "Fail to add vote to database");
+    assert.equal(thibautVote, '201', "Fail to add vote to database");
     assert.equal(ignaciusVote, "403", "Fail to add vote to database");
     assert.equal(maryVote, 201, "Fail to add vote to database");
     assert.deepEqual(

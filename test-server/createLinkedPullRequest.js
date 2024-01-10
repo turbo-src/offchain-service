@@ -273,5 +273,28 @@ describe("createLinkedPullRequest", function () {
       '0',
       'fail to add correct no votes'
     );
+
+    // Clean up by voting to merge the pull requests so other tests ("frozen") cases can proceed.
+    await postSetVote(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10c",
+      /*childDefaultHash:*/ "defaultHash10c",
+      /*mergeable:*/ true,
+      /*contributor_id:*/ "0x0cc59907e45614540dAa22Cf62520306439360f2",
+      /*side*/ "yes"
+    );
+
+    assert.deepEqual(
+      await postGetMostRecentLinkedPullRequest(
+          /*owner:*/ "joseph",
+          /*repo:*/ "joseph/demo",
+          /*defaultHash:*/ "defaultHash10",
+          /*contributor:*/ "",
+          /*side:*/ ""
+      ),
+     { status: 200, state: "merge", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10c", "defaultHash": "defaultHash10c", head: "defaultHash10c", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
   })
 });
