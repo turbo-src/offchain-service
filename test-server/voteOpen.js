@@ -1,4 +1,5 @@
 const assert = require("assert");
+const fsPromises = require('fs').promises;
 const {
   postSetVote,
   postGetPullRequest,
@@ -6,11 +7,17 @@ const {
   postGetPRvoteNoTotals,
 } = require("../src/requests");
 
-let snooze_ms = 5000;
+var snooze_ms = 1500;
+
+// We call this at the top of each test case, otherwise nodeosd could
+// throw duplication errors (ie, data races).
+const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 describe("Not enough voters vote to exceed quorum", function () {
   this.timeout(snooze_ms * 12);
   it("Should leave PR state as open if quorum is not exceeded", async function () {
+    await snooze(snooze_ms);
+
     let michaelVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -63,7 +70,7 @@ describe("Not enough voters vote to exceed quorum", function () {
       /*side:*/ ""
     );
 
-    assert.equal(michaelVote, 201, "Fail to add Michael's vote to database");
+    assert.equal(michaelVote, '201', "Fail to add Michael's vote to database");
     assert.equal(voteYesTotals50000, "50000", "Fail to add votes yes.");
     assert.equal(voteNoTotals0, "0", "Fail to add votes no.");
     assert.deepEqual(
@@ -71,11 +78,11 @@ describe("Not enough voters vote to exceed quorum", function () {
      { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
-    assert.equal(gabrielVote, 201, "Fail to add vote to database");
+    assert.equal(gabrielVote, '201', "Fail to add vote to database");
 
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "pre-open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest3", "childDefaultHash": "defaultHash3", "defaultHash": "defaultHash3", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 
