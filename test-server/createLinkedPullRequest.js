@@ -246,7 +246,7 @@ describe("createLinkedPullRequest", function () {
 
     assert.deepEqual(
       thomasMostRecentPullRequestDefaultHash10,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "defaultHash10b", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10c", "defaultHash": "defaultHash10c", head: "defaultHash10c", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
     );
 
