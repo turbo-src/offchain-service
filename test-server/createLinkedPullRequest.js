@@ -70,7 +70,6 @@ describe("createLinkedPullRequest", function () {
       'fail to add correct no votes'
     );
 
-    console.log('gabriel vote')
     let gabrielVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -82,7 +81,6 @@ describe("createLinkedPullRequest", function () {
     );
 
 
-    console.log('gabriel linked pr')
     const linkedPR10b = await createLinkedPullRequest(
       /*owner:*/ "joseph",
       /*repo_id:*/ "joseph/demo",
@@ -147,7 +145,6 @@ describe("createLinkedPullRequest", function () {
     );
 
 
-    console.log('magda vote - b b\n')
     let magdaVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -158,20 +155,52 @@ describe("createLinkedPullRequest", function () {
       /*side*/ "yes"
     );
 
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes"))
-    console.log(
-      'most recent pull request',
-      await postGetMostRecentLinkedPullRequest(
+    assert.equal(magdaVote, '201', 'magda failed to vote')
+
+    let magdaPullRequestDefaultHash10b = await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes")
+
+    let magdaMostRecentPullRequestDefaultHash10  = await postGetMostRecentLinkedPullRequest(
           /*owner:*/ "joseph",
           /*repo:*/ "joseph/demo",
           /*defaultHash:*/ "defaultHash10",
           /*contributor:*/ "",
           /*side:*/ ""
-      )
     );
 
-    console.log('thomas vote - b b\n')
+    assert.deepEqual(
+      magdaPullRequestDefaultHash10b,
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "defaultHash10b", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
+
+    assert.deepEqual(
+      magdaMostRecentPullRequestDefaultHash10,
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "defaultHash10b", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
+
+    assert.equal(
+      await postGetPRvoteYesTotals(
+        /*owner:*/ "joseph",
+        /*repo:*/ "joseph/demo",
+        /*defaultHash:*/ "defaultHash10b",
+        /*contributor:*/ "",
+        /*side:*/ ""
+      ),
+      '150000'
+    );
+
+    assert.equal(
+      await postGetPRvoteNoTotals(
+        /*owner:*/ "joseph",
+        /*repo:*/ "joseph/demo",
+        /*defaultHash:*/ "defaultHash10b",
+        /*contributor:*/ "",
+        /*side:*/ ""
+      ),
+      '0'
+    );
+
     let thomasVote = await postSetVote(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -188,7 +217,7 @@ describe("createLinkedPullRequest", function () {
       /*parentDefaultHash:*/ "defaultHash10b",
       /*defaultHash:*/ "defaultHash10c",
       /*childDefaultHash:*/ "defaultHash10c",
-      /*head:*/ "head",
+      /*head:*/ "defaultHash10c",
       /*branchDefaultHash*/ "branchDefaultHash",
       /*remoteURL*/ "remoteURL",
       /*baseBranch:*/ "master",
@@ -196,55 +225,53 @@ describe("createLinkedPullRequest", function () {
       /*title:*/ "feat: create linked pull request."
     );
 
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10", "", "yes"))
-    console.log('pull request', await postGetPullRequest("joseph", "joseph/demo", "defaultHash10b", "", "yes"))
-    console.log(
-      'most recent pull request',
-      await postGetMostRecentLinkedPullRequest(
+    assert.equal(thomasVote, '201', 'thomas failed to vote')
+    assert.equal(linkedPR10c, '201', 'failed to create linked pull request')
+
+    let thomasPullRequestDefaultHash10c = await postGetPullRequest("joseph", "joseph/demo", "defaultHash10c", "", "yes")
+
+    let thomasMostRecentPullRequestDefaultHash10  = await postGetMostRecentLinkedPullRequest(
           /*owner:*/ "joseph",
           /*repo:*/ "joseph/demo",
           /*defaultHash:*/ "defaultHash10",
           /*contributor:*/ "",
           /*side:*/ ""
-      )
     );
-
-    const pullRequestLatest = await postGetMostRecentLinkedPullRequest(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10",
-      /*contributor:*/ "",
-      /*side:*/ ""
-    );
-    const voteYesTotals = await postGetPRvoteYesTotals(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10c",
-      /*contributor:*/ "",
-      /*side:*/ ""
-    );
-
-    const voteNoTotals = await postGetPRvoteNoTotals(
-      /*owner:*/ "joseph",
-      /*repo:*/ "joseph/demo",
-      /*defaultHash:*/ "defaultHash10c",
-      /*contributor:*/ "",
-      /*side:*/ ""
-    );
-
-    const totalVotes = Number(voteYesTotals) + Number(voteNoTotals)
-
-    assert.equal(magdaVote, '201', 'magda failed to vote')
-    assert.equal(thomasVote, '201', 'thomas failed to vote')
-
-    assert.equal(linkedPR10c, '201', 'failed to create linked pull request')
-
-    assert.equal(totalVotes, 200_000, "Fail to rollover votes to linked pull request.");
 
     assert.deepEqual(
-      pullRequestLatest,
-     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10c", "defaultHash": "defaultHash10c", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      thomasPullRequestDefaultHash10c,
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10c", "defaultHash": "defaultHash10c", head: "defaultHash10c", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open."
+    );
+
+    assert.deepEqual(
+      thomasMostRecentPullRequestDefaultHash10,
+     { status: 200, state: "open", repo_id: "joseph/demo",  fork_branch: "pullRequest10", "childDefaultHash": "defaultHash10b", "defaultHash": "defaultHash10b", head: "defaultHash10b", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+      "Fail to stay open."
+    );
+
+    assert.equal(
+      await postGetPRvoteYesTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10c",
+      /*contributor:*/ "",
+      /*side:*/ ""
+      ),
+      '200000',
+      'fail to add correct yes votes'
+    );
+
+    assert.equal(
+      await postGetPRvoteNoTotals(
+      /*owner:*/ "joseph",
+      /*repo:*/ "joseph/demo",
+      /*defaultHash:*/ "defaultHash10c",
+      /*contributor:*/ "",
+      /*side:*/ ""
+      ),
+      '0',
+      'fail to add correct no votes'
     );
   })
 });
