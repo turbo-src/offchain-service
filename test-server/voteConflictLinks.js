@@ -4,6 +4,8 @@ const {
   postGetPullRequest,
   postGetPRvoteYesTotals,
   postGetPRvoteNoTotals,
+  postGetMostRecentLinkedPullRequest,
+  createLinkedPullRequest
 } = require("../src/requests");
 
 let snooze_ms = 5000;
@@ -55,6 +57,22 @@ describe("Pull request goes into conflict", function () {
       /*side*/ "yes"
     );
 
+    const linkedPR8b = await createLinkedPullRequest(
+      /*owner:*/ "joseph",
+      /*repo_id:*/ "joseph/demo",
+      /*parentDefaultHash:*/ "defaultHash8",
+      /*defaultHash:*/ "defaultHash8",
+      /*childDefaultHash:*/ "defaultHash8b",
+      /*head:*/ "defaultHash8b",
+      /*branchDefaultHash*/ "branchDefaultHash",
+      /*remoteURL*/ "remoteURL",
+      /*baseBranch:*/ "master",
+      /*fork_branch:*/ "pullRequest8",
+      /*title:*/ "feat: create linked pull request."
+    );
+
+    assert.equal(linkedPR8b, '201', 'failed to create linked pull request')
+
     const voteYesTotals50000After = await postGetPRvoteYesTotals(
       /*owner:*/ "joseph",
       /*repo:*/ "joseph/demo",
@@ -71,7 +89,7 @@ describe("Pull request goes into conflict", function () {
       /*side:*/ ""
     );
 
-    const mergeStatus = await postGetPullRequest(
+    const mergeStatus = await postGetMostRecentLinkedPullRequest(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
       /*defaultHash:*/ "defaultHash8",
@@ -93,7 +111,7 @@ describe("Pull request goes into conflict", function () {
     assert.equal(gabrielVote, 403, "Fail to prevent adding vote to database when vote is conflict");
     assert.deepEqual(
       mergeStatus,
-     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8", head: "head", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
+     { status: 200, state: "conflict", repo_id: "joseph/demo",  fork_branch: "pullRequest8", "childDefaultHash": "defaultHash8b", "defaultHash": "defaultHash8", head: "defaultHash8b", branchDefaultHash: "branchDefaultHash", remoteURL: "remoteURL", baseBranch: "master" },
       "Fail to stay open even though it was vote on and did not exceed quorum"
     );
 

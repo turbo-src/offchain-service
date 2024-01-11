@@ -119,12 +119,11 @@ const PullRequest = db.define(
 							unFreeze();
 						}
 					}
-				} else if (percentVoted <= 0 && !updated && pr.mergeable) {
+				} else if (percentVoted == 0 && pr.mergeable) {
 					await PullRequest.update({ state: "vote" }, { where: { id: pr.id } });
 				} else if (
 					percentVoted > 0 &&
 					percentVoted < 0.1 &&
-					!updated &&
 					pr.mergeable
 				) {
 					await PullRequest.update(

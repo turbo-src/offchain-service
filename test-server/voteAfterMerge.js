@@ -1,16 +1,25 @@
 const assert = require("assert");
+const fsPromises = require('fs').promises;
 const {
   postSetVote,
   postGetPullRequest,
   postGetPRvoteYesTotals,
   postGetPRvoteNoTotals,
+  postGetMostRecentLinkedPullRequest
 } = require("../src/requests");
 
-let snooze_ms = 5000;
+var snooze_ms = 1500;
+
+// We call this at the top of each test case, otherwise nodeosd could
+// throw duplication errors (ie, data races).
+const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 describe("Multiple voters vote to merge Pull Request 1: defaultHash5", function () {
   this.timeout(snooze_ms * 12);
   it("Should add votes to the votes table, add yes/noTokensAmount to the pullRequest table, set PR state to merge when majority is reached", async function () {
+
+    await snooze(snooze_ms);
+
     const maryVote = await postSetVote(
       /*owner:*/ "",
       /*repo:*/ "joseph/demo",
@@ -77,7 +86,7 @@ describe("Multiple voters vote to merge Pull Request 1: defaultHash5", function 
       /*side:*/ ""
     );
 
-    assert.equal(maryVote, 201, "Fail to add vote to database");
+    assert.equal(maryVote, '201', "Fail to add vote to database");
     assert.equal(voteYesTotalsMerge, "500001", "Fail to add votes yes.");
     assert.equal(voteNoTotalsMerge, "0", "Fail to add votes no.");
     assert.deepEqual(
