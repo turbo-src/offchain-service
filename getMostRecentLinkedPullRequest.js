@@ -34,7 +34,7 @@ async function getMostRecentLinkedPullRequest(
         console.log(error)
         return {
             status: 500,
-            state: pr.state,
+            state: '',
             repo_id: repo_id,
             fork_branch: '',
             defaultHash: '',
