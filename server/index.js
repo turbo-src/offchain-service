@@ -1,30 +1,30 @@
-const express = require("express");
-const { graphqlHTTP } = require("express-graphql");
-const { buildSchema } = require("graphql");
-const { db } = require("./db");
-require("dotenv").config();
+const express = require('express')
+const { graphqlHTTP } = require('express-graphql')
+const { buildSchema } = require('graphql')
+const { db } = require('./db')
+require('dotenv').config()
 
 const {
-  createPullRequest,
-  createLinkedPullRequest,
-  updatePullRequest,
-  createRepo,
-  getRepo,
-  getAuthorizedContributor,
-  transferTokens,
-  getVotePowerAmount,
-  getPullRequest,
-  getMostRecentLinkedPullRequest,
-  getRepoStatus,
-  getPRvoteTotals,
-  getPRvoteYesTotals,
-  getPRvoteNoTotals,
-  setQuorum,
-  getQuorum,
-  setVote,
-  getRepoData,
-  getVotes,
-} = require("../lib");
+    createPullRequest,
+    createLinkedPullRequest,
+    updatePullRequest,
+    createRepo,
+    getRepo,
+    getAuthorizedContributor,
+    transferTokens,
+    getVotePowerAmount,
+    getPullRequest,
+    getMostRecentLinkedPullRequest,
+    getRepoStatus,
+    getPRvoteTotals,
+    getPRvoteYesTotals,
+    getPRvoteNoTotals,
+    setQuorum,
+    getQuorum,
+    setVote,
+    getRepoData,
+    getVotes,
+} = require('../lib')
 
 var schema = buildSchema(`
   type RepoStatus {
@@ -160,194 +160,194 @@ var schema = buildSchema(`
     getPRvoteNoTotals(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): Float,
     getVotes(repo: String, defaultHash: String, contributor_id: String): GetVotes,
   }
-`);
+`)
 
 var root = {
-  createRepo: async (args) => {
-    return await createRepo(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  getRepo: async (args) => {
-    return await getRepo(args.repo);
-  },
-  createPullRequest: async (args) => {
-    return await createPullRequest(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.childDefaultHash,
-      args.head,
-      args.branchDefaultHash,
-      args.remoteURL,
-      args.baseBranch,
-      args.fork_branch,
-      args.title,
-      args.issue_id
-    );
-  },
-  createLinkedPullRequest: async (args) => {
-    return await createLinkedPullRequest(
-      args.owner,
-      args.repo,
-      args.parentDefaultHash,
-      args.defaultHash,
-      args.childDefaultHash,
-      args.head,
-      args.branchDefaultHash,
-      args.remoteURL,
-      args.baseBranch,
-      args.fork_branch,
-      args.title
-    );
-  },
-  updatePullRequest: async (args) => {
-    return await updatePullRequest(
-      args.repo,
-      args.defaultHash,
-      args.childDefaultHash
-    );
-  },
-  getRepoStatus: async (args) => {
-    const res = await getRepoStatus(args.repo_id);
-    if (res === true) {
-      return { status: 200, exists: true };
-    } else if (res === false) {
-      return { status: 200, exists: false };
-    } else if (res === 404) {
-      return { status: 404, exists: false };
-    } else {
-      return { status: 500, exists: false };
-    }
-  },
-  getAuthorizedContributor: async (args) => {
-    return await getAuthorizedContributor(args.contributor_id, args.repo_id);
-  },
-  getVotePowerAmount: async (args) => {
-    return await getVotePowerAmount(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  transferTokens: async (args) => {
-    return await transferTokens(
-      args.owner,
-      args.repo,
-      args.from,
-      args.to,
-      args.amount
-    );
-  },
-  setVote: async (args) => {
+    createRepo: async (args) => {
+        return await createRepo(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    getRepo: async (args) => {
+        return await getRepo(args.repo)
+    },
+    createPullRequest: async (args) => {
+        return await createPullRequest(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.childDefaultHash,
+            args.head,
+            args.branchDefaultHash,
+            args.remoteURL,
+            args.baseBranch,
+            args.fork_branch,
+            args.title,
+            args.issue_id,
+        )
+    },
+    createLinkedPullRequest: async (args) => {
+        return await createLinkedPullRequest(
+            args.owner,
+            args.repo,
+            args.parentDefaultHash,
+            args.defaultHash,
+            args.childDefaultHash,
+            args.head,
+            args.branchDefaultHash,
+            args.remoteURL,
+            args.baseBranch,
+            args.fork_branch,
+            args.title,
+        )
+    },
+    updatePullRequest: async (args) => {
+        return await updatePullRequest(
+            args.repo,
+            args.defaultHash,
+            args.childDefaultHash,
+        )
+    },
+    getRepoStatus: async (args) => {
+        const res = await getRepoStatus(args.repo_id)
+        if (res === true) {
+            return { status: 200, exists: true }
+        } else if (res === false) {
+            return { status: 200, exists: false }
+        } else if (res === 404) {
+            return { status: 404, exists: false }
+        } else {
+            return { status: 500, exists: false }
+        }
+    },
+    getAuthorizedContributor: async (args) => {
+        return await getAuthorizedContributor(args.contributor_id, args.repo_id)
+    },
+    getVotePowerAmount: async (args) => {
+        return await getVotePowerAmount(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    transferTokens: async (args) => {
+        return await transferTokens(
+            args.owner,
+            args.repo,
+            args.from,
+            args.to,
+            args.amount,
+        )
+    },
+    setVote: async (args) => {
     // Ensure token.status returns a 200
     // and token.amount > 0.
     // May want to incorporate all the into getAuthorizedContributor.
     // Probably not best to check in lib/setVote.js
     // for module encapsulation.
-    return await setVote(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.childDefaultHash,
-      args.mergeable,
-      args.contributor_id,
-      args.side
-    );
-  },
-  getPullRequest: async (args) => {
-    return await getPullRequest(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  getMostRecentLinkedPullRequest: async (args) => {
-    return await getMostRecentLinkedPullRequest(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  setQuorum: async (args) => {
-    return await setQuorum(args.repo, args.contributor_id, args.quorum);
-  },
-  getQuorum: async (args) => {
-    return await getQuorum(args.repo);
-  },
-  getPRvoteTotals: async (args) => {
-    return getPRvoteTotals(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  getPRvoteYesTotals: async (args) => {
-    return getPRvoteYesTotals(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  getPRvoteNoTotals: async (args) => {
-    return getPRvoteNoTotals(
-      args.owner,
-      args.repo,
-      args.defaultHash,
-      args.contributor_id,
-      args.side
-    );
-  },
-  getRepoData: async (args) => {
-    return await getRepoData(args.repo_id, args.contributor_id);
-  },
-  getVotes: async (args) => {
-    const res = await getVotes(
-      args.repo,
-      args.defaultHash,
-      args.contributor_id
-    );
-    return res;
-  },
-};
+        return await setVote(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.childDefaultHash,
+            args.mergeable,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    getPullRequest: async (args) => {
+        return await getPullRequest(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    getMostRecentLinkedPullRequest: async (args) => {
+        return await getMostRecentLinkedPullRequest(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    setQuorum: async (args) => {
+        return await setQuorum(args.repo, args.contributor_id, args.quorum)
+    },
+    getQuorum: async (args) => {
+        return await getQuorum(args.repo)
+    },
+    getPRvoteTotals: async (args) => {
+        return getPRvoteTotals(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    getPRvoteYesTotals: async (args) => {
+        return getPRvoteYesTotals(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    getPRvoteNoTotals: async (args) => {
+        return getPRvoteNoTotals(
+            args.owner,
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+            args.side,
+        )
+    },
+    getRepoData: async (args) => {
+        return await getRepoData(args.repo_id, args.contributor_id)
+    },
+    getVotes: async (args) => {
+        const res = await getVotes(
+            args.repo,
+            args.defaultHash,
+            args.contributor_id,
+        )
+        return res
+    },
+}
 
-const port = 4002;
+const port = 4002
 
-const app = express();
+const app = express()
 
-app.listen(port, "0.0.0.0");
-console.log(`Running an Express-GraphQL server on port ${port}`);
+app.listen(port, '0.0.0.0')
+console.log(`Running an Express-GraphQL server on port ${port}`)
 
 app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    rootValue: root,
-    graphiql: true,
-  })
-);
+    '/graphql',
+    graphqlHTTP({
+        schema: schema,
+        rootValue: root,
+        graphiql: true,
+    }),
+)
 
 try {
-  //Will delete data from db every time with force: true
-  db.sync({ force: true });
-  db.authenticate();
-  console.log(
-    "Connection to the Postgres database has been established successfully."
-  );
+    //Will delete data from db every time with force: true
+    db.sync({ force: true })
+    db.authenticate()
+    console.log(
+        'Connection to the Postgres database has been established successfully.',
+    )
 } catch (error) {
-  console.error("Unable to connect to the Postgres database:", error);
+    console.error('Unable to connect to the Postgres database:', error)
 }
