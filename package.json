@@ -25,6 +25,7 @@
    },
    "homepage": "",
    "devDependencies": {
-      "dotenv": "^16.0.1"
+      "dotenv": "^16.0.1",
+      "eslint": "^8.56.0"
    }
 }
