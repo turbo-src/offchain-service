@@ -3,11 +3,15 @@ const db = require('../db');
 const Transfer = require('./Transfer');
 
 const Repo = db.define('repo', {
-  owner: {
+  repo_id: {
     type: Sequelize.STRING(),
+    unique: true,
     allowNull: false,
   },
-  repo_id: {
+  contributor_id: {
+    type: Sequelize.STRING(),
+  },
+  repo_name: {
     type: Sequelize.STRING(),
     unique: true,
     allowNull: false,
@@ -20,9 +24,6 @@ const Repo = db.define('repo', {
   tokenAmount: {
     type: Sequelize.STRING(),
     defaultValue: 1_000_000,
-  },
-  contributor_id: {
-    type: Sequelize.STRING(),
   },
   quorum: {
     type: Sequelize.STRING(),

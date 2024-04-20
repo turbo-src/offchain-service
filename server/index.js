@@ -140,7 +140,7 @@ var schema = buildSchema(`
   }
 
   type Query {
-    createRepo(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): String,
+    createRepo(repo_id: String, contributor_id: String, repo_name: String): String,
     getRepo(repo: String): Repo,
     createPullRequest(owner: String, repo: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String, issue_id: String): String,
     createLinkedPullRequest(owner: String, repo: String, parentDefaultHash: String, defaultHash: String, childDefaultHash: String, head: String, branchDefaultHash: String, remoteURL: String, baseBranch: String, fork_branch: String, title: String): String,
@@ -165,11 +165,9 @@ var schema = buildSchema(`
 var root = {
     createRepo: async (args) => {
         return await createRepo(
-            args.owner,
-            args.repo,
-            args.defaultHash,
+            args.repo_id,
             args.contributor_id,
-            args.side,
+            args.repo_name,
         )
     },
     getRepo: async (args) => {

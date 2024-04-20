@@ -7,11 +7,11 @@ const port =
       : 'http://localhost:4002'
 
 var root = {
-    postCreateRepo: async (owner, repo, defaultHash, contributor_id, side) => {
+    postCreateRepo: async (repo_id, contributor_id, repo_name) => {
         const res = await superagent
             .post(`${port}/graphql`)
             .send({
-                query: `{ createRepo(owner: "${owner}", repo: "${repo}", defaultHash: "${defaultHash}", contributor_id: "${contributor_id}", side: "${side}") }`,
+                query: `{ createRepo(repo_id: "${repo_id}", contributor_id: "${contributor_id}", repo: "${repo}") }`,
             })
             .set('accept', 'json')
 
