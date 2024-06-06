@@ -150,7 +150,7 @@ var schema = buildSchema(`
     getAuthorizedContributor(contributor_id: String, repo_id: String): Boolean,
     getVotePowerAmount(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): ContributorTokenAmount,
     transferTokens(owner: String, repo: String, from: String, to: String, amount: Int): TransferReceipt,
-    setVote(owner: String, repo: String, defaultHash: String, childDefaultHash: String, mergeable: Boolean, contributor_id: String, side: String): String,
+    setVote(repoID: String, url: String, commitID: String, contributorID: String, signature: String): String,
     getPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     getMostRecentLinkedPullRequest(owner: String, repo: String, defaultHash: String, contributor_id: String, side: String): PullRequest,
     setQuorum(repo: String, contributor_id: String, quorum: String): String,
@@ -244,20 +244,18 @@ var root = {
         )
     },
     setVote: async (args) => {
-    // Ensure token.status returns a 200
-    // and token.amount > 0.
-    // May want to incorporate all the into getAuthorizedContributor.
-    // Probably not best to check in lib/setVote.js
-    // for module encapsulation.
-        return await setVote(
-            args.owner,
-            args.repo,
-            args.defaultHash,
-            args.childDefaultHash,
-            args.mergeable,
-            args.contributor_id,
-            args.side,
-        )
+      // Ensure token.status returns a 200
+      // and token.amount > 0.
+      // May want to incorporate all the into getAuthorizedContributor.
+      // Probably not best to check in lib/setVote.js
+      // for module encapsulation.
+      return await setVote(
+        args.repoID,
+        args.url,
+        args.commitID,
+        args.contributorID,
+        args.signature,
+      );
     },
     getPullRequest: async (args) => {
         return await getPullRequest(
